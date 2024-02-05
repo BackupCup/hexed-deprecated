@@ -1,0 +1,17 @@
+{
+  "accursed_altar_hex": {
+    "sounds": [
+      "hexed:accursed_altar_hex"
+    ]
+  },
+  "accursed_altar_taint": {
+  "sounds": [
+    "hexed:accursed_altar_taint"
+    ]
+  },
+  "accursed_altar_activate": {
+    "sounds": [
+      "hexed:accursed_altar_activate"
+    ]
+  }
+}

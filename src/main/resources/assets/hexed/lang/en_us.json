@@ -1,0 +1,55 @@
+{
+  "itemGroup.hexed.hexed_group": "Hexed",
+
+  "block.hexed.brimstone_candle": "Brimstone Candle",
+  "block.hexed.lichlore_candle": "Lichlore Candle",
+
+  "block.hexed.tall_candle": "Tall Candle",
+  "block.hexed.tall_white_candle": "Tall White Candle",
+  "block.hexed.tall_light_gray_candle": "Tall Light Gray Candle",
+  "block.hexed.tall_gray_candle": "Tall Gray Candle",
+  "block.hexed.tall_black_candle": "Tall Black Candle",
+  "block.hexed.tall_brown_candle": "Tall Brown Candle",
+  "block.hexed.tall_red_candle": "Tall Red Candle",
+  "block.hexed.tall_orange_candle": "Tall Orange Candle",
+  "block.hexed.tall_yellow_candle": "Tall Yellow Candle",
+  "block.hexed.tall_lime_candle": "Tall Lime Candle",
+  "block.hexed.tall_green_candle": "Tall Green Candle",
+  "block.hexed.tall_cyan_candle": "Tall Cyan Candle",
+  "block.hexed.tall_light_blue_candle": "Tall Light Blue Candle",
+  "block.hexed.tall_blue_candle": "Tall Blue Candle",
+  "block.hexed.tall_purple_candle": "Tall Purple Candle",
+  "block.hexed.tall_magenta_candle": "Tall Magenta Candle",
+  "block.hexed.tall_pink_candle": "Tall Pink Candle",
+
+  "block.hexed.accursed_altar": "Altar of the Accursed",
+
+  "item.hexed.brimstone_crystal": "Brimstone Crystal",
+  "item.hexed.calamitous_fabric": "Calamitous Fabric",
+
+  "item.hexed.calamitous_hood": "Calamitous Hood",
+  "item.hexed.calamitous_robes": "Calamitous Robes",
+  "item.hexed.calamitous_cassock": "Calamitous Cassock",
+  "item.hexed.calamitous_boots": "Calamitous Boots",
+
+  "effect.hexed.aflame": "Aflame",
+  "effect.hexed.irradiated": "Irradiated",
+  "effect.hexed.ethereal": "Ethereal",
+
+  "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
+  "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",
+  "tooltip.hexed.brimstone_candle.line_3": "Required to make the Altar of the Accursed function.",
+
+  "tooltip.hexed.lichlore_candle.line_1": "Spectral force echoes from",
+  "tooltip.hexed.lichlore_candle.line_2": "the metal of this candle.",
+  "tooltip.hexed.lichlore_candle.line_3": "Counts as 2 Bookshelves for the Enchanting Table.",
+
+  "tooltip.hexed.abstract_candle.line_1": "A dormant, decorative candle.",
+
+  "tooltip.hexed.calamitous_armor.line_1": "If you're looking for some fourth-degree",
+  "tooltip.hexed.calamitous_armor.line_2": "burns, you've got the right person.",
+  "tooltip.hexed.calamitous_armor.line_3": "Purifies the brimstone fires powering",
+  "tooltip.hexed.calamitous_armor.line_4": "the Hexes in your equipment.",
+
+  "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function."
+}

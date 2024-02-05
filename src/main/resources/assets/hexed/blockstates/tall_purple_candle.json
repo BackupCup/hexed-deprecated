@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "top=true": { "model":  "hexed:block/tall_deco_candles/purple/candle_top" },
+    "top=false": {"model":  "hexed:block/tall_deco_candles/purple/candle_bottom" }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.backupcup.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "LivingEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "InGameHUDMixin"
+  ]
+}

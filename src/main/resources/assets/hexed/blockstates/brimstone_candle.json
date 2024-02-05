@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "top=true,lit=false": { "model":  "hexed:block/brimstone_candle/candle_top" },
+    "top=true,lit=true": { "model":  "hexed:block/brimstone_candle/candle_top_lit" },
+    "top=false": {"model":  "hexed:block/brimstone_candle/candle_bottom" }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "hexed:rune_omega",
+    "hexed:rune_fire",
+    "hexed:rune_magnesium",
+    "hexed:rune_mercury",
+    "hexed:rune_moon",
+    "hexed:rune_sulfur"
+  ]
+}

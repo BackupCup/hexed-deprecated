@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "C C",
+        "# #"
+    ],
+    "key": {
+        "#": {
+            "item": "hexed:calamitous_fabric"
+        },
+        "C": {
+            "item": "hexed:brimstone_crystal"
+        }
+    },
+    "result": {
+        "item": "hexed:calamitous_boots",
+        "count": 1
+    },
+    "group": "combat"
+}

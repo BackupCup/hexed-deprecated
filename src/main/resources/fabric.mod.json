@@ -1,0 +1,48 @@
+{
+	"schemaVersion": 1,
+	"id": "hexed",
+	"version": "${version}",
+	"name": "Hexed",
+	"description": "TODO",
+	"authors": [
+		"BackupCup"
+	],
+	"contact": {
+		"homepage": "TODO",
+		"sources": "TODO"
+	},
+	"license": "Timefall Development License 1.2",
+	"icon": "assets/hexed/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "net.backupcup.hexed.Hexed",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "net.backupcup.hexed.HexedClient",
+				"adapter": "kotlin"
+			}
+		],
+		"fabric-datagen": [
+			{
+				"value": "net.backupcup.hexed.HexedDataGenerator",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"accessWidener": "hexed.accesswidener",
+	"mixins": [
+		"hexed.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"fabric-language-kotlin": ">=1.9.21"
+	}
+}
