@@ -65,10 +65,10 @@ class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> 
     // [do damage -> be slower, attack faster]
 
     override fun render(
-        entity: AccursedAltarBlockEntity?,
+        entity: AccursedAltarBlockEntity,
         tickDelta: Float,
-        matrices: MatrixStack?,
-        vertexConsumers: VertexConsumerProvider?,
+        matrices: MatrixStack,
+        vertexConsumers: VertexConsumerProvider,
         light: Int,
         overlay: Int
     ) {
