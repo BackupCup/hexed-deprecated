@@ -11,9 +11,9 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 object RegisterStatusEffects {
-    val IRRADIATED: StatusEffect = IrradiatedStatusEffect(StatusEffectCategory.HARMFUL, 0xcddf6c)
-    val AFLAME: StatusEffect = AflameStatusEffect(StatusEffectCategory.HARMFUL, 0x7a3045)
-    val ETHEREAL: StatusEffect = EtherealStatusEffect(StatusEffectCategory.HARMFUL, 0x0b8a8f)
+    val IRRADIATED: StatusEffect = IrradiatedStatusEffect(StatusEffectCategory.BENEFICIAL, 0xcddf6c)
+    val AFLAME: StatusEffect = AflameStatusEffect(StatusEffectCategory.BENEFICIAL, 0x7a3045)
+    val ETHEREAL: StatusEffect = EtherealStatusEffect(StatusEffectCategory.BENEFICIAL, 0x0b8a8f)
 
     fun registerStatusEffects() {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "irradiated"), IRRADIATED)

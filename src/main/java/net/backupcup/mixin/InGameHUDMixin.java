@@ -22,23 +22,27 @@ public abstract class InGameHUDMixin {
     private static final Identifier HEARTS_IRRADIATED = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_irradiated.png");
     @Unique
     private static final Identifier HEARTS_AFLAME = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_aflame.png");
-
+    @Unique
+    private static final Identifier HEARTS_ETHEREAL = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_ethereal.png");
     @Inject(method = "drawHeart", at = @At("HEAD"), cancellable = true)
     private void drawEffectHearts(DrawContext context, InGameHud.HeartType type, int x, int y, int v, boolean blinking, boolean halfHeart, CallbackInfo ci) {
         if (!blinking && type == InGameHud.HeartType.NORMAL &&
                 MinecraftClient.getInstance().cameraEntity instanceof PlayerEntity player &&
                 (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getIRRADIATED()) ||
-                        player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getAFLAME()))
+                 player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getAFLAME()) ||
+                 player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getETHEREAL()))
         ) {
-            Identifier textureId;
+            Identifier texture;
             if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getIRRADIATED())) {
-                textureId = HEARTS_IRRADIATED;
+                texture = HEARTS_IRRADIATED;
             } else if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getAFLAME())) {
-                textureId = HEARTS_AFLAME;
+                texture = HEARTS_AFLAME;
+            } else if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getETHEREAL())) {
+                texture = HEARTS_ETHEREAL;
             } else {
                 return;
             }
-            context.drawTexture(textureId, x, y, halfHeart ? 9 : 0, v, 9, 9);
+            context.drawTexture(texture, x, y, halfHeart ? 9 : 0, v, 9, 9);
             ci.cancel();
         }
     }
