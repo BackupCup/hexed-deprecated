@@ -1,6 +1,6 @@
 package net.backupcup.hexed
 
-import net.backupcup.hexed.altar.BrimstoneCrystalRenderer
+import net.backupcup.hexed.altar.AccursedAltarRunesRenderer
 import net.backupcup.hexed.register.*
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
@@ -23,6 +23,6 @@ object HexedClient: ClientModInitializer {
 
 
         BlockEntityRendererRegistry.register(RegisterBlockEntities.ACCURSED_ALTAR_BLOCK_ENTITY
-        ) { BrimstoneCrystalRenderer() }
+        ) { AccursedAltarRunesRenderer() }
     }
 }

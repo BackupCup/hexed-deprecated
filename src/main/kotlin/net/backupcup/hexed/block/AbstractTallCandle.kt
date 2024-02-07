@@ -171,7 +171,7 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
         }
     }
 
-    protected fun setLit(world: World, pos: BlockPos, state: BlockState, litValue: Boolean) {
+    private fun setLit(world: World, pos: BlockPos, state: BlockState, litValue: Boolean) {
         world.setBlockState(pos, state.with(LIT, litValue), NOTIFY_ALL)
 
         if(state.get(TOP)) world.setBlockState(pos.down(1), state.with(LIT, litValue).with(

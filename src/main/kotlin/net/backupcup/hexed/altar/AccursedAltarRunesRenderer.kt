@@ -1,7 +1,6 @@
 package net.backupcup.hexed.altar
 
 import net.backupcup.hexed.register.RegisterBlocks
-import net.backupcup.hexed.register.RegisterItems
 import net.backupcup.hexed.register.RegisterRunes
 import net.fabricmc.api.EnvType
 import net.fabricmc.api.Environment
@@ -17,15 +16,15 @@ import kotlin.math.sin
 
 
 @Environment(EnvType.CLIENT)
-class BrimstoneCrystalRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> {
+class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> {
 
-    private val renderOffsets = listOf(
-        listOf(0.0, -1.0, 30.0, ItemStack(RegisterRunes.OMEGA)),
-        listOf(0.86605, -0.5, 25.0, ItemStack(RegisterRunes.MOON)),
-        listOf(-0.86605, -0.5, 20.0, ItemStack(RegisterRunes.MAGNESIUM)),
-        listOf(0.0, 1.0, 15.0, ItemStack(RegisterRunes.MERCURY)),
-        listOf(0.86605, 0.5, 10.0, ItemStack(RegisterRunes.SULFUR)),
-        listOf(-0.86605, 0.5, 5.0, ItemStack(RegisterRunes.FIRE))
+    private val itemStackTexture = listOf(
+        ItemStack(RegisterRunes.OMEGA),
+        ItemStack(RegisterRunes.MOON),
+        ItemStack(RegisterRunes.MAGNESIUM),
+        ItemStack(RegisterRunes.MERCURY),
+        ItemStack(RegisterRunes.SULFUR),
+        ItemStack(RegisterRunes.FIRE)
     )
 
     override fun render(

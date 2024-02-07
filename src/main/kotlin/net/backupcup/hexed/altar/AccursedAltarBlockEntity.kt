@@ -4,7 +4,6 @@ import net.backupcup.hexed.block.BrimstoneCandle
 import net.backupcup.hexed.register.RegisterBlockEntities
 import net.backupcup.hexed.register.RegisterBlocks
 import net.backupcup.hexed.register.RegisterSounds
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
@@ -14,9 +13,7 @@ import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
-import net.minecraft.particle.DefaultParticleType
 import net.minecraft.particle.DustParticleEffect
-import net.minecraft.particle.ParticleTypes
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.sound.SoundCategory
