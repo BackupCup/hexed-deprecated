@@ -33,8 +33,12 @@
   "item.hexed.calamitous_boots": "Calamitous Boots",
 
   "effect.hexed.aflame": "Aflame",
+  "effect.hexed.ablaze": "Ablaze",
   "effect.hexed.irradiated": "Irradiated",
   "effect.hexed.ethereal": "Ethereal",
+
+  "death.attack.ablazed": "%1$s turned into searing ashes",
+  "death.attack.ablazed.player": "%1$s turned into searing ashes whilst fighting %2$s",
 
   "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
   "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",

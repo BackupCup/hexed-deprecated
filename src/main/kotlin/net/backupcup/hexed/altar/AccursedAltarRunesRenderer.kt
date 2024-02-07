@@ -34,7 +34,7 @@ class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> 
     // [20 Armor -[get hit]> 0 ...[goes back up slowly]... 20]
 
     // name: Aflame
-    // Gives the enemy "Ablaze (more powerful onFire)" effect when hit
+    // Gives the enemy "Ablaze (more powerful onFire)" effect on hit
     // user is lit on fire on hit
 
     // name: Ephemeral
