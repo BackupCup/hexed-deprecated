@@ -11,6 +11,7 @@ import net.minecraft.world.World
 
 object RegisterDamageTypes {
     val ABLAZE_DAMAGE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier(Hexed.MOD_ID, "ablazed"))
+    val VINDICTIVE_DAMAGE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier(Hexed.MOD_ID, "vindictive"))
 
     fun of(world: World, key: RegistryKey<DamageType>?): DamageSource {
         return DamageSource(world.registryManager.get(RegistryKeys.DAMAGE_TYPE).entryOf(key))

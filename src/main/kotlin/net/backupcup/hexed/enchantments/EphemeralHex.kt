@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.effect.StatusEffectInstance
 
 class EphemeralHex(
     weight: Rarity?,
@@ -24,22 +23,7 @@ class EphemeralHex(
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (target is LivingEntity) {
             if(!hasFullRobes(user)) {
-                if (user.hasStatusEffect(RegisterStatusEffects.EXHAUSTION)) {
-                    val exhaustionAmplifier = user.getStatusEffect(RegisterStatusEffects.EXHAUSTION)?.amplifier?.plus(1)
-
-                    for (i in 0..exhaustionAmplifier!!) {
-                        user.addStatusEffect(StatusEffectInstance(
-                            RegisterStatusEffects.EXHAUSTION,
-                            150 + (exhaustionAmplifier - i) * 50, i,
-                            true, false, true
-                        ))
-                    }
-                } else {
-                    user.addStatusEffect(StatusEffectInstance(
-                        RegisterStatusEffects.EXHAUSTION,
-                        30, 0
-                    ))
-                }
+                entityMultiplyingEffect(user, RegisterStatusEffects.EXHAUSTION, 150, 50)
             }
         }
     }

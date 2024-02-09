@@ -19,16 +19,16 @@ object RegisterStatusEffects {
     //Ephemeral Hex
     val EXHAUSTION: StatusEffect = ExhaustionStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe6904e)
 
-    //UNUSED
-    val IRRADIATED: StatusEffect = IrradiatedStatusEffect(StatusEffectCategory.BENEFICIAL, 0xcddf6c)
+    //Vindictive Hex
+    val VINDICTIVE: StatusEffect = VindictiveStatusEffect(StatusEffectCategory.BENEFICIAL, 0xf4a58d)
+    val SMOULDERING: StatusEffect = SmoulderingStatusEffect(StatusEffectCategory.BENEFICIAL, 0xcddf6c)
 
     fun registerStatusEffects() {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ablaze"), ABLAZE)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ethereal"), ETHEREAL)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "exhaustion"), EXHAUSTION)
-
-        //UNUSED
-        Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "irradiated"), IRRADIATED)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "vindictive"), VINDICTIVE)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "smouldering"), SMOULDERING)
     }
 }

@@ -13,7 +13,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
@@ -34,7 +36,13 @@ public abstract class LivingEntityMixin {
             if (hexed$hasEnchantmentInHands(RegisterEnchantments.INSTANCE.getPERSECUTED_HEX(), source)) {
                 return (amount <= 25f) ? (amount * 0.01f * getHealth()) : 25f;
             }
+        }
+        return amount;
+    }
 
+    @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
+    private float hexed$EtherealHealth(float amount, DamageSource source) {
+        if (source.getSource() instanceof LivingEntity) {
             if (this.hasStatusEffect(RegisterStatusEffects.INSTANCE.getETHEREAL()) && !hexed$hasFullRobes(this.getArmorItems())) {
                 return amount * (1f + this.getStatusEffect(RegisterStatusEffects.INSTANCE.getETHEREAL()).getDuration() / 10f);
             }
@@ -55,6 +63,15 @@ public abstract class LivingEntityMixin {
         }
         return amount;
     }
+
+    @Inject(method = "heal", at = @At("HEAD"), cancellable = true)
+    private void hexed$SmoulderingHeal(float amount, CallbackInfo callbackInfo) {
+        if(this.hasStatusEffect(RegisterStatusEffects.INSTANCE.getSMOULDERING())) {
+            callbackInfo.cancel();
+        }
+    }
+
+
 
     @Unique
     private boolean hexed$hasEnchantmentInHands(Object key, DamageSource source) {

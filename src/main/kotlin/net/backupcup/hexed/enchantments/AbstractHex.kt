@@ -5,6 +5,8 @@ import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.effect.StatusEffect
+import net.minecraft.entity.effect.StatusEffectInstance
 
 abstract class AbstractHex(
     weight: Rarity?,
@@ -51,5 +53,29 @@ abstract class AbstractHex(
             if (!piece.isIn(RegisterTags.CALAMITOUS_ARMOR)) return false
         }
         return true
+    }
+
+    fun entityMultiplyingEffect(user: LivingEntity, effect: StatusEffect, duration: Int, decayLength: Int) {
+        if (user.hasStatusEffect(effect)) {
+            val effectAmplifier = user.getStatusEffect(effect)?.amplifier?.plus(1)
+
+            for (i in 0..effectAmplifier!!) {
+                user.addStatusEffect(
+                    StatusEffectInstance(
+                        effect,
+                        duration + (effectAmplifier - i) * decayLength, i,
+                        true, false, true
+                    )
+                )
+            }
+        } else {
+            user.addStatusEffect(
+                StatusEffectInstance(
+                    effect,
+                    duration, 0,
+                    true, false, true
+                )
+            )
+        }
     }
 }

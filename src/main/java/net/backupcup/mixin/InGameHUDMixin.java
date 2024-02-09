@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public abstract class InGameHUDMixin {
     @Unique
-    private static final Identifier HEARTS_IRRADIATED = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_irradiated.png");
+    private static final Identifier HEARTS_SMOULDERING = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_smouldering.png");
     @Unique
     private static final Identifier HEARTS_AFLAME = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_aflame.png");
     @Unique
@@ -29,8 +29,8 @@ public abstract class InGameHUDMixin {
         if (!blinking && type == InGameHud.HeartType.NORMAL &&
                 MinecraftClient.getInstance().cameraEntity instanceof PlayerEntity player) {
             Identifier texture;
-            if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getIRRADIATED())) {
-                texture = HEARTS_IRRADIATED;
+            if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getSMOULDERING())) {
+                texture = HEARTS_SMOULDERING;
             } else if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getAFLAME()) ||
                        player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getABLAZE())) {
                 texture = HEARTS_AFLAME;

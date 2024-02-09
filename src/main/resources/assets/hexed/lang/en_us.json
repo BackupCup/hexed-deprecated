@@ -38,17 +38,21 @@
   "enchantment.hexed.persecuted.des": "Converts Attack Damage into percentage of enemy's Health. Causes the user to take more damage when hit.",
   "enchantment.hexed.ephemeral": "Ephemeral",
   "enchantment.hexed.ephemeral.desc": "Starts off with more damage than the item normally would have, but it's damage output discharges from exhaustive use.",
+  "enchantment.hexed.vindictive": "Vindictive",
+  "enchantment.hexed.vindictive.desc": "Applies an effect that deals multiplicative damage on running out to the enemy, but you lose any regeneration.",
 
 
   "effect.hexed.aflame": "Aflame",
   "effect.hexed.ablaze": "Ablaze",
   "effect.hexed.ethereal": "Ethereal",
   "effect.hexed.exhaustion": "Exhaustion",
-
-  "effect.hexed.irradiated": "Irradiated",
+  "effect.hexed.vindictive": "Vindictive",
+  "effect.hexed.smouldering": "Smouldering",
 
   "death.attack.ablazed": "%1$s turned into searing ashes",
   "death.attack.ablazed.player": "%1$s turned into searing ashes whilst fighting %2$s",
+  "death.attack.vindictive": "%1$s got multiplied by zero",
+  "death.attack.vindictive.player": "%1$s got multiplied by zero whilst fighting %2$s",
 
   "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
   "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",
