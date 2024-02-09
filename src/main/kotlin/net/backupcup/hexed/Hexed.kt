@@ -17,6 +17,8 @@ object Hexed : ModInitializer {
 		RegisterDecoCandles.registerDecoCandles()
 		RegisterSounds.registerSounds()
 		RegisterStatusEffects.registerStatusEffects()
+		RegisterEnchantments.registerHexes()
+		RegisterTags.registerTags()
 		RegisterItemGroup.registerItemGroup()
 	}
 }

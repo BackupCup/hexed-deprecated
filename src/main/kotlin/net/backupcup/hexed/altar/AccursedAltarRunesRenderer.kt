@@ -19,49 +19,21 @@ import kotlin.math.sin
 @Environment(EnvType.CLIENT)
 class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> {
 
-    private val itemStackTexture = listOf(
-        ItemStack(RegisterRunes.OMEGA),
-        ItemStack(RegisterRunes.MOON),
-        ItemStack(RegisterRunes.MAGNESIUM),
-        ItemStack(RegisterRunes.MERCURY),
-        ItemStack(RegisterRunes.SULFUR),
-        ItemStack(RegisterRunes.FIRE)
-    )
+    companion object {
+        val itemStackTexture = listOf(
+            ItemStack(RegisterRunes.OMEGA),
+            ItemStack(RegisterRunes.MOON),
+            ItemStack(RegisterRunes.MAGNESIUM),
+            ItemStack(RegisterRunes.MERCURY),
+            ItemStack(RegisterRunes.SULFUR),
+            ItemStack(RegisterRunes.FIRE)
+        )
+    }
 
-    // name: Persecuted
-    // Attack does [ITEM_ATTACK_DAMAGE]% of max hp of the enemy
-    // Hit while holding -> Armor poof
-    // [20 Armor -[get hit]> 0 ...[goes back up slowly]... 20]
-
-    // name: Aflame
-    // Gives the enemy "Ablaze (more powerful onFire)" effect on hit
-    // user is lit on fire on hit
-
-    // name: Ephemeral
-    // Damage output of the user diminishes over time, returns naturally after some time
-    // Starts off with more damage than it normally would have
-    // [base: 8 -> 12 -> 1]
-    //
-    // 0-5sec 1-10sec 2-15sec 3-20sec 4-25sec 5-30sec
-
-
-    //no levels:
-    // addStatusEffect (RegisterStatusEffects.EPHEMERAL, level 0, 30 seconds)
-
-    //
-    //X level
-    //X = getStatusEffectAmplifier
-    //amplifier = X + 1
-    //for i 0..amplifier addStatusEffect(RegisterStatusEffects.EPHEMERAL, level i, 30 + (amplifier - i) * decayLength
-    // lvl 0 45
-    // lvl 1 40
-    // lvl 2 35
-    // lvl 3 30
-    //
+    // name: Vindictive
+    // Every hit applies a level of a special Effect that does more damage on applied, depending on the amplifier
 
     // name: Resentful
-    //
-    //
     // [do damage -> be slower, attack faster]
 
     override fun render(
