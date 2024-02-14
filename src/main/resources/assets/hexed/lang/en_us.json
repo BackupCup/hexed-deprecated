@@ -71,5 +71,12 @@
   "tooltip.hexed.calamitous_armor.line_3": "Purifies the brimstone fires powering",
   "tooltip.hexed.calamitous_armor.line_4": "the Hexes in your equipment.",
 
+  "tooltip.hexed.brimstone_crystal.line_1": "Crystallized hatred, filled with potential.",
+  "tooltip.hexed.brimstone_crystal.line_2": "Used to make an Altar of the Accursed",
+  "tooltip.hexed.brimstone_crystal.line_3": "and Calamitous Armor.",
+
+  "tooltip.hexed.calamitous_fabric.line_1": "Special fabric, interwoven with necrotic magic.",
+  "tooltip.hexed.calamitous_fabric.line_2": "Used to make Calamitous Armor.",
+
   "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function."
 }

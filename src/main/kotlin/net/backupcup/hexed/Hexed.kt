@@ -1,12 +1,11 @@
 package net.backupcup.hexed
 
+import net.backupcup.hexed.loot.ModifyLootTables
 import net.backupcup.hexed.register.*
 import net.fabricmc.api.ModInitializer
-import org.slf4j.LoggerFactory
 
 object Hexed : ModInitializer {
-	val MOD_ID: String = "hexed"
-    private val logger = LoggerFactory.getLogger(MOD_ID)
+	const val MOD_ID: String = "hexed"
 
 	override fun onInitialize() {
 		RegisterItems.registerItems()
@@ -20,5 +19,7 @@ object Hexed : ModInitializer {
 		RegisterEnchantments.registerHexes()
 		RegisterTags.registerTags()
 		RegisterItemGroup.registerItemGroup()
+
+		ModifyLootTables.registerLootModifiers()
 	}
 }

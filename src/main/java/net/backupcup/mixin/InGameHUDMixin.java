@@ -19,11 +19,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public abstract class InGameHUDMixin {
     @Unique
-    private static final Identifier HEARTS_SMOULDERING = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_smouldering.png");
+    private static final Identifier HEARTS_SMOULDERING = new Identifier(Hexed.MOD_ID, "textures/gui/icons_smouldering.png");
     @Unique
-    private static final Identifier HEARTS_AFLAME = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_aflame.png");
+    private static final Identifier HEARTS_AFLAME = new Identifier(Hexed.MOD_ID, "textures/gui/icons_aflame.png");
     @Unique
-    private static final Identifier HEARTS_ETHEREAL = new Identifier(Hexed.INSTANCE.getMOD_ID(), "textures/gui/icons_ethereal.png");
+    private static final Identifier HEARTS_ETHEREAL = new Identifier(Hexed.MOD_ID, "textures/gui/icons_ethereal.png");
     @Inject(method = "drawHeart", at = @At("HEAD"), cancellable = true)
     private void hexed$drawEffectHearts(DrawContext context, InGameHud.HeartType type, int x, int y, int v, boolean blinking, boolean halfHeart, CallbackInfo ci) {
         if (!blinking && type == InGameHud.HeartType.NORMAL &&
