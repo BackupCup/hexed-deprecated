@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=north": { "model":  "hexed:block/accursed_altar_north" },
-    "facing=south": { "model":  "hexed:block/accursed_altar_north" },
-    "facing=east": { "model":  "hexed:block/accursed_altar_east" },
-    "facing=west": { "model":  "hexed:block/accursed_altar_east" }
+    "facing=north": { "model":  "hexed:block/accursed_altar", "y":  0},
+    "facing=east": { "model":  "hexed:block/accursed_altar", "y":  90},
+    "facing=south": { "model":  "hexed:block/accursed_altar", "y":  180},
+    "facing=west": { "model":  "hexed:block/accursed_altar", "y":  270}
   }
 }

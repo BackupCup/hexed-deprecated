@@ -83,28 +83,29 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
 
     @Deprecated("Deprecated in Java")
     override fun onUse(
-        state: BlockState?,
-        world: World?,
-        pos: BlockPos?,
-        player: PlayerEntity?,
-        hand: Hand?,
-        hit: BlockHitResult?
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        player: PlayerEntity,
+        hand: Hand,
+        hit: BlockHitResult
     ): ActionResult {
-        if(player?.abilities?.allowModifyWorld!!) {
+        if(player.abilities?.allowModifyWorld == true) {
             val handItem = player.getStackInHand(hand)
-            if(handItem.isEmpty && state!!.get(BrimstoneCandle.LIT)) {
-                setLit(world!!, pos!!, state, false)
-                player.playSound(SoundEvents.BLOCK_CANDLE_EXTINGUISH, 1f, 1f)
+            if(handItem.isEmpty && state.get(LIT)) {
+                setLit(world, pos, state, false)
+                player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 1f, 1f)
                 world.addParticle(
                     particleExtinguish,
                     pos.x + .5, pos.y + 1.0, pos.z + .5,
                     0.0, 0.0625, 0.0)
                 return ActionResult.success(world.isClient)
             }
-            if((handItem.isOf(Items.FLINT_AND_STEEL) || handItem.isOf(Items.FIRE_CHARGE)) && !state!!.get(
-                    BrimstoneCandle.LIT
+            if((handItem.isOf(Items.FLINT_AND_STEEL) || handItem.isOf(Items.FIRE_CHARGE)) && !state.get(
+                    LIT
                 )) {
-                setLit(world!!, pos!!, state, true)
+                setLit(world, pos, state, true)
+                player.playSound(SoundEvents.ITEM_FIRECHARGE_USE, 1f, 1f)
                 if(!player.isCreative) {
                     if(handItem.isOf(Items.FLINT_AND_STEEL)) {
                         handItem.damage(1, player.random, player.server?.playerManager?.getPlayer(player.uuid))
@@ -126,7 +127,7 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
         itemStack: ItemStack?
     ) {
         if (world!!.canSetBlock(pos?.up(1))) {
-            world.setBlockState(pos?.up(1), this.defaultState.with(TallCandle.TOP, true))
+            world.setBlockState(pos?.up(1), this.defaultState.with(TOP, true))
         }
     }
 

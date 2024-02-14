@@ -4,7 +4,6 @@ import net.backupcup.hexed.block.BrimstoneCandle
 import net.backupcup.hexed.register.RegisterBlockEntities
 import net.backupcup.hexed.register.RegisterBlocks
 import net.backupcup.hexed.register.RegisterSounds
-import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -14,9 +13,11 @@ import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.particle.DustParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
@@ -78,21 +79,29 @@ class AccursedAltarBlockEntity(
             )
         )
 
-        fun clientTick(world: World?, pos: BlockPos?, state: BlockState?, blockEntity: AccursedAltarBlockEntity?) {
-            if (!state!!.get(AccursedAltar.ACTIVE)) {
-                if (state.get(AccursedAltar.FACING) == Direction.NORTH || state.get(AccursedAltar.FACING) == Direction.SOUTH) {
+        fun clientTick(world: World, pos: BlockPos, state: BlockState, blockEntity: AccursedAltarBlockEntity) {
+            if (!state.get(AccursedAltar.ACTIVE)) {
+                if (state.get(AccursedAltar.FACING).axis == Direction.Axis.Z) {
                     CANDLE_OFFSETS[0].forEach {particlePos ->
-                        blockEntity?.checkCandles(blockEntity, particlePos, world!!, pos!!)
+                        blockEntity.clientCheckCandles(blockEntity, particlePos, world, pos)
                     }
                 } else {
                     CANDLE_OFFSETS[1].forEach {particlePos ->
-                        blockEntity?.checkCandles(blockEntity, particlePos, world!!, pos!!)
+                        blockEntity.clientCheckCandles(blockEntity, particlePos, world, pos)
                     }
                 }
+                if (world.time % 20L == 0L) {
+                    world.addParticle(
+                        ParticleTypes.ANGRY_VILLAGER,
+                        pos.x + 0.5,
+                        pos.y + 1.0,
+                        pos.z + 0.5,
+                        Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025)
+                    )}
             } else {
-                world?.addParticle(
+                world.addParticle(
                     DustParticleEffect.DEFAULT,
-                    pos!!.x + 0.5,
+                    pos.x + 0.5,
                     pos.y + 1.0,
                     pos.z + 0.5,
                     Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025)
@@ -100,48 +109,68 @@ class AccursedAltarBlockEntity(
             }
         }
 
-        fun tick(world: World?, pos: BlockPos?, state: BlockState?, blockEntity: AccursedAltarBlockEntity?) {
-            if (!state!!.get(AccursedAltar.ACTIVE)) {
-                if (state.get(AccursedAltar.FACING) == Direction.NORTH || state.get(AccursedAltar.FACING) == Direction.SOUTH) {
-                    CANDLE_OFFSETS[0].forEach {particlePos ->
-                        if (!blockEntity!!.checkPosForCandle(world, pos, particlePos)) return
-                        if (!blockEntity.checkPosForLitCandle(world, pos, particlePos)) return
+        fun tick(world: World, pos: BlockPos, state: BlockState, blockEntity: AccursedAltarBlockEntity) {
+            if (world.time % 20L == 0L) {
+                if (!state.get(AccursedAltar.ACTIVE)) {
+                    if (state.get(AccursedAltar.FACING).axis == Direction.Axis.Z) {
+                        if (blockEntity.serverCheckCandles(CANDLE_OFFSETS[0], world, pos, blockEntity) == 6)
+                            blockEntity.altarStateSet(world, pos, state, true)
+                    } else {
+                        if (blockEntity.serverCheckCandles(CANDLE_OFFSETS[1], world, pos, blockEntity) == 6)
+                            blockEntity.altarStateSet(world, pos, state, true)
                     }
-                    world?.setBlockState(pos, state.with(AccursedAltar.ACTIVE, true))
                 } else {
-                    CANDLE_OFFSETS[1].forEach {particlePos ->
-                        if (!blockEntity!!.checkPosForCandle(world, pos, particlePos)) return
-                        if (!blockEntity.checkPosForLitCandle(world, pos, particlePos)) return
+                    if (state.get(AccursedAltar.FACING).axis == Direction.Axis.Z) {
+                        if (blockEntity.serverCheckCandles(CANDLE_OFFSETS[0], world, pos, blockEntity) < 6)
+                            blockEntity.altarStateSet(world, pos, state, false)
+                    } else {
+                        if (blockEntity.serverCheckCandles(CANDLE_OFFSETS[1], world, pos, blockEntity) < 6)
+                            blockEntity.altarStateSet(world, pos, state, false)
                     }
-                    world?.setBlockState(pos, state.with(AccursedAltar.ACTIVE, true))
                 }
-                world?.playSound(
-                    null,
-                    pos,
-                    RegisterSounds.ACCURSED_ALTAR_ACTIVATE,
-                    SoundCategory.BLOCKS,
-                    0.25f,
-                    1f
-                )
-                world?.updateListeners(pos, blockEntity?.cachedState, state, Block.NOTIFY_LISTENERS)
             }
         }
     }
 
-    private fun checkPosForCandle(world: World?, pos: BlockPos?, offset: BlockPos): Boolean {
-        return world?.getBlockState(
-            BlockPos(pos!!.x + offset.x, pos.y + offset.y, pos.z + offset.z)
-        )?.block == RegisterBlocks.BRIMSTONE_CANDLE
+    private fun posGetCandle(world: World, pos: BlockPos, offset: BlockPos): Boolean {
+        return world.getBlockState(
+            BlockPos(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z)
+        ).block == RegisterBlocks.BRIMSTONE_CANDLE
     }
 
-    private fun checkPosForLitCandle(world: World?, pos: BlockPos?, offset: BlockPos): Boolean {
-        return world?.getBlockState(
-            BlockPos(pos!!.x + offset.x, pos.y + offset.y, pos.z + offset.z)
-        )!!.get(BrimstoneCandle.LIT)
+    private fun posGetCandleLit(world: World, pos: BlockPos, offset: BlockPos): Boolean {
+        return world.getBlockState(
+            BlockPos(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z)
+        ).get(BrimstoneCandle.LIT)
     }
 
-    fun checkCandles(blockEntity: AccursedAltarBlockEntity, particlePos: BlockPos, world: World, pos: BlockPos) {
-        if (!blockEntity.checkPosForCandle(world, pos, particlePos)) {
+    private fun altarStateSet(world: World, pos: BlockPos, state: BlockState, newState: Boolean) {
+        if (newState) {
+            world.playSound(
+                null, pos,
+                RegisterSounds.ACCURSED_ALTAR_ACTIVATE, SoundCategory.BLOCKS,
+                0.25f, 1f) }
+        else {
+            world.playSound(
+                null, pos,
+                SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,
+                0.25f, 1f)}
+        world.setBlockState(pos, state.with(AccursedAltar.ACTIVE, newState))
+    }
+
+    private fun serverCheckCandles(offsetList: List<BlockPos>, world: World, pos: BlockPos, blockEntity: AccursedAltarBlockEntity): Int {
+        var candlesMatch = 0
+
+        for (candleOffset in offsetList) {
+            if (!blockEntity.posGetCandle(world, pos, candleOffset)) continue
+            if (!blockEntity.posGetCandleLit(world, pos, candleOffset)) continue
+            candlesMatch++
+        }
+        return candlesMatch
+    }
+
+    fun clientCheckCandles(blockEntity: AccursedAltarBlockEntity, particlePos: BlockPos, world: World, pos: BlockPos) {
+        if (!blockEntity.posGetCandle(world, pos, particlePos)) {
             world.addParticle(
                 DustParticleEffect.DEFAULT,
                 pos.x + particlePos.x.toDouble() + 0.5,
@@ -150,7 +179,7 @@ class AccursedAltarBlockEntity(
                 Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025)
             )
         } else {
-            if(!blockEntity.checkPosForLitCandle(world, pos, particlePos)) {
+            if(!blockEntity.posGetCandleLit(world, pos, particlePos)) {
                 world.addParticle(
                     DustParticleEffect.DEFAULT,
                     pos.x + particlePos.x.toDouble() + 0.5,

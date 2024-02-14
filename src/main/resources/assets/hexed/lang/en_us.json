@@ -27,20 +27,22 @@
   "item.hexed.brimstone_crystal": "Brimstone Crystal",
   "item.hexed.calamitous_fabric": "Calamitous Fabric",
 
+  "block.hexed.skeleton_skull_candle": "Skeleton Skull Candle",
+  "block.hexed.wither_skull_candle": "Wither Skull Candle",
+
   "item.hexed.calamitous_hood": "Calamitous Hood",
   "item.hexed.calamitous_robes": "Calamitous Robes",
   "item.hexed.calamitous_cassock": "Calamitous Cassock",
   "item.hexed.calamitous_boots": "Calamitous Boots",
 
   "enchantment.hexed.aflame": "Aflame",
-  "enchantment.hexed.aflame.desc": "Lights enemies ablaze on hit but also causes the user to light aflame on hit.",
+  "enchantment.hexed.aflame.desc": "Sets enemies ablaze upon impact, but also ignites the user.",
   "enchantment.hexed.persecuted": "Persecuted",
-  "enchantment.hexed.persecuted.des": "Converts Attack Damage into percentage of enemy's Health. Causes the user to take more damage when hit.",
+  "enchantment.hexed.persecuted.desc": "Converts Attack Damage into a percentage of the enemy’s Health, resulting in increased damage taken by the user.",
   "enchantment.hexed.ephemeral": "Ephemeral",
-  "enchantment.hexed.ephemeral.desc": "Starts off with more damage than the item normally would have, but it's damage output discharges from exhaustive use.",
+  "enchantment.hexed.ephemeral.desc": "Initially deals more damage than the item normally would, but its damage output diminishes with exhaustive use.",
   "enchantment.hexed.vindictive": "Vindictive",
-  "enchantment.hexed.vindictive.desc": "Applies an effect that deals multiplicative damage on running out to the enemy, but you lose any regeneration.",
-
+  "enchantment.hexed.vindictive.desc": "Applies an effect that deals multiplicative damage as it runs out, at the cost of losing regeneration.",
 
   "effect.hexed.aflame": "Aflame",
   "effect.hexed.ablaze": "Ablaze",

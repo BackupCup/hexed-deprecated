@@ -25,6 +25,10 @@ object RegisterItemGroup {
                 entries.add(ItemStack(RegisterArmor.CALAMITOUS_BOOTS))
 
                 entries.add(ItemStack(RegisterBlocks.ACCURSED_ALTAR))
+
+                entries.add(ItemStack(RegisterBlocks.SKELETON_SKULL_CANDLE))
+                entries.add(ItemStack(RegisterBlocks.WITHER_SKULL_CANDLE))
+
                 entries.add(ItemStack(RegisterBlocks.BRIMSTONE_CANDLE))
                 entries.add(ItemStack(RegisterBlocks.LICHLORE_CANDLE))
 

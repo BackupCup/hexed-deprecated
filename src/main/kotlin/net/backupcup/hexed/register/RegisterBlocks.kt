@@ -4,6 +4,8 @@ import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.altar.AccursedAltar
 import net.backupcup.hexed.block.BrimstoneCandle
 import net.backupcup.hexed.block.LichloreCandle
+import net.backupcup.hexed.block.SkeletonSkullCandle
+import net.backupcup.hexed.block.WitherSkullCandle
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
@@ -41,12 +43,36 @@ object RegisterBlocks {
         .nonOpaque()
         .pistonBehavior(PistonBehavior.BLOCK))
 
+    val SKELETON_SKULL_CANDLE: Block = SkeletonSkullCandle(FabricBlockSettings.create()
+        .strength(1f)
+        .sounds(BlockSoundGroup.STONE)
+        .mapColor(MapColor.GRAY)
+        .nonOpaque()
+        .luminance(SkeletonSkullCandle.STATE_TO_LUMINANCE)
+        .pistonBehavior(PistonBehavior.DESTROY)
+    )
+
+    val WITHER_SKULL_CANDLE: Block = WitherSkullCandle(FabricBlockSettings.create()
+        .strength(1f)
+        .sounds(BlockSoundGroup.STONE)
+        .mapColor(MapColor.GRAY)
+        .nonOpaque()
+        .luminance(WitherSkullCandle.STATE_TO_LUMINANCE)
+        .pistonBehavior(PistonBehavior.DESTROY)
+    )
+
     fun registerBlocks() {
         Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "brimstone_candle"), BRIMSTONE_CANDLE)
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "brimstone_candle"), BlockItem(BRIMSTONE_CANDLE, FabricItemSettings()))
 
         Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "lichlore_candle"), LICHLORE_CANDLE)
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "lichlore_candle"), BlockItem(LICHLORE_CANDLE, FabricItemSettings()))
+
+        Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "skeleton_skull_candle"), SKELETON_SKULL_CANDLE)
+        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "skeleton_skull_candle"), BlockItem(SKELETON_SKULL_CANDLE, FabricItemSettings()))
+
+        Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "wither_skull_candle"), WITHER_SKULL_CANDLE)
+        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "wither_skull_candle"), BlockItem(WITHER_SKULL_CANDLE, FabricItemSettings()))
 
         Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "accursed_altar"), ACCURSED_ALTAR)
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "accursed_altar"), BlockItem(ACCURSED_ALTAR, FabricItemSettings()))

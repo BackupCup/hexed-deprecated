@@ -2,12 +2,18 @@ package net.backupcup.hexed.altar
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.backupcup.hexed.Hexed
+import net.minecraft.client.font.MultilineText
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
+import net.minecraft.client.gui.tooltip.Tooltip
 import net.minecraft.client.render.GameRenderer
 import net.minecraft.entity.player.PlayerInventory
+import net.minecraft.text.StringVisitable
 import net.minecraft.text.Text
+import net.minecraft.text.Texts
+import net.minecraft.util.Colors
 import net.minecraft.util.Identifier
+import org.joml.Matrix4f
 
 class AccursedAltarScreen(
     handler: AccursedAltarScreenHandler?,
@@ -39,6 +45,10 @@ class AccursedAltarScreen(
     override fun render(context: DrawContext?, mouseX: Int, mouseY: Int, delta: Float) {
         renderBackground(context)
         super.render(context, mouseX, mouseY, delta)
+        RenderSystem.setShaderTexture(0, TEXTURE)
+
+
+
         drawMouseoverTooltip(context, mouseX, mouseY)
     }
 }

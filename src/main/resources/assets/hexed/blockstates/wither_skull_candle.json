@@ -1,0 +1,580 @@
+{
+    "variants": {
+        "facing=north,hanging=true,candle=0": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=1": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=2": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_black",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=3": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_blue",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=4": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_brown",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=5": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_cyan",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=6": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_gray",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=7": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_green",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=8": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_light_blue",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=9": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_light_gray",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=10": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_lime",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=11": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_magenta",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=12": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_orange",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=13": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_pink",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=14": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_purple",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=15": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_red",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=16": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_white",
+            "y": 0
+        },
+        "facing=north,hanging=true,candle=17": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_yellow",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=0": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=1": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=2": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_black",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=3": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_blue",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=4": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_brown",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=5": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_cyan",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=6": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_gray",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=7": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_green",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=8": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_light_blue",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=9": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_light_gray",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=10": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_lime",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=11": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_magenta",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=12": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_orange",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=13": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_pink",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=14": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_purple",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=15": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_red",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=16": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_white",
+            "y": 0
+        },
+        "facing=north,hanging=false,candle=17": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_yellow",
+            "y": 0
+        },
+        "facing=east,hanging=true,candle=0": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=1": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=2": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_black",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=3": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_blue",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=4": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_brown",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=5": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_cyan",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=6": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_gray",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=7": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_green",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=8": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_light_blue",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=9": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_light_gray",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=10": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_lime",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=11": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_magenta",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=12": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_orange",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=13": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_pink",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=14": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_purple",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=15": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_red",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=16": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_white",
+            "y": 90
+        },
+        "facing=east,hanging=true,candle=17": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_yellow",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=0": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=1": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=2": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_black",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=3": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_blue",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=4": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_brown",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=5": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_cyan",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=6": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_gray",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=7": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_green",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=8": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_light_blue",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=9": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_light_gray",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=10": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_lime",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=11": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_magenta",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=12": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_orange",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=13": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_pink",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=14": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_purple",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=15": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_red",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=16": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_white",
+            "y": 90
+        },
+        "facing=east,hanging=false,candle=17": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_yellow",
+            "y": 90
+        },
+        "facing=south,hanging=true,candle=0": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=1": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=2": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_black",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=3": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_blue",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=4": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_brown",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=5": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_cyan",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=6": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_gray",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=7": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_green",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=8": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_light_blue",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=9": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_light_gray",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=10": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_lime",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=11": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_magenta",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=12": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_orange",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=13": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_pink",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=14": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_purple",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=15": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_red",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=16": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_white",
+            "y": 180
+        },
+        "facing=south,hanging=true,candle=17": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_yellow",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=0": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=1": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=2": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_black",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=3": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_blue",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=4": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_brown",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=5": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_cyan",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=6": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_gray",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=7": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_green",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=8": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_light_blue",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=9": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_light_gray",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=10": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_lime",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=11": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_magenta",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=12": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_orange",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=13": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_pink",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=14": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_purple",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=15": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_red",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=16": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_white",
+            "y": 180
+        },
+        "facing=south,hanging=false,candle=17": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_yellow",
+            "y": 180
+        },
+        "facing=west,hanging=true,candle=0": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=1": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=2": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_black",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=3": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_blue",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=4": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_brown",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=5": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_cyan",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=6": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_gray",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=7": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_green",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=8": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_light_blue",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=9": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_light_gray",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=10": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_lime",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=11": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_magenta",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=12": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_orange",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=13": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_pink",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=14": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_purple",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=15": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_red",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=16": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_white",
+            "y": 270
+        },
+        "facing=west,hanging=true,candle=17": {
+            "model": "hexed:block/skull_candles/wither_skulls/hanging/skull_candle_yellow",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=0": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=1": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=2": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_black",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=3": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_blue",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=4": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_brown",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=5": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_cyan",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=6": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_gray",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=7": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_green",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=8": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_light_blue",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=9": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_light_gray",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=10": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_lime",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=11": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_magenta",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=12": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_orange",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=13": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_pink",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=14": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_purple",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=15": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_red",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=16": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_white",
+            "y": 270
+        },
+        "facing=west,hanging=false,candle=17": {
+            "model": "hexed:block/skull_candles/wither_skulls/standing/skull_candle_yellow",
+            "y": 270
+        }
+    }
+}

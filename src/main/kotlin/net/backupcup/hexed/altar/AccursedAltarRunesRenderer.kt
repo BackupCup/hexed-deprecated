@@ -30,9 +30,6 @@ class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> 
         )
     }
 
-    // name: Vindictive
-    // Every hit applies a level of a special Effect that does more damage on applied, depending on the amplifier
-
     // name: Resentful
     // [do damage -> be slower, attack faster]
 

@@ -16,6 +16,9 @@ object HexedClient: ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.LICHLORE_CANDLE, RenderLayer.getCutout())
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.ACCURSED_ALTAR, RenderLayer.getCutout())
 
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.SKELETON_SKULL_CANDLE, RenderLayer.getCutout())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.WITHER_SKULL_CANDLE, RenderLayer.getCutout())
+
 
         RegisterDecoCandles.candleTypes.forEach {(_, block) ->
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout())

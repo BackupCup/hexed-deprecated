@@ -48,12 +48,12 @@ class TallCandle(
         builder?.add(LIT, TOP)
     }
 
-    override fun randomDisplayTick(state: BlockState?, world: World?, pos: BlockPos?, random: Random?) {
-        val randomFloat = random!!.nextFloat()
-        if (state!!.get(LIT) && state.get(TOP)) {
+    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        val randomFloat = random.nextFloat()
+        if (state.get(LIT) && state.get(TOP)) {
             if(randomFloat < .15f) {
-                world!!.addParticle(ParticleTypes.SMOKE,
-                    pos!!.x + .5, pos.y + 0.85, pos.z + .5,
+                world.addParticle(ParticleTypes.SMOKE,
+                    pos.x + .5, pos.y + 0.85, pos.z + .5,
                     0.0, 0.0, 0.0)
                 if(randomFloat < .07f) {
                     world.playSound(
@@ -62,8 +62,8 @@ class TallCandle(
                         random.nextFloat() + 1f, random.nextFloat() * .7f + .3f, false)
                 }
             }
-            world!!.addParticle(ParticleTypes.FLAME,
-                pos!!.x + .5, pos.y + 0.85, pos.z + .5,
+            world.addParticle(ParticleTypes.FLAME,
+                pos.x + .5, pos.y + 0.85, pos.z + .5,
                 0.0, 0.0, 0.0)
         }
     }

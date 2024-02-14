@@ -50,7 +50,7 @@ class AccursedAltar(settings: Settings?
     ).reduce { v1, v2 -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR) }.get();
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>?) {
-        builder?.add(FACING)?.add(ACTIVE)
+        builder?.add(FACING, ACTIVE)
     }
 
     override fun appendTooltip(

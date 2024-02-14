@@ -1,14 +1,20 @@
 package net.backupcup.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.register.RegisterTags;
+import net.backupcup.hexed.statusEffects.AbstractHexStatusEffect;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -17,7 +23,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -71,7 +78,10 @@ public abstract class LivingEntityMixin {
         }
     }
 
-
+    @WrapOperation(method = "clearStatusEffects", at = @At(value = "INVOKE", target = "Ljava/util/Map;values()Ljava/util/Collection;"))
+    private Collection<StatusEffectInstance> hexed$skipHexedDebuffs(Map<?, StatusEffectInstance> map, Operation<Map<?, StatusEffectInstance>> original) {
+        return map.values().stream().filter(effectInstance -> !(effectInstance.getEffectType() instanceof AbstractHexStatusEffect)).collect(Collectors.toList());
+    }
 
     @Unique
     private boolean hexed$hasEnchantmentInHands(Object key, DamageSource source) {
