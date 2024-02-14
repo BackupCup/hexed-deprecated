@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blackstone"
+    },
+    "C": {
+      "item": "hexed:brimstone_crystal"
+    },
+    "G": {
+      "item": "minecraft:gilded_blackstone"
+    },
+    "I": {
+      "item": "minecraft:gold_ingot"
+    },
+    "W": {
+      "item": "minecraft:red_wool"
+    }
+  },
+  "pattern": [
+    "C C",
+    "IWI",
+    "BGB"
+  ],
+  "result": {
+    "item": "hexed:accursed_altar"
+  },
+  "show_notification": true
+}

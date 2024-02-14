@@ -1,0 +1,61 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brimstone_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexed:brimstone_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_calamitous_fabric": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexed:calamitous_fabric"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_calamitous_hood": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexed:calamitous_hood"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hexed:calamitous_hood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_calamitous_fabric",
+      "has_brimstone_crystal",
+      "has_calamitous_hood",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hexed:calamitous_hood"
+    ]
+  },
+  "sends_telemetry_event": false
+}

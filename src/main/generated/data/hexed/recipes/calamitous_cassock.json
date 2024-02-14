@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "hexed:brimstone_crystal"
+    },
+    "F": {
+      "item": "hexed:calamitous_fabric"
+    }
+  },
+  "pattern": [
+    "FCF",
+    "F F",
+    "F F"
+  ],
+  "result": {
+    "item": "hexed:calamitous_cassock"
+  },
+  "show_notification": true
+}
