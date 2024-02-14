@@ -41,7 +41,7 @@ class TallCandle(
         options: TooltipContext?
     ) {
         tooltip?.add(Text.translatable("tooltip.hexed.abstract_candle.line_1")
-            .formatted(Formatting.GRAY).formatted(Formatting.ITALIC).formatted(Formatting.BOLD))
+            .formatted(Formatting.GRAY))
     }
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>?) {

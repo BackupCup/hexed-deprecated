@@ -2,13 +2,15 @@ package net.backupcup.hexed.block
 
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.particle.ParticleEffect
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.IntProperty
 import net.minecraft.util.math.Direction
 
-class WitherSkullCandle(settings: Settings?) : AbstractSkullCandle(settings) {
+class WitherSkullCandle(settings: Settings?, override val fireParticle: ParticleEffect = ParticleTypes.SOUL_FIRE_FLAME) : AbstractSkullCandle(settings) {
     companion object {
         val LIT: BooleanProperty = AbstractSkullCandle.LIT
         val HANGING: BooleanProperty = AbstractSkullCandle.HANGING

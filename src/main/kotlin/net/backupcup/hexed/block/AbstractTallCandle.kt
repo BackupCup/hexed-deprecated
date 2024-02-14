@@ -49,35 +49,35 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
 
     @Deprecated("Deprecated in Java")
     override fun getOutlineShape(
-        state: BlockState?,
+        state: BlockState,
         world: BlockView?,
         pos: BlockPos?,
         context: ShapeContext?
     ): VoxelShape {
-        if (state!!.get(TOP)) return VoxelShapes.cuboid(TOP_SHAPE)
+        if (state.get(TOP)) return VoxelShapes.cuboid(TOP_SHAPE)
         return VoxelShapes.cuboid(BOTTOM_SHAPE)
     }
 
     @Deprecated("Deprecated in Java")
     override fun getCollisionShape(
-        state: BlockState?,
+        state: BlockState,
         world: BlockView?,
         pos: BlockPos?,
         context: ShapeContext?
     ): VoxelShape {
-        if (state!!.get(TOP)) return VoxelShapes.cuboid(TOP_SHAPE)
+        if (state.get(TOP)) return VoxelShapes.cuboid(TOP_SHAPE)
         return VoxelShapes.cuboid(BOTTOM_SHAPE)
     }
 
     @Deprecated("Deprecated in Java")
     override fun onProjectileHit(
-        world: World?,
-        state: BlockState?,
-        hit: BlockHitResult?,
+        world: World,
+        state: BlockState,
+        hit: BlockHitResult,
         projectile: ProjectileEntity?
     ) {
-        if(!world?.isClient!! && projectile!!.isOnFire && !state?.get(LIT)!!) {
-            setLit(world, hit!!.blockPos, state, true)
+        if(!world.isClient && projectile!!.isOnFire && !state.get(LIT)) {
+            setLit(world, hit.blockPos, state, true)
         }
     }
 
@@ -120,17 +120,18 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
     }
 
     override fun onPlaced(
-        world: World?,
+        world: World,
         pos: BlockPos?,
         state: BlockState?,
         placer: LivingEntity?,
         itemStack: ItemStack?
     ) {
-        if (world!!.canSetBlock(pos?.up(1))) {
+        if (world.canSetBlock(pos?.up(1))) {
             world.setBlockState(pos?.up(1), this.defaultState.with(TOP, true))
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onStateReplaced(
         state: BlockState,
         world: World,
@@ -159,8 +160,8 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
         return sideCoversSmallSquare(world, pos?.down(), Direction.UP)
     }
 
-    private fun breakPieces(world: WorldAccess?, pos: BlockPos?) {
-        if (world!!.getBlockState(pos!!.up()).block == this) {
+    private fun breakPieces(world: WorldAccess, pos: BlockPos) {
+        if (world.getBlockState(pos.up()).block == this) {
             if(world.getBlockState(pos.up()).get(TOP)) {
                 world.breakBlock(pos.up(), false)
             }

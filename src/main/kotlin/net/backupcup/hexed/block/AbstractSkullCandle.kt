@@ -10,6 +10,7 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
+import net.minecraft.particle.ParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
@@ -43,6 +44,8 @@ abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
             if (state.get(LIT) != false) 15 else 0
         }
     }
+
+    abstract val fireParticle: ParticleEffect
 
     private val STANDING_SHAPE: List<VoxelShape> = listOf(
         createCuboidShape(4.0, 0.0, 1.0, 12.0, 12.0, 14.0), //NORTH
@@ -143,10 +146,12 @@ abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun rotate(state: BlockState, rotation: BlockRotation): BlockState? {
         return state.with(FACING, rotation.rotate(state.get(FACING)))
     }
 
+    @Deprecated("Deprecated in Java")
     override fun mirror(state: BlockState, mirror: BlockMirror): BlockState {
         return state.rotate(mirror.getRotation(state.get(FACING)))
     }
@@ -169,14 +174,15 @@ abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
         return blockState.with(HANGING, false).with(FACING, ctx.horizontalPlayerFacing.opposite)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun canPlaceAt(state: BlockState, world: WorldView, pos: BlockPos): Boolean {
-        if (sideCoversSmallSquare(world, pos.down(), Direction.UP)) {
-            return true
+        return if (sideCoversSmallSquare(world, pos.down(), Direction.UP)) {
+            true
         } else {
             val direction = state.get(FACING) as Direction
             val blockPos = pos.offset(direction.opposite)
             val blockState = world.getBlockState(blockPos)
-            return blockState.isSideSolidFullSquare(world, blockPos, direction)
+            blockState.isSideSolidFullSquare(world, blockPos, direction)
         }
     }
 
@@ -278,7 +284,7 @@ abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
                         random.nextFloat() + 1f, random.nextFloat() * .7f + .3f, false)
                 }
             }
-            world.addParticle(ParticleTypes.SMALL_FLAME,
+            world.addParticle(fireParticle,
                 pos.x + offset[0], pos.y + offset[1], pos.z + offset[2],
                 0.0, 0.0, 0.0)
         }
