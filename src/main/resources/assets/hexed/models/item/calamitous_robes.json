@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "hexed:item/calamitous_robes"
+    "layer0": "hexed:item/armor/calamitous_robes"
   }
 }

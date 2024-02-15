@@ -186,6 +186,7 @@ abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun getStateForNeighborUpdate(
         state: BlockState,
         direction: Direction,
@@ -194,14 +195,15 @@ abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
         pos: BlockPos,
         neighborPos: BlockPos
     ): BlockState {
-        if (state.get(HANGING)) {
-            return if (direction.opposite == state.get(FACING) && !state.canPlaceAt(world, pos)
+        return if (state.get(HANGING)) {
+            if (direction.opposite == state.get(FACING) && !state.canPlaceAt(world, pos)
             ) Blocks.AIR.defaultState else state
         } else {
-            return if (!sideCoversSmallSquare(world, pos.down(), Direction.UP)) Blocks.AIR.defaultState else state
+            if (!sideCoversSmallSquare(world, pos.down(), Direction.UP)) Blocks.AIR.defaultState else state
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState,
         world: World,
@@ -253,6 +255,7 @@ abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
         return ActionResult.PASS
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onStateReplaced(
         state: BlockState,
         world: World,

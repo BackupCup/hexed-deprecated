@@ -74,9 +74,9 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
         world: World,
         state: BlockState,
         hit: BlockHitResult,
-        projectile: ProjectileEntity?
+        projectile: ProjectileEntity
     ) {
-        if(!world.isClient && projectile!!.isOnFire && !state.get(LIT)) {
+        if(!world.isClient && projectile.isOnFire && !state.get(LIT)) {
             setLit(world, hit.blockPos, state, true)
         }
     }
