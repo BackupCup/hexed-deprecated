@@ -30,20 +30,32 @@ Porting Clarification:
 Permission is not granted to any user of this software to make ports of this software to another mod loader. This means that if this software was created for the Fabric Mod Loader, it may not be ported to the Forge Mod Loader or Quilt Mod Loader without express written permission from the copyright holders. Permission is granted to any user to fork the repository of this software and create a port to a different mod loader if, and only if, the port is to be submitted to the copyright holders as a Pull Request wherever this software's source code is hosted by the copyright holders. The submitter of the Pull Request containing the porting code agrees that Timefall Development is free to negotiate the terms for the use of the submitted code. This includes, but will often not be the case that, submissions are used without compensation of any kind.
 
 
+Asset Usage Permission Clarification:
+Permission has been granted to the copyright holder(s) of this project to make use of assets from the Calamity Mod in this project. It is understood by the copyright holder(s) of this project that this permission may be rescinded at any time and should not be understood as support or endorsement of this project. Proof of this permission may be found [here](https://github.com/EndLone/hexed/blob/master/Discord_3SWUtKdglc.png).
+
 Sound Asset Clarification:
 Permission is not granted to any user or contributor of this software to use the sound
 assets of this software in any way, shape or form beyond contributing to this software.
-These assets are used, with permission, from The Calamity Mod Team, which can be found at
-the following link: https://steamcommunity.com/sharedfiles/filedetails/?id=2824688072
+These assets are used, with permission from The Calamity Mod Team, which can be found at
+the following link(s): 
+https://github.com/CalamityTeam/CalamityModPublic/blob/1.4.4/Sounds/Custom/SupremeCalamitasSpawn.ogg
+https://github.com/CalamityTeam/CalamityModPublic/blob/1.4.4/Sounds/Custom/WeaponEnchant.ogg
+https://github.com/CalamityTeam/CalamityModPublic/blob/1.4.4/Sounds/Custom/WeaponExhume.ogg
+
+The Calamity Mod Team can be found at the following link(s):
+[Link to the Calamity Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2824688072)
+[Link to the Calamity Mod Discord](https://www.discord.gg/calamity)
 
 Texture Asset Clarification:
 Permission is not granted to any user or contributor of this software to use the texture
-assets within the runes and mob_effect directories of this software in any way, 
+assets within the runes, mob_effect and armor directories of this software in any way, 
 shape or form beyond contributing to this software.
-These assets are used, with permission, from The Calamity Mod Team, which can be found at
-the following link: https://steamcommunity.com/sharedfiles/filedetails/?id=2824688072
+These assets are used, with permission from The Calamity Mod Team, which can be found at
+the following link: https://github.com/CalamityTeam/CalamityModPublic/tree/1.4.4/UI/CalamitasEnchantments
 
-Proof of permission granted by Fabsol(The owner of Calamity Mod): https://media.discordapp.net/attachments/1132618832842870824/1207461368756838410/image.png?ex=65dfbb07&is=65cd4607&hm=c6e69bca4a3dfd580bf676c29b20e42a6c32d777c3c22fd87161d5b44057014f&=&format=webp&quality=lossless
+The Calamity Mod Team can be found at the following link(s):
+[Link to the Calamity Mod](https://steamcommunity.com/sharedfiles/filedetails/?id=2824688072)
+[Link to the Calamity Mod Discord](https://www.discord.gg/calamity)
 
 
 Definition of 'Our Sources' in this license:
