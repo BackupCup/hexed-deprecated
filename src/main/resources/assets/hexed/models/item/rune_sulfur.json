@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "hexed:item/runes/sulfur"
+    "layer0": "hexed:item/runes/persecuted"
   }
 }
