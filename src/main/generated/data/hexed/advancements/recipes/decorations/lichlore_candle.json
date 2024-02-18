@@ -1,0 +1,74 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ender_eye": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:ender_eye"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:iron_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lichlore_candle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexed:lichlore_candle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hexed:lichlore_candle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_candle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:white_candle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_ender_eye",
+      "has_white_candle",
+      "has_iron_ingot",
+      "has_lichlore_candle",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hexed:lichlore_candle"
+    ]
+  },
+  "sends_telemetry_event": false
+}

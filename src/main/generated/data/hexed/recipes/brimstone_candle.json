@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:black_candle"
+    },
+    "F": {
+      "item": "minecraft:blaze_powder"
+    },
+    "I": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "F",
+    "C",
+    "I"
+  ],
+  "result": {
+    "item": "hexed:brimstone_candle"
+  },
+  "show_notification": true
+}

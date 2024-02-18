@@ -2,6 +2,7 @@ package net.backupcup.hexed.register
 
 import net.backupcup.hexed.Hexed
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
+import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
@@ -14,8 +15,9 @@ object RegisterItemGroup {
     fun registerItemGroup(): ItemGroup {
         return Registry.register(Registries.ITEM_GROUP, Identifier(Hexed.MOD_ID, "hexed_group"), FabricItemGroup.builder()
             .displayName(Text.translatable("itemGroup.hexed.hexed_group"))
-            .icon { ItemStack(RegisterBlocks.BRIMSTONE_CANDLE.asItem()) }
+            .icon { ItemStack(RegisterItems.BRIMSTONE_CRYSTAL) }
             .entries { _, entries ->
+                entries.add(ItemStack(RegisterBlocks.CALAMAIDAS_PLUSHIE))
                 entries.add(ItemStack(RegisterItems.BRIMSTONE_CRYSTAL))
                 entries.add(ItemStack(RegisterItems.CALAMITOUS_FABRIC))
 

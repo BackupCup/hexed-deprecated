@@ -1,6 +1,8 @@
 {
   "itemGroup.hexed.hexed_group": "Hexed",
 
+  "block.hexed.calamaidas_plushie": "Supreme Maid Plushie",
+
   "block.hexed.brimstone_candle": "Brimstone Candle",
   "block.hexed.lichlore_candle": "Lichlore Candle",
 
@@ -24,11 +26,11 @@
 
   "block.hexed.accursed_altar": "Altar of the Accursed",
 
-  "item.hexed.brimstone_crystal": "Brimstone Crystal",
-  "item.hexed.calamitous_fabric": "Calamitous Fabric",
-
   "block.hexed.skeleton_skull_candle": "Skeleton Skull Candle",
   "block.hexed.wither_skull_candle": "Wither Skull Candle",
+
+  "item.hexed.brimstone_crystal": "Brimstone Crystal",
+  "item.hexed.calamitous_fabric": "Calamitous Fabric",
 
   "item.hexed.calamitous_hood": "Calamitous Hood",
   "item.hexed.calamitous_robes": "Calamitous Robes",
@@ -56,6 +58,8 @@
   "death.attack.vindictive": "%1$s got multiplied by zero",
   "death.attack.vindictive.player": "%1$s got multiplied by zero whilst fighting %2$s",
 
+  "tooltip.hexed.calamaidas_plushie": "Things are about to get calamitous!",
+
   "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
   "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",
   "tooltip.hexed.brimstone_candle.line_3": "Required to make the Altar of the Accursed function.",
@@ -78,5 +82,6 @@
   "tooltip.hexed.calamitous_fabric.line_1": "Special fabric, interwoven with necrotic magic.",
   "tooltip.hexed.calamitous_fabric.line_2": "Used to make Calamitous Armor.",
 
-  "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function."
+  "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function.",
+  "message.hexed.altar_used": "The Brimstone Candles extinguished, despite your efforts to keep them Lit."
 }

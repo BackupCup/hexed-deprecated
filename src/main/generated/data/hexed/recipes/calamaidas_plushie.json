@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:black_wool"
+    },
+    "G": {
+      "item": "minecraft:light_gray_wool"
+    },
+    "P": {
+      "item": "minecraft:blaze_powder"
+    },
+    "W": {
+      "item": "minecraft:white_wool"
+    }
+  },
+  "pattern": [
+    "GWG",
+    "BPB",
+    "WBW"
+  ],
+  "result": {
+    "item": "hexed:calamaidas_plushie"
+  },
+  "show_notification": true
+}
