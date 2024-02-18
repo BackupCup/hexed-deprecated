@@ -4,8 +4,10 @@ import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.ShapeContext
+import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.projectile.ProjectileEntity
+import net.minecraft.item.Equipment
 import net.minecraft.item.Item
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
@@ -33,7 +35,7 @@ import net.minecraft.world.WorldAccess
 import net.minecraft.world.WorldView
 import java.util.function.ToIntFunction
 
-abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
+abstract class AbstractSkullCandle(settings: Settings?) : Block(settings), Equipment {
     companion object {
         val LIT: BooleanProperty = BooleanProperty.of("lit")
         val HANGING: BooleanProperty = BooleanProperty.of("hanging")
@@ -154,6 +156,10 @@ abstract class AbstractSkullCandle(settings: Settings?) : Block(settings) {
     @Deprecated("Deprecated in Java")
     override fun mirror(state: BlockState, mirror: BlockMirror): BlockState {
         return state.rotate(mirror.getRotation(state.get(FACING)))
+    }
+
+    override fun getSlotType(): EquipmentSlot {
+        return EquipmentSlot.HEAD
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {

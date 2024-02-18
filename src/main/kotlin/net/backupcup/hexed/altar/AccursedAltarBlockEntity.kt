@@ -1,5 +1,6 @@
 package net.backupcup.hexed.altar
 
+import net.backupcup.hexed.block.AbstractTallCandle
 import net.backupcup.hexed.block.BrimstoneCandle
 import net.backupcup.hexed.register.RegisterBlockEntities
 import net.backupcup.hexed.register.RegisterBlocks
@@ -16,6 +17,7 @@ import net.minecraft.particle.DustParticleEffect
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
+import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.sound.SoundCategory
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
@@ -33,14 +35,19 @@ class AccursedAltarBlockEntity(
     state
 ), NamedScreenHandlerFactory {
 
-    private var isActive = if(world?.getBlockState(pos)?.block == RegisterBlocks.ACCURSED_ALTAR) {
-        world?.getBlockState(this.pos)?.get(AccursedAltar.ACTIVE)
-    } else {
-        false
+    private var isActive =
+        if(this.world?.getBlockState(this.pos)?.block == RegisterBlocks.ACCURSED_ALTAR)
+            { world?.getBlockState(this.pos)?.get(AccursedAltar.ACTIVE) }
+        else
+            { false }
+
+    fun getActiveState(): Boolean? {
+        markDirty()
+        return this.world?.getBlockState(this.pos)?.get(AccursedAltar.ACTIVE)
     }
 
-    override fun createMenu(syncId: Int, playerInventory: PlayerInventory, player: PlayerEntity?): ScreenHandler {
-        return AccursedAltarScreenHandler(syncId, playerInventory)
+    override fun createMenu(syncId: Int, playerInventory: PlayerInventory, player: PlayerEntity): ScreenHandler {
+        return AccursedAltarScreenHandler(syncId, playerInventory, player, ScreenHandlerContext.EMPTY, this)
     }
 
     override fun getDisplayName(): Text {
@@ -54,7 +61,7 @@ class AccursedAltarBlockEntity(
 
     override fun writeNbt(nbt: NbtCompound?) {
         super.writeNbt(nbt)
-        nbt?.putBoolean("active", isActive!!)
+        nbt?.putBoolean("active", isActive == true)
     }
 
     override fun toInitialChunkDataNbt(): NbtCompound {
@@ -66,7 +73,7 @@ class AccursedAltarBlockEntity(
     }
 
     companion object {
-        private val CANDLE_OFFSETS = listOf(
+        val CANDLE_OFFSETS = listOf(
             listOf(
                 BlockPos(-2, 1, -3), BlockPos(-2, 1, 3),
                 BlockPos(2, 1, -3), BlockPos(2, 1, 3),
@@ -156,6 +163,29 @@ class AccursedAltarBlockEntity(
                 SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,
                 0.25f, 1f)}
         world.setBlockState(pos, state.with(AccursedAltar.ACTIVE, newState))
+    }
+
+    fun changeCandleState(newState: Boolean) {
+        val blockPos: BlockPos = this.pos
+        val world: World? = this.world
+        val offsetList: List<BlockPos> =
+            if (world?.getBlockState(blockPos)?.get(AccursedAltar.FACING)?.axis == Direction.Axis.Z)
+                CANDLE_OFFSETS[0]
+            else
+                CANDLE_OFFSETS[1]
+
+        offsetList.forEach { offset ->
+            val candlePos = BlockPos(blockPos.x + offset.x, blockPos.y + offset.y, blockPos.z + offset.z)
+            if (world?.getBlockState(candlePos)?.isOf(RegisterBlocks.BRIMSTONE_CANDLE) == true) {
+                if (world.getBlockState(candlePos).get(BrimstoneCandle.LIT)) {
+                    AbstractTallCandle.setLit(world, candlePos, world.getBlockState(candlePos), newState)
+                    world.playSound(
+                        null, candlePos,
+                        SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS,
+                        0.125f, 1f)
+                }
+            }
+        }
     }
 
     private fun serverCheckCandles(offsetList: List<BlockPos>, world: World, pos: BlockPos, blockEntity: AccursedAltarBlockEntity): Int {

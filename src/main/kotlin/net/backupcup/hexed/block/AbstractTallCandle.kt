@@ -33,6 +33,14 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
         val STATE_TO_LUMINANCE = ToIntFunction { state: BlockState ->
             if (state.get(LIT) != false) 15 else 0
         }
+
+        fun setLit(world: World, pos: BlockPos, state: BlockState, litValue: Boolean) {
+            world.setBlockState(pos, state.with(LIT, litValue), NOTIFY_ALL)
+
+            if(state.get(TOP)) world.setBlockState(pos.down(1), state.with(LIT, litValue).with(
+                TOP, false))
+            else world.setBlockState(pos.up(1), state.with(LIT, litValue).with(TOP, true))
+        }
     }
 
     abstract val particleExtinguish: ParticleEffect
@@ -171,13 +179,5 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
                 world.breakBlock(pos.down(), false)
             }
         }
-    }
-
-    private fun setLit(world: World, pos: BlockPos, state: BlockState, litValue: Boolean) {
-        world.setBlockState(pos, state.with(LIT, litValue), NOTIFY_ALL)
-
-        if(state.get(TOP)) world.setBlockState(pos.down(1), state.with(LIT, litValue).with(
-            TOP, false))
-        else world.setBlockState(pos.up(1), state.with(LIT, litValue).with(TOP, true))
     }
 }
