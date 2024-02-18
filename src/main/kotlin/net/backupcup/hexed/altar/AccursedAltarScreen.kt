@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.util.HexData
 import net.backupcup.hexed.util.ScreenHelper
+import net.backupcup.hexed.util.TextWrapUtils
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.gui.widget.TexturedButtonWidget
@@ -136,14 +137,7 @@ class AccursedAltarScreen(
                 x + 47, y + 51, 0F, 0F,
                 16, 16, 16, 16)
 
-            val tooltipList: MutableList<Text> = splitTextByComma(
-                Text.translatable(HexData.getHexInfo(this.currentHex)?.description))
-
-            tooltipList.addFirst(Text.translatable(HexData.getHexInfo(currentHex)?.name).formatted(Formatting.RED).formatted(Formatting.BOLD))
-
-            if (ScreenHelper.isInButtonBounds(mouseX, mouseY, x + 47, y + 51, 16, 16)) {
-                context?.drawTooltip(textRenderer, tooltipList, mouseX, mouseY)
-            }
+            HexData.getHexInfo(this.currentHex)?.description?.let { this.renderTooltip(it, mouseX, mouseY, context) }
         }
 
         drawMouseoverTooltip(context, mouseX, mouseY)
@@ -153,24 +147,20 @@ class AccursedAltarScreen(
         val neighbouringList: List<String> = mutableListOf()
         val currentHexIndex = availableList.indexOf(current)
 
-        //Add previous
         neighbouringList.addLast(
             if (currentHexIndex - 1 >= 0)
                 { availableList[currentHexIndex - 1] }
             else
                 { availableList[availableList.size - 1] })
 
-        //Add current
         neighbouringList.addLast(current)
 
-        //Add next
         neighbouringList.addLast(
             if (currentHexIndex + 1 < availableList.size)
                 { availableList[currentHexIndex + 1] }
             else
                 { availableList[0] })
 
-        //return
         return neighbouringList
     }
 
@@ -198,14 +188,15 @@ class AccursedAltarScreen(
             x + startX, y + startY, width, height, buttonWidget)
     }
 
-    private fun splitTextByComma(text: Text): MutableList<Text> {
-        val splitText = mutableListOf<Text>()
-        val components = text.string.split(",")
+    private fun renderTooltip(text: String, mouseX: Int, mouseY: Int, context: DrawContext?) {
+        val tooltipLines: MutableList<Text> = mutableListOf()
+        val descTooltip: Collection<Text> = TextWrapUtils.wrapText(width, text, Formatting.GRAY) as Collection<Text>
 
-        for (component in components) {
-            splitText.add(Text.translatable(component.trim()).formatted(Formatting.GRAY))
+        tooltipLines.addFirst(Text.translatable(HexData.getHexInfo(this.currentHex)?.name).formatted(Formatting.RED).formatted(Formatting.BOLD))
+        tooltipLines.addAll(descTooltip)
+
+        if (ScreenHelper.isInButtonBounds(mouseX, mouseY, x + 47, y + 51, 16, 16)) {
+            context?.drawTooltip(textRenderer, tooltipLines, mouseX, mouseY)
         }
-
-        return splitText
     }
 }
