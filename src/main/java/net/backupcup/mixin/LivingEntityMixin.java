@@ -8,10 +8,12 @@ import net.backupcup.hexed.register.RegisterTags;
 import net.backupcup.hexed.statusEffects.AbstractHexStatusEffect;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Final;
@@ -33,25 +35,11 @@ public abstract class LivingEntityMixin {
 
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
 
-    @Shadow public abstract StatusEffectInstance getStatusEffect(StatusEffect effect);
-
-    @Shadow public abstract Iterable<ItemStack> getArmorItems();
-
     @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private float hexed$PersecutedDamage(float amount, DamageSource source) {
         if (source.getSource() instanceof LivingEntity) {
             if (hexed$hasEnchantmentInHands(RegisterEnchantments.INSTANCE.getPERSECUTED_HEX(), source)) {
                 return (amount <= 25f) ? (amount * 0.01f * getHealth()) : 25f;
-            }
-        }
-        return amount;
-    }
-
-    @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-    private float hexed$EtherealHealth(float amount, DamageSource source) {
-        if (source.getSource() instanceof LivingEntity) {
-            if (this.hasStatusEffect(RegisterStatusEffects.INSTANCE.getETHEREAL()) && !hexed$hasFullRobes(this.getArmorItems())) {
-                return amount * (1f + this.getStatusEffect(RegisterStatusEffects.INSTANCE.getETHEREAL()).getDuration() / 10f);
             }
         }
         return amount;
@@ -78,6 +66,13 @@ public abstract class LivingEntityMixin {
         }
     }
 
+    @Inject(method = "heal", at = @At("HEAD"), cancellable = true)
+    private void hexed$TraitorousHeal(float amount, CallbackInfo callbackInfo) {
+        if(this.hasStatusEffect(RegisterStatusEffects.INSTANCE.getTRAITOROUS())) {
+            callbackInfo.cancel();
+        }
+    }
+
     @WrapOperation(method = "clearStatusEffects", at = @At(value = "INVOKE", target = "Ljava/util/Map;values()Ljava/util/Collection;"))
     private Collection<StatusEffectInstance> hexed$skipHexedDebuffs(Map<?, StatusEffectInstance> map, Operation<Map<?, StatusEffectInstance>> original) {
         return map.values().stream().filter(effectInstance -> !(effectInstance.getEffectType() instanceof AbstractHexStatusEffect)).collect(Collectors.toList());
@@ -86,7 +81,7 @@ public abstract class LivingEntityMixin {
     @Unique
     private boolean hexed$hasEnchantmentInHands(Object key, DamageSource source) {
         return EnchantmentHelper.get(((LivingEntity) Objects.requireNonNull(source.getSource())).getMainHandStack()).containsKey(key) ||
-                EnchantmentHelper.get(((LivingEntity) source.getSource()).getOffHandStack()).containsKey(key);
+                EnchantmentHelper.get(((LivingEntity) Objects.requireNonNull(source.getSource())).getOffHandStack()).containsKey(key);
     }
 
     @Unique

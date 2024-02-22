@@ -45,6 +45,10 @@
   "enchantment.hexed.ephemeral.desc": "Initially deals more damage than the item normally would, but its damage output diminishes with exhaustive use.",
   "enchantment.hexed.vindictive": "Vindictive",
   "enchantment.hexed.vindictive.desc": "Applies an effect that deals multiplicative damage as it runs out, at the cost of losing regeneration.",
+  "enchantment.hexed.traitorous": "Traitorous",
+  "enchantment.hexed.traitorous.desc": "Attacks from behind halt enemy health regeneration briefly, while your weapon undergoes a cooldown.",
+  "enchantment.hexed.displaced": "Displaced",
+  "enchantment.hexed.displaced.desc": "Swaps the Armor and Armor Toughness values.",
 
   "effect.hexed.aflame": "Aflame",
   "effect.hexed.ablaze": "Ablaze",
@@ -52,6 +56,7 @@
   "effect.hexed.exhaustion": "Exhaustion",
   "effect.hexed.vindictive": "Vindictive",
   "effect.hexed.smouldering": "Smouldering",
+  "effect.hexed.traitorous": "Traitorous",
 
   "death.attack.ablazed": "%1$s turned into searing ashes",
   "death.attack.ablazed.player": "%1$s turned into searing ashes whilst fighting %2$s",

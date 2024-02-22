@@ -24,6 +24,8 @@ public abstract class InGameHUDMixin {
     private static final Identifier HEARTS_AFLAME = new Identifier(Hexed.MOD_ID, "textures/gui/icons_aflame.png");
     @Unique
     private static final Identifier HEARTS_ETHEREAL = new Identifier(Hexed.MOD_ID, "textures/gui/icons_ethereal.png");
+    @Unique
+    private static final Identifier HEARTS_TRAITOROUS = new Identifier(Hexed.MOD_ID, "textures/gui/icons_traitorous.png");
     @Inject(method = "drawHeart", at = @At("HEAD"), cancellable = true)
     private void hexed$drawEffectHearts(DrawContext context, InGameHud.HeartType type, int x, int y, int v, boolean blinking, boolean halfHeart, CallbackInfo ci) {
         if (!blinking && type == InGameHud.HeartType.NORMAL &&
@@ -34,8 +36,8 @@ public abstract class InGameHUDMixin {
             } else if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getAFLAME()) ||
                        player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getABLAZE())) {
                 texture = HEARTS_AFLAME;
-            } else if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getETHEREAL())) {
-                texture = HEARTS_ETHEREAL;
+            } else if (player.hasStatusEffect(RegisterStatusEffects.INSTANCE.getTRAITOROUS())) {
+                texture = HEARTS_TRAITOROUS;
             } else {
                 return;
             }

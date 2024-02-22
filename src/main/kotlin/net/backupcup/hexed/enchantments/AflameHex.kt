@@ -6,15 +6,18 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.util.Identifier
 
 class AflameHex(
     weight: Rarity?,
     target: EnchantmentTarget?,
-    slotTypes: Array<out EquipmentSlot>?
+    slotTypes: Array<out EquipmentSlot>?,
+    texturepath: Identifier
 ) : AbstractHex(
     weight,
     target,
-    slotTypes
+    slotTypes,
+    texturepath
 ) {
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {

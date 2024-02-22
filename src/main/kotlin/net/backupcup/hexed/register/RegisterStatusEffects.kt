@@ -2,6 +2,8 @@ package net.backupcup.hexed.register
 
 import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.statusEffects.*
+import net.minecraft.entity.attribute.EntityAttributeModifier
+import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.registry.Registries
@@ -14,7 +16,8 @@ object RegisterStatusEffects {
     val ABLAZE: StatusEffect = AblazeStatusEffect(StatusEffectCategory.BENEFICIAL, 0xae2334)
 
     //Persecuted Hex
-    val ETHEREAL: StatusEffect = EtherealStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe83b3b)
+    val ETHEREAL: StatusEffect = EtherealStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe83b3b, -1.0)
+        .addAttributeModifier(EntityAttributes.GENERIC_ARMOR, "0b99b923-903b-436a-b865-fdc3fe63aad7", 0.0, EntityAttributeModifier.Operation.ADDITION)
 
     //Ephemeral Hex
     val EXHAUSTION: StatusEffect = ExhaustionStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe6904e)
@@ -23,6 +26,9 @@ object RegisterStatusEffects {
     val VINDICTIVE: StatusEffect = VindictiveStatusEffect(StatusEffectCategory.BENEFICIAL, 0xf4a58d)
     val SMOULDERING: StatusEffect = SmoulderingStatusEffect(StatusEffectCategory.BENEFICIAL, 0xcddf6c)
 
+    //Traitorous Hex
+    val TRAITOROUS: StatusEffect = TraitorousStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe83b3b)
+
     fun registerStatusEffects() {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ablaze"), ABLAZE)
@@ -30,5 +36,6 @@ object RegisterStatusEffects {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "exhaustion"), EXHAUSTION)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "vindictive"), VINDICTIVE)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "smouldering"), SMOULDERING)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "traitorous"), TRAITOROUS)
     }
 }

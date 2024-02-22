@@ -7,11 +7,13 @@ import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.util.Identifier
 
 abstract class AbstractHex(
     weight: Rarity?,
     target: EnchantmentTarget?,
-    slotTypes: Array<out EquipmentSlot>?
+    slotTypes: Array<out EquipmentSlot>?,
+    val texturepath: Identifier
 ) : Enchantment(
     weight,
     target,

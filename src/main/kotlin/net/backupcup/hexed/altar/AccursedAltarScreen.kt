@@ -133,11 +133,11 @@ class AccursedAltarScreen(
             context?.drawText(textRenderer, Text.translatable(this.currentHex), x + 84, y + 86, Colors.WHITE, true)
 
             context?.drawTexture(
-                HexData.getHexInfo(this.currentHex)?.texturepath,
+                HexData.getHexTexture(this.currentHex),
                 x + 47, y + 51, 0F, 0F,
                 16, 16, 16, 16)
 
-            HexData.getHexInfo(this.currentHex)?.description?.let { this.renderTooltip(it, mouseX, mouseY, context) }
+            HexData.getHexDescription(this.currentHex).let { this.renderTooltip(it, mouseX, mouseY, context) }
         }
 
         drawMouseoverTooltip(context, mouseX, mouseY)
@@ -192,7 +192,7 @@ class AccursedAltarScreen(
         val tooltipLines: MutableList<Text> = mutableListOf()
         val descTooltip: Collection<Text> = TextWrapUtils.wrapText(width, text, Formatting.GRAY) as Collection<Text>
 
-        tooltipLines.addFirst(Text.translatable(HexData.getHexInfo(this.currentHex)?.name).formatted(Formatting.RED).formatted(Formatting.BOLD))
+        tooltipLines.addFirst(Text.translatable(this.currentHex).formatted(Formatting.RED).formatted(Formatting.BOLD))
         tooltipLines.addAll(descTooltip)
 
         if (ScreenHelper.isInButtonBounds(mouseX, mouseY, x + 47, y + 51, 16, 16)) {

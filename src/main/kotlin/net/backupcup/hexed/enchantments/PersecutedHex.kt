@@ -6,21 +6,33 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.util.Identifier
 
 class PersecutedHex(
     weight: Rarity?,
     target: EnchantmentTarget?,
-    slotTypes: Array<out EquipmentSlot>?
+    slotTypes: Array<out EquipmentSlot>?,
+    texturepath: Identifier
 ) : AbstractHex(
     weight,
     target,
-    slotTypes
+    slotTypes,
+    texturepath
 ) {
     override fun onUserDamaged(user: LivingEntity, attacker: Entity, level: Int) {
-        user.addStatusEffect(StatusEffectInstance(
-            RegisterStatusEffects.ETHEREAL,
-            100, 0,
-            true, false, true
-        ))
+        if (user.hasStatusEffect(RegisterStatusEffects.ETHEREAL)) {
+            return
+        }
+
+        val armorPoints = user.armor
+        for (i in 0..armorPoints) {
+            user.addStatusEffect(
+                StatusEffectInstance(
+                    RegisterStatusEffects.ETHEREAL,
+                    1 + (armorPoints - i) * 10, i,
+                    true, false, true
+                )
+            )
+        }
     }
 }
