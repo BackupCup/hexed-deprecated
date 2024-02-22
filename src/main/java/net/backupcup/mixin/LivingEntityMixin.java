@@ -73,6 +73,7 @@ public abstract class LivingEntityMixin {
         }
     }
 
+    //TODO: DOESN'T WORK PROPERLY, NEEDS A REWORK
     @WrapOperation(method = "clearStatusEffects", at = @At(value = "INVOKE", target = "Ljava/util/Map;values()Ljava/util/Collection;"))
     private Collection<StatusEffectInstance> hexed$skipHexedDebuffs(Map<?, StatusEffectInstance> map, Operation<Map<?, StatusEffectInstance>> original) {
         return map.values().stream().filter(effectInstance -> !(effectInstance.getEffectType() instanceof AbstractHexStatusEffect)).collect(Collectors.toList());
@@ -80,8 +81,7 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private boolean hexed$hasEnchantmentInHands(Object key, DamageSource source) {
-        return EnchantmentHelper.get(((LivingEntity) Objects.requireNonNull(source.getSource())).getMainHandStack()).containsKey(key) ||
-                EnchantmentHelper.get(((LivingEntity) Objects.requireNonNull(source.getSource())).getOffHandStack()).containsKey(key);
+        return EnchantmentHelper.get(((LivingEntity) Objects.requireNonNull(source.getSource())).getMainHandStack()).containsKey(key);
     }
 
     @Unique

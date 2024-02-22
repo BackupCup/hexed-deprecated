@@ -40,7 +40,6 @@ class TraitorousHex(
 
             if (!hasFullRobes(user)) {
                 if (HexHelper.getEnchantments(user.mainHandStack).contains(this)) user.itemCooldownManager.set(user.mainHandStack.item, 40)
-                if (HexHelper.getEnchantments(user.offHandStack).contains(this)) user.itemCooldownManager.set(user.offHandStack.item, 40)
             }
         }
 
