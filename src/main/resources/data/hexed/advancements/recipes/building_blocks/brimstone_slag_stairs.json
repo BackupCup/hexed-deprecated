@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brimstone_slag": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexed:brimstone_slag"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hexed:brimstone_slag_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_brimstone_slag",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hexed:brimstone_slag_stairs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

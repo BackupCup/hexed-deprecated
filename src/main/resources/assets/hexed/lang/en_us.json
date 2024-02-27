@@ -1,5 +1,9 @@
 {
-  "itemGroup.hexed.hexed_group": "Hexed",
+  "itemGroup.hexed.hexed_group": "Hexed Main",
+  "itemGroup.hexed.hexed_deco_group": "Hexed Decorations",
+
+  "advancements.hexed.ultrakill.title": "The Cyber Grind",
+  "advancements.hexed.ultrakill.description": "Get all 3 ULTRAKILL Reference hexes.",
 
   "block.hexed.calamaidas_plushie": "Supreme Maid Plushie",
 
@@ -29,6 +33,25 @@
   "block.hexed.skeleton_skull_candle": "Skeleton Skull Candle",
   "block.hexed.wither_skull_candle": "Wither Skull Candle",
 
+  "block.hexed.brimstone_slag": "Brimstone Slag",
+  "block.hexed.lavendin_cinder": "Lavendin Cinder",
+  "block.hexed.brimstone_slag_stairs": "Brimstone Slag Stairs",
+  "block.hexed.brimstone_slag_slab": "Brimstone Slag Slab",
+  "block.hexed.brimstone_slag_wall": "Brimstone Slag Wall",
+
+  "block.hexed.brimstone_bricks": "Brimstone Bricks",
+  "block.hexed.brimstone_bricks_stairs": "Brimstone Bricks Stairs",
+  "block.hexed.brimstone_bricks_slab": "Brimstone Bricks Slab",
+  "block.hexed.brimstone_bricks_wall": "Brimstone Bricks Wall",
+
+  "block.hexed.smooth_brimstone_slag": "Smooth Brimstone Slag",
+  "block.hexed.smooth_brimstone_slag_stairs": "Smooth Brimstone Slag Stairs",
+  "block.hexed.smooth_brimstone_slag_slab": "Smooth Brimstone Slag Slab",
+  "block.hexed.smooth_brimstone_slag_wall": "Smooth Brimstone Slag Wall",
+
+  "block.hexed.chiseled_brimstone_slag": "Chiseled Brimstone Slag",
+  "block.hexed.brimstone_slag_pillar": "Brimstone Slag Pillar",
+
   "item.hexed.brimstone_crystal": "Brimstone Crystal",
   "item.hexed.calamitous_fabric": "Calamitous Fabric",
 
@@ -49,6 +72,22 @@
   "enchantment.hexed.traitorous.desc": "Attacks from behind halt enemy health regeneration briefly, while your weapon undergoes a cooldown.",
   "enchantment.hexed.displaced": "Displaced",
   "enchantment.hexed.displaced.desc": "Swaps the Armor and Armor Toughness values.",
+  "enchantment.hexed.aquatique": "Aquatique",
+  "enchantment.hexed.aquatique.desc": "Greatly increases your swimming speed, at the cost of higher fall damage.",
+  "enchantment.hexed.bloodthirsty": "Bloodthirsty",
+  "enchantment.hexed.bloodthirsty.desc": "Killing an enemy heals a portion of your health, but all other healing effects are disabled. Increases your Max Health by 4 hearts.",
+  "enchantment.hexed.disfigurement": "Disfigurement",
+  "enchantment.hexed.disfigurement.desc": "When the wearer is hit, every living creature in a certain area is Hungered and Weakened, including the wearer.",
+  "enchantment.hexed.metamorphosis": "Metamorphosis",
+  "enchantment.hexed.metamorphosis.desc": "Any healing that exceeds max health is turned into food. Natural regeneration is turned off.",
+  "enchantment.hexed.ironclad": "Ironclad",
+  "enchantment.hexed.ironclad.desc": "Damage received is reduced by 33%. If your health isn't full, upon taking damage, a heart will be temporarily deducted from your Max Health.",
+  "enchantment.hexed.divine": "Divine",
+  "enchantment.hexed.divine.desc": "Doubles all newly generated loot in chests. Will curse the wearer with a random Debuff upon opening a loot chest.",
+  "enchantment.hexed.dynamique": "Dynamique",
+  "enchantment.hexed.dynamique.desc": "Increases jump height, at the cost of higher fall damage.",
+  "enchantment.hexed.averting": "Averting",
+  "enchantment.hexed.averting.desc": "Provides a chance to reduce incoming damage, resulting in lower armor durability.",
 
   "effect.hexed.aflame": "Aflame",
   "effect.hexed.ablaze": "Ablaze",
@@ -57,6 +96,7 @@
   "effect.hexed.vindictive": "Vindictive",
   "effect.hexed.smouldering": "Smouldering",
   "effect.hexed.traitorous": "Traitorous",
+  "effect.hexed.ironclad": "Ironclad",
 
   "death.attack.ablazed": "%1$s turned into searing ashes",
   "death.attack.ablazed.player": "%1$s turned into searing ashes whilst fighting %2$s",
@@ -86,6 +126,10 @@
 
   "tooltip.hexed.calamitous_fabric.line_1": "Special fabric, interwoven with necrotic magic.",
   "tooltip.hexed.calamitous_fabric.line_2": "Used to make Calamitous Armor.",
+
+  "tooltip.hexed.ultrakill.mankind_is_dead": "MANKIND IS DEAD",
+  "tooltip.hexed.ultrakill.blood_is_fuel": "BLOOD IS FUEL",
+  "tooltip.hexed.ultrakill.hell_is_full": "HELL IS FULL",
 
   "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function.",
   "message.hexed.altar_used": "The Brimstone Candles extinguished, despite your efforts to keep them Lit."

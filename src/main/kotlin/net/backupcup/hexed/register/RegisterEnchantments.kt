@@ -1,7 +1,8 @@
 package net.backupcup.hexed.register
 
 import net.backupcup.hexed.Hexed
-import net.backupcup.hexed.enchantments.*
+import net.backupcup.hexed.enchantments.armor.*
+import net.backupcup.hexed.enchantments.weapon.*
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -31,12 +32,33 @@ object RegisterEnchantments {
     val DISPLACED_HEX = DisplacedHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR, arrayOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET),
         Identifier(Hexed.MOD_ID, "textures/gui/runes/displaced.png"))
+    val AVERTING_HEX = AvertingHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.ARMOR, arrayOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/averting.png"))
     val AQUATIQUE_HEX = AquatiqueHex(Enchantment.Rarity.VERY_RARE,
-        EnchantmentTarget.ARMOR, arrayOf(EquipmentSlot.FEET),
+        EnchantmentTarget.ARMOR_FEET, arrayOf(EquipmentSlot.FEET),
         Identifier(Hexed.MOD_ID, "textures/gui/runes/aquatique.png"))
+    val DYNAMIQUE_HEX = DynamiqueHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.ARMOR_FEET, arrayOf(EquipmentSlot.FEET),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/dynamique.png"))
+    val IRONCLAD_HEX = IroncladHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.ARMOR_LEGS, arrayOf(EquipmentSlot.LEGS),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/ironclad.png"))
+    val FRANTIC_HEX = FranticHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.ARMOR_LEGS, arrayOf(EquipmentSlot.LEGS),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/frantic.png"))
     val BLOODTHIRSTY_HEX = BloodthirstyHex(Enchantment.Rarity.VERY_RARE,
-        EnchantmentTarget.ARMOR, arrayOf(EquipmentSlot.CHEST),
+        EnchantmentTarget.ARMOR_CHEST, arrayOf(EquipmentSlot.CHEST),
         Identifier(Hexed.MOD_ID, "textures/gui/runes/bloodthirsty.png"))
+    val DISFIGUREMENT_HEX = DisfigurementHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.ARMOR_CHEST, arrayOf(EquipmentSlot.CHEST),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/disfigurement.png"))
+    val METAMORPHOSIS_HEX = MetamorphosisHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.ARMOR_HEAD, arrayOf(EquipmentSlot.HEAD),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/metamorphosis.png"))
+    val DIVINE_HEX = DivineHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.ARMOR_HEAD, arrayOf(EquipmentSlot.HEAD),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/divine.png"))
 
     //BOW
     //TODO
@@ -58,25 +80,22 @@ object RegisterEnchantments {
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "traitorous"), TRAITOROUS_HEX)
 
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "displaced"), DISPLACED_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "averting"), AVERTING_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "aquatique"), AQUATIQUE_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "dynamique"), DYNAMIQUE_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "ironclad"), IRONCLAD_HEX)
+        //Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "frantic"), FRANTIC_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "bloodthirsty"), BLOODTHIRSTY_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "disfigurement"), DISFIGUREMENT_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "metamorphosis"), METAMORPHOSIS_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "divine"), DIVINE_HEX)
 
         /*
         # - dummy hex, no translations, no logic
         ??? - still to get the idea
 
-        feet:
-            # Aquatique - increases swim speed, but increases fall damage
-            ??? - mobility feet
-        legs:
-            Prowess - Each hit has a 50% to be dodged. All damage received is multiplied by 1.5
-            ??? - mobility legs
-        chest:
-            # Bloodthirsty - Increases max hp by 4 hearts. All regular healing effects are disabled. Killing enemies now restores a portion of health.
-            Disfigurement - Every living entity in a certain area (including the wearer) is constantly Hungered and Weakened.
-        head:
-            Metamorphosis - Any healing that exceeds max health is turned into saturation. Natural regeneration is turned off.
-            Divine - Any chest that didn't generate loot already, will contain more loot. Each opening of a chest will result in 5 seconds of Darkness
+        legs: # ??? Frantic - Dodge an attack and travel back 2 blocks (with a cooldown). +10% Chance to miss your attack for every dodge (resets on miss)
+        THIS NEEDS AN IDEA REWORK REALLY BADLY
 
         crossbow:
             FIREWORK RAPID LAUNCHER

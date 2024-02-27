@@ -49,35 +49,4 @@ abstract class AbstractHex(
     private fun isHex(enchantment: Enchantment?): Boolean {
         return (enchantment is AbstractHex)
     }
-
-    fun hasFullRobes(entity: LivingEntity): Boolean {
-        entity.armorItems.forEach { piece ->
-            if (!piece.isIn(RegisterTags.CALAMITOUS_ARMOR)) return false
-        }
-        return true
-    }
-
-    fun entityMultiplyingEffect(user: LivingEntity, effect: StatusEffect, duration: Int, decayLength: Int) {
-        if (user.hasStatusEffect(effect)) {
-            val effectAmplifier = user.getStatusEffect(effect)?.amplifier?.plus(1)
-
-            for (i in 0..effectAmplifier!!) {
-                user.addStatusEffect(
-                    StatusEffectInstance(
-                        effect,
-                        duration + (effectAmplifier - i) * decayLength, i,
-                        true, false, true
-                    )
-                )
-            }
-        } else {
-            user.addStatusEffect(
-                StatusEffectInstance(
-                    effect,
-                    duration, 0,
-                    true, false, true
-                )
-            )
-        }
-    }
 }

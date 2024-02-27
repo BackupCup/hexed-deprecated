@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
-@Mixin(InGameHud.class)
+@Mixin(value = InGameHud.class, priority = 10)
 public abstract class InGameHUDMixin {
     @Unique
     private static final Identifier HEARTS_SMOULDERING = new Identifier(Hexed.MOD_ID, "textures/gui/icons_smouldering.png");

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ItemStack.class)
+@Mixin(value = ItemStack.class, priority = 10)
 public abstract class ItemStackMixin {
     @Shadow public abstract Item getItem();
 

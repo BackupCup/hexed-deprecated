@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "state=0": { "model":  "hexed:block/brimstone_slag/pillar_both" },
+    "state=1": { "model":  "hexed:block/brimstone_slag/pillar_top" },
+    "state=2": { "model":  "hexed:block/brimstone_slag/pillar_bottom" },
+    "state=3": { "model":  "hexed:block/brimstone_slag/pillar_middle" }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "hexed:lavendin_cinder",
+    "hexed:brimstone_slag",
+    "hexed:brimstone_slag_slab",
+    "hexed:brimstone_slag_stairs",
+    "hexed:brimstone_slag_wall",
+    "hexed:brimstone_bricks",
+    "hexed:brimstone_bricks_slab",
+    "hexed:brimstone_bricks_stairs",
+    "hexed:brimstone_bricks_wall",
+    "hexed:smooth_brimstone_slag",
+    "hexed:smooth_brimstone_slag_stairs",
+    "hexed:smooth_brimstone_slag_wall",
+    "hexed:smooth_brimstone_slag_slab",
+    "hexed:chiseled_brimstone_slag",
+    "hexed:brimstone_slag_pillar",
+    "hexed:accursed_altar"
+  ]
+}

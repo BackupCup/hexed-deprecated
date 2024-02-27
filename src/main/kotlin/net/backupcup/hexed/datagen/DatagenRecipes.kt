@@ -1,14 +1,13 @@
 package net.backupcup.hexed.datagen
 
-import net.backupcup.hexed.register.RegisterArmor
-import net.backupcup.hexed.register.RegisterBlocks
-import net.backupcup.hexed.register.RegisterDecoCandles
-import net.backupcup.hexed.register.RegisterItems
+import net.backupcup.hexed.register.*
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider
 import net.minecraft.data.server.recipe.RecipeJsonProvider
+import net.minecraft.data.server.recipe.RecipeProvider
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder
 import net.minecraft.item.Items
+import net.minecraft.recipe.Ingredient
 import net.minecraft.recipe.book.RecipeCategory
 import java.util.function.Consumer
 
@@ -152,5 +151,38 @@ class DatagenRecipes(output: FabricDataOutput?) : FabricRecipeProvider(output) {
             .criterion(hasItem(RegisterItems.BRIMSTONE_CRYSTAL), conditionsFromItem(RegisterItems.BRIMSTONE_CRYSTAL))
             .criterion(hasItem(RegisterArmor.CALAMITOUS_HELMET), conditionsFromItem(RegisterArmor.CALAMITOUS_HELMET))
             .offerTo(exporter)
+
+
+
+        offerChiseledBlockRecipe(exporter, RecipeCategory.DECORATIONS, RegisterSlagBlocks.CHISELED_BRIMSTONE_SLAG, RegisterSlagBlocks.BRIMSTONE_BRICKS)
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG, 4)
+            .pattern("SS")
+            .pattern("SS").input('S', RegisterSlagBlocks.BRIMSTONE_SLAG)
+            .criterion(hasItem(RegisterSlagBlocks.BRIMSTONE_SLAG), RecipeProvider.conditionsFromItem(RegisterSlagBlocks.BRIMSTONE_SLAG))
+            .offerTo(exporter)
+
+        createSlabRecipe(RecipeCategory.DECORATIONS, RegisterSlagBlocks.BRIMSTONE_SLAG_SLAB, Ingredient.ofItems(RegisterSlagBlocks.BRIMSTONE_SLAG))
+            .criterion(hasItem(RegisterSlagBlocks.BRIMSTONE_SLAG), RecipeProvider.conditionsFromItem(RegisterSlagBlocks.BRIMSTONE_SLAG))
+            .offerTo(exporter)
+        createStairsRecipe(RegisterSlagBlocks.BRIMSTONE_SLAG_STAIRS, Ingredient.ofItems(RegisterSlagBlocks.BRIMSTONE_SLAG))
+            .criterion(hasItem(RegisterSlagBlocks.BRIMSTONE_SLAG), RecipeProvider.conditionsFromItem(RegisterSlagBlocks.BRIMSTONE_SLAG))
+            .offerTo(exporter)
+        offerWallRecipe(exporter, RecipeCategory.DECORATIONS, RegisterSlagBlocks.BRIMSTONE_SLAG_WALL, RegisterSlagBlocks.BRIMSTONE_SLAG)
+
+        createSlabRecipe(RecipeCategory.DECORATIONS, RegisterSlagBlocks.BRIMSTONE_BRICKS_SLAB, Ingredient.ofItems(RegisterSlagBlocks.BRIMSTONE_BRICKS))
+            .criterion(hasItem(RegisterSlagBlocks.BRIMSTONE_BRICKS), RecipeProvider.conditionsFromItem(RegisterSlagBlocks.BRIMSTONE_BRICKS))
+            .offerTo(exporter)
+        createStairsRecipe(RegisterSlagBlocks.BRIMSTONE_BRICKS_STAIRS, Ingredient.ofItems(RegisterSlagBlocks.BRIMSTONE_BRICKS))
+            .criterion(hasItem(RegisterSlagBlocks.BRIMSTONE_BRICKS), RecipeProvider.conditionsFromItem(RegisterSlagBlocks.BRIMSTONE_BRICKS))
+            .offerTo(exporter)
+        offerWallRecipe(exporter, RecipeCategory.DECORATIONS, RegisterSlagBlocks.BRIMSTONE_BRICKS_WALL, RegisterSlagBlocks.BRIMSTONE_BRICKS)
+
+        createSlabRecipe(RecipeCategory.DECORATIONS, RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG_SLAB, Ingredient.ofItems(RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG))
+            .criterion(hasItem(RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG), RecipeProvider.conditionsFromItem(RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG))
+            .offerTo(exporter)
+        createStairsRecipe(RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG_STAIRS, Ingredient.ofItems(RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG))
+            .criterion(hasItem(RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG), RecipeProvider.conditionsFromItem(RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG))
+            .offerTo(exporter)
+        offerWallRecipe(exporter, RecipeCategory.DECORATIONS, RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG_WALL, RegisterSlagBlocks.SMOOTH_BRIMSTONE_SLAG)
     }
 }

@@ -85,5 +85,6 @@ object RegisterBlocks {
 
         Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "calamaidas_plushie"), CALAMAIDAS_PLUSHIE)
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "calamaidas_plushie"), BlockItem(CALAMAIDAS_PLUSHIE, FabricItemSettings().rarity(Rarity.EPIC)))
+        RegisterSlagBlocks.registerSlagBlocks()
     }
 }

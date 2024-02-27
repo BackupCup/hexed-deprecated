@@ -2,6 +2,7 @@ package net.backupcup.hexed.altar
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.backupcup.hexed.Hexed
+import net.backupcup.hexed.register.RegisterEnchantments
 import net.backupcup.hexed.util.HexData
 import net.backupcup.hexed.util.ScreenHelper
 import net.backupcup.hexed.util.TextWrapUtils
@@ -9,6 +10,7 @@ import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.gui.screen.ingame.HandledScreen
 import net.minecraft.client.gui.widget.TexturedButtonWidget
 import net.minecraft.client.render.GameRenderer
+import net.minecraft.enchantment.Enchantment
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.text.Text
 import net.minecraft.util.Colors
@@ -26,6 +28,12 @@ class AccursedAltarScreen(
     private var isAltarActive by Delegates.notNull<Boolean>()
     private lateinit var currentHex: String
     private lateinit var availableHexList: MutableList<String>
+
+    private val UKRefMap = mapOf<Enchantment, String>(
+        RegisterEnchantments.METAMORPHOSIS_HEX to "tooltip.hexed.ultrakill.mankind_is_dead",
+        RegisterEnchantments.BLOODTHIRSTY_HEX to "tooltip.hexed.ultrakill.blood_is_fuel",
+        RegisterEnchantments.IRONCLAD_HEX to "tooltip.hexed.ultrakill.hell_is_full"
+    )
 
     val buttonHex = TexturedButtonWidget(
         0, 0,
@@ -144,22 +152,22 @@ class AccursedAltarScreen(
     }
 
     private fun getNeighbouringHexes(availableList: List<String>, current: String): List<String> {
-        val neighbouringList: List<String> = mutableListOf()
+        val neighbouringList: MutableList<String> = mutableListOf()
         val currentHexIndex = availableList.indexOf(current)
 
-        neighbouringList.addLast(
+        neighbouringList.add(0,
             if (currentHexIndex - 1 >= 0)
-                { availableList[currentHexIndex - 1] }
+            { availableList[currentHexIndex - 1] }
             else
-                { availableList[availableList.size - 1] })
+            { availableList[availableList.size - 1] })
 
-        neighbouringList.addLast(current)
+        neighbouringList.add(1, current)
 
-        neighbouringList.addLast(
+        neighbouringList.add(2,
             if (currentHexIndex + 1 < availableList.size)
-                { availableList[currentHexIndex + 1] }
+            { availableList[currentHexIndex + 1] }
             else
-                { availableList[0] })
+            { availableList[0] })
 
         return neighbouringList
     }
@@ -192,11 +200,17 @@ class AccursedAltarScreen(
         val tooltipLines: MutableList<Text> = mutableListOf()
         val descTooltip: Collection<Text> = TextWrapUtils.wrapText(width, text, Formatting.GRAY) as Collection<Text>
 
-        tooltipLines.addFirst(Text.translatable(this.currentHex).formatted(Formatting.RED).formatted(Formatting.BOLD))
+        tooltipLines.add(0, Text.translatable(this.currentHex).formatted(Formatting.RED).formatted(Formatting.BOLD))
         tooltipLines.addAll(descTooltip)
 
+        //ULTRAKILL reference
+        if(UKRefMap.containsKey(HexData.getHexByName(this.currentHex))) {
+            tooltipLines.add(Text.translatable(UKRefMap[HexData.getHexByName(this.currentHex)]).formatted(Formatting.DARK_RED).formatted(Formatting.BOLD)) }
+
         if (ScreenHelper.isInButtonBounds(mouseX, mouseY, x + 47, y + 51, 16, 16)) {
-            context?.drawTooltip(textRenderer, tooltipLines, mouseX, mouseY)
+            context?.drawTooltip(textRenderer,
+                tooltipLines,
+                mouseX, mouseY)
         }
     }
 }

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hexed:block/brimstone_slag_slab"
+    },
+    "type=double": {
+      "model": "hexed:block/brimstone_slag"
+    },
+    "type=top": {
+      "model": "hexed:block/brimstone_slag_slab_top"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hexed:block/brimstone_bricks_slab"
+    },
+    "type=double": {
+      "model": "hexed:block/brimstone_bricks"
+    },
+    "type=top": {
+      "model": "hexed:block/brimstone_bricks_slab_top"
+    }
+  }
+}

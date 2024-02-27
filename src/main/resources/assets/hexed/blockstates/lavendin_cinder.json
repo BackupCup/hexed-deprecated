@@ -1,0 +1,15 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_cinder"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_cinder_1"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_cinder_2"
+      }
+    ]
+  }
+}

@@ -226,11 +226,4 @@ class AccursedAltarScreenHandler(
     private fun getServerPlayer(): ServerPlayerEntity? {
         return this.playerEntity.world.server?.playerManager?.getPlayer(playerEntity.uuid)
     }
-
-
-    /*
-    TODO LIST:
-    2. make the scroll thing that i described to chronos [MAYBE? Im not sure really, could be more difficult to do that in the end]
-    8. more hexes
-     */
 }

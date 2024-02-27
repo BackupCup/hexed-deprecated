@@ -1,0 +1,88 @@
+{
+  "parent": "minecraft:nether/find_bastion",
+  "display": {
+    "title": {
+      "translate": "advancements.hexed.ultrakill.title",
+      "color": "gold",
+      "bold": true
+    },
+    "description": {
+      "translate": "advancements.hexed.ultrakill.description"
+    },
+    "icon": {
+      "item": "minecraft:player_head",
+      "nbt": "{SkullOwner:{Id:[I;-1222965136,-1319873449,-2069878945,1794942959],Properties:{textures:[{Value:\"e3RleHR1cmVzOntTS0lOOnt1cmw6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzY0MTdiYWE2NzI2NmM4NjEyNzQ5NzQ2NjBhMTVhZmExNWM3MjlhMzQxNzRkNjhlNWE1NDhmNTk5ZjBhMTVhNyJ9fX0=\"}]}}}"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "metamorphosis": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "levels": {
+                  "min": 1,
+                  "max": 1
+                },
+                "enchantment": "hexed:metamorphosis"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "bloodthirsty": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "levels": {
+                  "min": 1,
+                  "max": 1
+                },
+                "enchantment": "hexed:bloodthirsty"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ironclad": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "levels": {
+                  "min": 1,
+                  "max": 1
+                },
+                "enchantment": "hexed:ironclad"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "metamorphosis"
+    ],
+    [
+      "bloodthirsty"
+    ],
+    [
+      "ironclad"
+    ]
+  ]
+}

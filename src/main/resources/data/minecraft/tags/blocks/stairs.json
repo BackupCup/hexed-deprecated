@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "hexed:brimstone_slag_stairs",
+    "hexed:brimstone_bricks_stairs",
+    "hexed:smooth_brimstone_slag_stairs"
+  ]
+}

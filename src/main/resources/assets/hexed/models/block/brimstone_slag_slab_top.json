@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "hexed:block/brimstone_slag",
+    "side": "hexed:block/brimstone_slag",
+    "top": "hexed:block/brimstone_slag"
+  }
+}

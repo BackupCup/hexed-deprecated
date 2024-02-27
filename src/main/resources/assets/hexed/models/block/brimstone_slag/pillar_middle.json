@@ -1,0 +1,19 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "hexed:block/brimstone_slag_pillar",
+		"particle": "hexed:block/brimstone_slag"
+	},
+	"elements": [
+		{
+			"from": [2, 0, 2],
+			"to": [14, 16, 14],
+			"faces": {
+				"north": {"uv": [2, 0, 14, 16], "texture": "#0"},
+				"east": {"uv": [2, 0, 14, 16], "texture": "#0"},
+				"south": {"uv": [2, 0, 14, 16], "texture": "#0"},
+				"west": {"uv": [2, 0, 14, 16], "texture": "#0"}
+			}
+		}
+	]
+},

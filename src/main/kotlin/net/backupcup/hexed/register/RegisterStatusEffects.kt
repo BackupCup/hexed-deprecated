@@ -29,6 +29,10 @@ object RegisterStatusEffects {
     //Traitorous Hex
     val TRAITOROUS: StatusEffect = TraitorousStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe83b3b)
 
+    //Ironclad Hex
+    val IRONCLAD: StatusEffect = IroncladStatusEffect(StatusEffectCategory.BENEFICIAL, 0xfb6b1d, -2.0)
+        .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, "f8164c46-1f2d-4286-a7e3-8617e355cd1e", 0.0, EntityAttributeModifier.Operation.ADDITION)
+
     fun registerStatusEffects() {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ablaze"), ABLAZE)
@@ -37,5 +41,6 @@ object RegisterStatusEffects {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "vindictive"), VINDICTIVE)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "smouldering"), SMOULDERING)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "traitorous"), TRAITOROUS)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ironclad"), IRONCLAD)
     }
 }

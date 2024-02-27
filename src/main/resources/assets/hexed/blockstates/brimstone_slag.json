@@ -1,0 +1,15 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hexed:block/brimstone_slag"
+      },
+      {
+        "model": "hexed:block/brimstone_slag_1"
+      },
+      {
+        "model": "hexed:block/brimstone_slag_2"
+      }
+    ]
+  }
+}

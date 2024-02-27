@@ -18,7 +18,8 @@ object Hexed : ModInitializer {
 		RegisterStatusEffects.registerStatusEffects()
 		RegisterEnchantments.registerHexes()
 		RegisterTags.registerTags()
-		RegisterItemGroup.registerItemGroup()
+		RegisterItemGroupMain.registerItemGroup()
+		RegisterItemGroupDeco.registerItemGroup()
 
 		ModifyLootTables.registerLootModifiers()
 	}

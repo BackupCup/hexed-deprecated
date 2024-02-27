@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "hexed:block/brimstone_slag",
+    "side": "hexed:block/lavendin_cinder",
+    "top": "hexed:block/lavendin_cinder_top"
+  }
+}
