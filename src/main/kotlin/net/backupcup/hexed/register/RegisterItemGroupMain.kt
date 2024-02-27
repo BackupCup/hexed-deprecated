@@ -39,6 +39,7 @@ object RegisterItemGroupDeco {
             .icon { ItemStack(RegisterSlagBlocks.BRIMSTONE_SLAG_PILLAR) }
             .entries { _, entries ->
                 entries.add(RegisterSlagBlocks.LAVENDIN_CINDER)
+                entries.add(RegisterSlagBlocks.LAVENDIN_VERDURE)
 
                 entries.add(RegisterSlagBlocks.BRIMSTONE_SLAG)
                 entries.add(RegisterSlagBlocks.BRIMSTONE_BRICKS_STAIRS)

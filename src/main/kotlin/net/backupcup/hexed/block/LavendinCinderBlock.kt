@@ -23,7 +23,7 @@ class LavendinCinderBlock(settings: Settings?) : NyliumBlock(settings), Fertiliz
     }
 
     override fun grow(world: ServerWorld, random: Random, pos: BlockPos, state: BlockState?) {
-        world.setBlockState(pos.up(), Blocks.CRIMSON_ROOTS.defaultState) //TODO: CRIMSON_ROOTS IS A PLACEHOLDER
+        world.setBlockState(pos.up(), RegisterSlagBlocks.LAVENDIN_VERDURE.defaultState)
     }
 
     override fun randomTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random?) {

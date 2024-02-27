@@ -33,6 +33,7 @@ object HexedClient: ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.CALAMAIDAS_PLUSHIE, RenderLayer.getCutout())
 
         BlockRenderLayerMap.INSTANCE.putBlock(RegisterSlagBlocks.BRIMSTONE_SLAG_PILLAR, RenderLayer.getCutout())
+        BlockRenderLayerMap.INSTANCE.putBlock(RegisterSlagBlocks.LAVENDIN_VERDURE, RenderLayer.getCutout())
 
 
         RegisterDecoCandles.candleTypes.forEach {(_, block) ->

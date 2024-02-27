@@ -4,6 +4,7 @@ import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.block.BrimstoneSlagBlock
 import net.backupcup.hexed.block.BrimstoneSlagPillar
 import net.backupcup.hexed.block.LavendinCinderBlock
+import net.backupcup.hexed.block.LavendinVerdureBlock
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.Block
@@ -46,6 +47,17 @@ object RegisterSlagBlocks {
         .mapColor(MapColor.PINK)
         .pistonBehavior(PistonBehavior.NORMAL)
         .requiresTool()
+    )
+
+    val LAVENDIN_VERDURE: Block = LavendinVerdureBlock(
+        FabricBlockSettings.create()
+            .strength(0f)
+            .sounds(BlockSoundGroup.GRASS)
+            .mapColor(MapColor.PINK)
+            .pistonBehavior(PistonBehavior.DESTROY)
+            .nonOpaque()
+            .notSolid()
+            .noCollision()
     )
 
     val BRIMSTONE_SLAG: Block = BrimstoneSlagBlock(
@@ -152,6 +164,8 @@ object RegisterSlagBlocks {
 
         Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "lavendin_cinder"), LAVENDIN_CINDER)
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "lavendin_cinder"), BlockItem(LAVENDIN_CINDER, FabricItemSettings()))
+        Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "lavendin_verdure"), LAVENDIN_VERDURE)
+        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "lavendin_verdure"), BlockItem(LAVENDIN_VERDURE, FabricItemSettings()))
 
         Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "brimstone_slag"), BRIMSTONE_SLAG)
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "brimstone_slag"), BlockItem(BRIMSTONE_SLAG, FabricItemSettings()))

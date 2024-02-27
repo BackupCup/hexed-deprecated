@@ -1,0 +1,33 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure_1"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure_2"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure_1"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure_2"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure_3"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure_4"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lavendin_verdure_5"
+      }
+    ]
+  }
+}
