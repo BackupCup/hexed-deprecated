@@ -43,9 +43,9 @@ class BrimstoneCandle(
         options: TooltipContext?
     ) {
         tooltip?.add(Text.translatable("tooltip.hexed.brimstone_candle.line_1")
-            .formatted(Formatting.DARK_RED).formatted(Formatting.ITALIC).formatted(Formatting.BOLD))
+            .formatted(Formatting.DARK_RED, Formatting.ITALIC, Formatting.BOLD))
         tooltip?.add(Text.translatable("tooltip.hexed.brimstone_candle.line_2")
-            .formatted(Formatting.DARK_RED).formatted(Formatting.ITALIC).formatted(Formatting.BOLD))
+            .formatted(Formatting.DARK_RED, Formatting.ITALIC, Formatting.BOLD))
         tooltip?.add(Text.translatable("tooltip.hexed.brimstone_candle.line_3")
             .formatted(Formatting.GRAY))
     }

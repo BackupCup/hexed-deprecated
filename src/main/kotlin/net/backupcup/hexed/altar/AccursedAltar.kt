@@ -135,9 +135,7 @@ class AccursedAltar(settings: Settings?
         return checkType(type, RegisterBlockEntities.ACCURSED_ALTAR_BLOCK_ENTITY) { world, pos, state, blockEntity ->
             if (blockEntity is AccursedAltarBlockEntity) {
                 if (world.isClient) AccursedAltarBlockEntity.clientTick(world, pos, state, blockEntity)
-                else {
-                    AccursedAltarBlockEntity.tick(world, pos, state, blockEntity)
-                }
+                else AccursedAltarBlockEntity.tick(world, pos, state, blockEntity)
             }
         }
     }

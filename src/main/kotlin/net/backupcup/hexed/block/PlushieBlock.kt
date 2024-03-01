@@ -47,7 +47,7 @@ class PlushieBlock(settings: Settings?) : Block(settings), Equipment {
         tooltip: MutableList<Text>?,
         options: TooltipContext?
     ) {
-        tooltip?.add(Text.translatable("tooltip.hexed.calamaidas_plushie").formatted(Formatting.RED).formatted(Formatting.BOLD))
+        tooltip?.add(Text.translatable("tooltip.hexed.calamaidas_plushie").formatted(Formatting.RED, Formatting.BOLD))
         super.appendTooltip(stack, world, tooltip, options)
     }
 

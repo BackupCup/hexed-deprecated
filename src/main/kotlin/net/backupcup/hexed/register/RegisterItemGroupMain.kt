@@ -40,6 +40,8 @@ object RegisterItemGroupDeco {
             .entries { _, entries ->
                 entries.add(RegisterSlagBlocks.LAVENDIN_CINDER)
                 entries.add(RegisterSlagBlocks.LAVENDIN_VERDURE)
+                entries.add(RegisterSlagBlocks.LAVA_PISTIL)
+                entries.add(RegisterSlagBlocks.BLAZING_MAGMA_BUCKET)
 
                 entries.add(RegisterSlagBlocks.BRIMSTONE_SLAG)
                 entries.add(RegisterSlagBlocks.BRIMSTONE_BRICKS_STAIRS)

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "hexed:block/lava_pistil/pistil_middle_2"
+  }
+}

@@ -200,12 +200,12 @@ class AccursedAltarScreen(
         val tooltipLines: MutableList<Text> = mutableListOf()
         val descTooltip: Collection<Text> = TextWrapUtils.wrapText(width, text, Formatting.GRAY) as Collection<Text>
 
-        tooltipLines.add(0, Text.translatable(this.currentHex).formatted(Formatting.RED).formatted(Formatting.BOLD))
+        tooltipLines.add(0, Text.translatable(this.currentHex).formatted(Formatting.RED, Formatting.BOLD))
         tooltipLines.addAll(descTooltip)
 
         //ULTRAKILL reference
         if(UKRefMap.containsKey(HexData.getHexByName(this.currentHex))) {
-            tooltipLines.add(Text.translatable(UKRefMap[HexData.getHexByName(this.currentHex)]).formatted(Formatting.DARK_RED).formatted(Formatting.BOLD)) }
+            tooltipLines.add(Text.translatable(UKRefMap[HexData.getHexByName(this.currentHex)]).formatted(Formatting.DARK_RED, Formatting.BOLD)) }
 
         if (ScreenHelper.isInButtonBounds(mouseX, mouseY, x + 47, y + 51, 16, 16)) {
             context?.drawTooltip(textRenderer,

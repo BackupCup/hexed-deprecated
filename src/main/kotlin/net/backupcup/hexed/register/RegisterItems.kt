@@ -13,12 +13,12 @@ import net.minecraft.util.Identifier
 object RegisterItems {
     val CALAMITOUS_FABRIC: Item = TooltipItem(FabricItemSettings(),
         listOf(
-            Text.translatable("tooltip.hexed.calamitous_fabric.line_1").formatted(Formatting.DARK_RED).formatted(Formatting.ITALIC).formatted(Formatting.BOLD),
+            Text.translatable("tooltip.hexed.calamitous_fabric.line_1").formatted(Formatting.DARK_RED, Formatting.ITALIC, Formatting.BOLD),
             Text.translatable("tooltip.hexed.calamitous_fabric.line_2").formatted(Formatting.GRAY)
         ))
     val BRIMSTONE_CRYSTAL: Item = TooltipItem(FabricItemSettings(),
         listOf(
-            Text.translatable("tooltip.hexed.brimstone_crystal.line_1").formatted(Formatting.DARK_RED).formatted(Formatting.ITALIC).formatted(Formatting.BOLD),
+            Text.translatable("tooltip.hexed.brimstone_crystal.line_1").formatted(Formatting.DARK_RED, Formatting.ITALIC, Formatting.BOLD),
             Text.translatable("tooltip.hexed.brimstone_crystal.line_2").formatted(Formatting.GRAY),
             Text.translatable("tooltip.hexed.brimstone_crystal.line_3").formatted(Formatting.GRAY)
         ))

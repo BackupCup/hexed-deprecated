@@ -42,9 +42,9 @@ class LichloreCandle(
         options: TooltipContext?
     ) {
         tooltip?.add(Text.translatable("tooltip.hexed.lichlore_candle.line_1")
-            .formatted(Formatting.GREEN).formatted(Formatting.ITALIC).formatted(Formatting.BOLD))
+            .formatted(Formatting.GREEN, Formatting.ITALIC, Formatting.BOLD))
         tooltip?.add(Text.translatable("tooltip.hexed.lichlore_candle.line_2")
-            .formatted(Formatting.GREEN).formatted(Formatting.ITALIC).formatted(Formatting.BOLD))
+            .formatted(Formatting.GREEN, Formatting.ITALIC, Formatting.BOLD))
         tooltip?.add(Text.translatable("tooltip.hexed.lichlore_candle.line_3")
             .formatted(Formatting.GRAY))
     }

@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "type=0": [
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_bottom_1"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_bottom_2"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_bottom_3"
+      }
+    ],
+    "type=1": [
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_middle_1"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_middle_2"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_middle_3"
+      }
+    ],
+    "type=2": [
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_top_1"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_top_2"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_top_3"
+      },
+      {
+        "model": "hexed:block/brimstone_slag/lava_pistil/pistil_top_4"
+      }
+    ]
+  }
+}
