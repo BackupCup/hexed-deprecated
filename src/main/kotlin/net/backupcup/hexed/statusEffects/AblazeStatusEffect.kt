@@ -17,7 +17,6 @@ class AblazeStatusEffect(category: StatusEffectCategory?, color: Int) : Abstract
 
     override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
         applyAblazeDamage(entity)
-        //entity.damage(RegisterDamageTypes.of(entity.world, RegisterDamageTypes.ABLAZE_DAMAGE), 1f)
     }
 
     override fun onApplied(entity: LivingEntity, attributes: AttributeContainer, amplifier: Int) {

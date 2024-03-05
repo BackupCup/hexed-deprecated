@@ -18,6 +18,7 @@ object Hexed : ModInitializer {
 		RegisterStatusEffects.registerStatusEffects()
 		RegisterEnchantments.registerHexes()
 		RegisterTags.registerTags()
+		RegisterWorldGen.registerWorldGen()
 		RegisterItemGroupMain.registerItemGroup()
 		RegisterItemGroupDeco.registerItemGroup()
 

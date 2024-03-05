@@ -9,9 +9,8 @@ object HexedDataGenerator : DataGeneratorEntrypoint {
 		val pack: FabricDataGenerator.Pack = fabricDataGenerator.createPack()
 
 		//pack.addProvider(::DatagenRecipes)
-		pack.addProvider(::DatagenLoot)
-		pack.addProvider(::DatagenTags)
-		pack.addProvider(::DatagenModels)
-		//pack.addProvider(::DatagenBiomes)
+		//pack.addProvider(::DatagenLoot)
+		//pack.addProvider(::DatagenTags)
+		//pack.addProvider(::DatagenModels)
 	}
 }

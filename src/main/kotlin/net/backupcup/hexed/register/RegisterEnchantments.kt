@@ -2,6 +2,7 @@ package net.backupcup.hexed.register
 
 import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.armor.*
+import net.backupcup.hexed.enchantments.digger.VentureHex
 import net.backupcup.hexed.enchantments.weapon.*
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
@@ -70,7 +71,9 @@ object RegisterEnchantments {
     //TODO
 
     //DIGGER
-    //TODO
+    val VENTURE_HEX = VentureHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/venture.png"))
 
     fun registerHexes() {
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME_HEX)
@@ -84,21 +87,28 @@ object RegisterEnchantments {
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "aquatique"), AQUATIQUE_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "dynamique"), DYNAMIQUE_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "ironclad"), IRONCLAD_HEX)
-        //Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "frantic"), FRANTIC_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "frantic"), FRANTIC_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "bloodthirsty"), BLOODTHIRSTY_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "disfigurement"), DISFIGUREMENT_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "metamorphosis"), METAMORPHOSIS_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "divine"), DIVINE_HEX)
 
+
+
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "venture"), VENTURE_HEX)
         /*
         # - dummy hex, no translations, no logic
         ??? - still to get the idea
 
-        legs: # ??? Frantic - Dodge an attack and travel back 2 blocks (with a cooldown). +10% Chance to miss your attack for every dodge (resets on miss)
-        THIS NEEDS AN IDEA REWORK REALLY BADLY
-
         crossbow:
-            FIREWORK RAPID LAUNCHER
+            XXX - FIREWORK RAPID LAUNCHER, ???
+
+        digger:
+            venture - 2x the drops, but ???
+            XXX - Hammer mode, but 50% of the blocks broken don't drop
+            XXX - each block mined makes you mine faster, but move slower
+            XXX - uses saturation instead of durability
+
         */
     }
 }

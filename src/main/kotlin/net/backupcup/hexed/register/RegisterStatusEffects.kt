@@ -33,6 +33,10 @@ object RegisterStatusEffects {
     val IRONCLAD: StatusEffect = IroncladStatusEffect(StatusEffectCategory.BENEFICIAL, 0xfb6b1d, -2.0)
         .addAttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, "f8164c46-1f2d-4286-a7e3-8617e355cd1e", 0.0, EntityAttributeModifier.Operation.ADDITION)
 
+    //Frantic Hex
+    val FRANTIC: StatusEffect = FranticStatusEffect(StatusEffectCategory.BENEFICIAL, 0x7a3045, 0.025)
+        .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "0c496f0a-47bb-419a-954c-58aeb2d1708a", 0.0, EntityAttributeModifier.Operation.ADDITION)
+
     fun registerStatusEffects() {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ablaze"), ABLAZE)
@@ -42,5 +46,6 @@ object RegisterStatusEffects {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "smouldering"), SMOULDERING)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "traitorous"), TRAITOROUS)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ironclad"), IRONCLAD)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "frantic"), FRANTIC)
     }
 }

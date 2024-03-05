@@ -91,6 +91,8 @@
   "enchantment.hexed.dynamique.desc": "Increases jump height, at the cost of higher fall damage.",
   "enchantment.hexed.averting": "Averting",
   "enchantment.hexed.averting.desc": "Provides a chance to reduce incoming damage, resulting in lower armor durability.",
+  "enchantment.hexed.frantic": "Frantic",
+  "enchantment.hexed.frantic.desc": "Taking damage increases movement speed, multiplying damage taken in return.",
 
   "effect.hexed.aflame": "Aflame",
   "effect.hexed.ablaze": "Ablaze",
@@ -100,11 +102,14 @@
   "effect.hexed.smouldering": "Smouldering",
   "effect.hexed.traitorous": "Traitorous",
   "effect.hexed.ironclad": "Ironclad",
+  "effect.hexed.frantic": "Frantic",
 
   "death.attack.ablazed": "%1$s turned into searing ashes",
   "death.attack.ablazed.player": "%1$s turned into searing ashes whilst fighting %2$s",
   "death.attack.vindictive": "%1$s got multiplied by zero",
   "death.attack.vindictive.player": "%1$s got multiplied by zero whilst fighting %2$s",
+  "death.attack.frantic": "%1$s's pain receptors got overloaded",
+  "death.attack.frantic.player": "%1$s's pain receptors got overloaded whilst fighting %2$s",
 
   "tooltip.hexed.calamaidas_plushie": "Things are about to get calamitous!",
 
