@@ -1,11 +1,21 @@
 {
   "replace": false,
   "values": [
-    "hexed:rune_omega",
-    "hexed:rune_fire",
-    "hexed:rune_magnesium",
-    "hexed:rune_mercury",
-    "hexed:rune_moon",
-    "hexed:rune_sulfur"
+    "hexed:aflame",
+    "hexed:aquatique",
+    "hexed:averting",
+    "hexed:bloodthirsty",
+    "hexed:disfigurement",
+    "hexed:displaced",
+    "hexed:divine",
+    "hexed:dynamique",
+    "hexed:ephemeral",
+    "hexed:exuberance",
+    "hexed:frantic",
+    "hexed:ironclad",
+    "hexed:metamorphosis",
+    "hexed:persecuted",
+    "hexed:traitorous",
+    "hexed:vindictive"
   ]
 }

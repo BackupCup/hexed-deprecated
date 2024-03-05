@@ -1,11 +1,13 @@
 package net.backupcup.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.backupcup.hexed.register.RegisterDamageTypes;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.util.HexHelper;
-import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -13,8 +15,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,7 +31,11 @@ import java.util.Objects;
 import java.util.Random;
 
 @Mixin(value = LivingEntity.class, priority = 10)
-public abstract class LivingEntityMixin {
+public abstract class LivingEntityMixin extends Entity{
+
+    public LivingEntityMixin(EntityType<?> type, World world) {
+        super(type, world);
+    }
 
     @Shadow public abstract float getHealth();
 
@@ -46,19 +51,9 @@ public abstract class LivingEntityMixin {
 
     @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
 
-    @Shadow public abstract void travel(Vec3d movementInput);
-
-    @Shadow protected abstract void fall(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition);
-
-    @Shadow protected abstract void travelControlled(PlayerEntity controllingPlayer, Vec3d movementInput);
-
-    @Shadow protected abstract Vec3d getControlledMovementInput(PlayerEntity controllingPlayer, Vec3d movementInput);
-
-    @Shadow protected abstract float getVelocityMultiplier();
-
-    @Shadow private float movementSpeed;
-
     @Shadow public abstract void damageArmor(DamageSource source, float amount);
+
+    @Shadow public abstract boolean damage(DamageSource source, float amount);
 
     @Unique
     private void entityMultiplyingEffect(StatusEffect effect, int duration, int decayLength) {
@@ -75,7 +70,7 @@ public abstract class LivingEntityMixin {
         } else {
             addStatusEffect(new StatusEffectInstance(
                     effect,
-                    duration, 1,
+                    duration, 0,
                     true, false, true
             ));
         }
@@ -184,6 +179,23 @@ public abstract class LivingEntityMixin {
             float newAmount = amount * (1 - 0.125f*avertingArmor);
             damageArmor(source, newAmount);
             return newAmount;
+        }
+
+        return amount;
+    }
+
+    @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
+    private float hexed$FranticDamage(float amount, DamageSource source) {
+        if (source.isOf(RegisterDamageTypes.INSTANCE.getFRANTIC_DAMAGE())) return amount;
+
+        if (HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.LEGS), RegisterEnchantments.INSTANCE.getFRANTIC_HEX())) {
+            entityMultiplyingEffect(RegisterStatusEffects.INSTANCE.getFRANTIC(), 100, 50);
+
+            if (HexHelper.INSTANCE.hasFullRobes(getArmorItems())) return amount;
+
+            damage(RegisterDamageTypes.INSTANCE.of(getWorld(), RegisterDamageTypes.INSTANCE.getFRANTIC_DAMAGE()),
+                    amount *= 1 + (float) getStatusEffect(RegisterStatusEffects.INSTANCE.getFRANTIC()).getAmplifier() /2);
+            return 0;
         }
 
         return amount;

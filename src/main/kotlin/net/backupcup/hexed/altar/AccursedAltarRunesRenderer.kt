@@ -20,18 +20,8 @@ import kotlin.math.sin
 class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> {
 
     companion object {
-        val itemStackTexture = listOf(
-            ItemStack(RegisterRunes.OMEGA),
-            ItemStack(RegisterRunes.MOON),
-            ItemStack(RegisterRunes.MAGNESIUM),
-            ItemStack(RegisterRunes.MERCURY),
-            ItemStack(RegisterRunes.SULFUR),
-            ItemStack(RegisterRunes.FIRE)
-        )
+        var itemStackTexture = listOf<ItemStack>()
     }
-
-    // name: Resentful
-    // [do damage -> be slower, attack faster]
 
     override fun render(
         entity: AccursedAltarBlockEntity,
@@ -43,8 +33,13 @@ class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> 
     ) {
 
         if(entity.world?.getBlockState(entity.pos)?.block == RegisterBlocks.ACCURSED_ALTAR) {
-            if (entity.world?.getBlockState(entity.pos)?.get(AccursedAltar.ACTIVE) != true) return
+            if (entity.world?.getBlockState(entity.pos)?.get(AccursedAltar.ACTIVE) != true) {
+                if (itemStackTexture.isNotEmpty()) itemStackTexture = listOf()
+                return
+            }
         }
+
+        if (itemStackTexture.isEmpty()) itemStackTexture = RegisterRunes.getRandomRunes()
 
         val lightAbove = WorldRenderer.getLightmapCoordinates(entity.world, entity.pos.up())
         var renderVec = Vec3d(0.0, 0.0, -1.0)

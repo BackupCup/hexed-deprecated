@@ -3,24 +3,60 @@ package net.backupcup.hexed.register
 import net.backupcup.hexed.Hexed
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
 
 object RegisterRunes {
-    val OMEGA: Item = Item(FabricItemSettings())
-    val FIRE: Item = Item(FabricItemSettings())
-    val MAGNESIUM: Item = Item(FabricItemSettings())
-    val MERCURY: Item = Item(FabricItemSettings())
-    val MOON: Item = Item(FabricItemSettings())
-    val SULFUR: Item = Item(FabricItemSettings())
+    val AFLAME: Item = Item(FabricItemSettings())
+    val AQUATIQUE: Item = Item(FabricItemSettings())
+    val AVERTING: Item = Item(FabricItemSettings())
+    val BLOODTHIRSTY: Item = Item(FabricItemSettings())
+    val DISFIGUREMENT: Item = Item(FabricItemSettings())
+    val DISPLACED: Item = Item(FabricItemSettings())
+    val DIVINE: Item = Item(FabricItemSettings())
+    val DYNAMIQUE: Item = Item(FabricItemSettings())
+    val EPHEMERAL: Item = Item(FabricItemSettings())
+    val EXUBERANCE: Item = Item(FabricItemSettings())
+    val FRANTIC: Item = Item(FabricItemSettings())
+    val IRONCLAD: Item = Item(FabricItemSettings())
+    val METAMORPHOSIS: Item = Item(FabricItemSettings())
+    val PERSECUTED: Item = Item(FabricItemSettings())
+    val TRAITOROUS: Item = Item(FabricItemSettings())
+    val VINDICTIVE: Item = Item(FabricItemSettings())
+
+    val RUNE_LIST: List<Pair<Item, String>> = listOf(
+        AFLAME          to           "aflame",
+        AQUATIQUE       to        "aquatique",
+        AVERTING        to         "averting",
+        BLOODTHIRSTY    to     "bloodthirsty",
+        DISFIGUREMENT   to    "disfigurement",
+        DISPLACED       to        "displaced",
+        DIVINE          to           "divine",
+        DYNAMIQUE       to        "dynamique",
+        EPHEMERAL       to        "ephemeral",
+        EXUBERANCE      to       "exuberance",
+        FRANTIC         to          "frantic",
+        IRONCLAD        to         "ironclad",
+        METAMORPHOSIS   to    "metamorphosis",
+        PERSECUTED      to       "persecuted",
+        TRAITOROUS      to       "traitorous",
+        VINDICTIVE      to       "vindictive"
+    )
 
     fun registerRunes() {
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "rune_omega"), OMEGA)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "rune_fire"), FIRE)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "rune_magnesium"), MAGNESIUM)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "rune_mercury"), MERCURY)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "rune_moon"), MOON)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "rune_sulfur"), SULFUR)
+        RUNE_LIST.forEach { (item, id) ->
+            Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, id), item)
+        }
+    }
+
+    fun getRandomRunes(): List<ItemStack> {
+        val returnList = mutableListOf<ItemStack>()
+        RUNE_LIST.shuffled().forEachIndexed { index, pair ->
+            if (index >= 6) return returnList
+            returnList.add(ItemStack(pair.first))
+        }
+        return returnList
     }
 }
