@@ -2,7 +2,7 @@ package net.backupcup.hexed.register
 
 import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.armor.*
-import net.backupcup.hexed.enchantments.digger.VentureHex
+import net.backupcup.hexed.enchantments.digger.GeneralDiggerHex
 import net.backupcup.hexed.enchantments.weapon.*
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
@@ -71,9 +71,18 @@ object RegisterEnchantments {
     //TODO
 
     //DIGGER
-    val VENTURE_HEX = VentureHex(Enchantment.Rarity.VERY_RARE,
+    val RUINOUS_HEX = GeneralDiggerHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/venture.png"))
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/ruinous.png"))
+    val AMPLIFY_HEX = GeneralDiggerHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/amplify.png"))
+    val OVERBURDEN_HEX = GeneralDiggerHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/overburden.png"))
+    val FAMISHMENT_HEX = GeneralDiggerHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
+        Identifier(Hexed.MOD_ID, "textures/gui/runes/famishment.png"))
 
     fun registerHexes() {
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME_HEX)
@@ -95,20 +104,30 @@ object RegisterEnchantments {
 
 
 
-        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "venture"), VENTURE_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "ruinous"), RUINOUS_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "amplify"), AMPLIFY_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "overburden"), OVERBURDEN_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "famishment"), FAMISHMENT_HEX)
         /*
-        # - dummy hex, no translations, no logic
-        ??? - still to get the idea
+        Status Descriptions:
+        - Logic: No logic implemented
+        - Transl: Translation feature missing
+        - Name: Name not assigned
+        - Text: Texture missing
+        - Idea: Idea still under consideration
 
-        crossbow:
-            XXX - FIREWORK RAPID LAUNCHER, ???
+        Hex Ideas:
+        - Bow:
+          Idea: ???
 
-        digger:
-            venture - 2x the drops, but ???
-            XXX - Hammer mode, but 50% of the blocks broken don't drop
-            XXX - each block mined makes you mine faster, but move slower
-            XXX - uses saturation instead of durability
+        - Crossbow:
+          Text: FIREWORK RAPID LAUNCHER
 
+        - Trident:
+          Idea: ???
+
+        - Digger:
+          Logic + Transl + Text + Idea: Rapaciousness - ???
         */
     }
 }

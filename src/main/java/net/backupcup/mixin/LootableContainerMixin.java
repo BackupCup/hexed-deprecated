@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.register.RegisterTags;
+import net.backupcup.hexed.util.HexHelper;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
@@ -28,16 +29,6 @@ import java.util.List;
 @Mixin(value = LootableContainerBlockEntity.class, priority = 10)
 public class LootableContainerMixin {
     @Shadow protected long lootTableSeed;
-
-    @Unique
-    private boolean hasFullRobes(Iterable<ItemStack> armorStack) {
-        for (ItemStack piece : armorStack) {
-            if (!piece.isIn(RegisterTags.INSTANCE.getCALAMITOUS_ARMOR())) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     @Inject(method = "checkLootInteraction", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/loot/context/LootContextParameterSet$Builder;luck(F)Lnet/minecraft/loot/context/LootContextParameterSet$Builder;",
@@ -67,7 +58,7 @@ public class LootableContainerMixin {
                 amplifier = 5;
                 durationModifier = 80;}
 
-            if (hasFullRobes(player.getArmorItems())) durationModifier /= 2;
+            if (HexHelper.INSTANCE.hasFullRobes(player.getArmorItems())) durationModifier /= 2;
 
             player.addStatusEffect(new StatusEffectInstance(
                     randomEffect,

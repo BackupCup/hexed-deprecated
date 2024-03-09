@@ -1,6 +1,8 @@
 package net.backupcup.hexed.altar
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.register.RegisterBlockEntities
+import net.backupcup.hexed.register.RegisterStats
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
@@ -10,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.screen.NamedScreenHandlerFactory
+import net.minecraft.stat.Stat
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.DirectionProperty
@@ -121,6 +124,7 @@ class AccursedAltar(settings: Settings?
 
             if (screenHandlerFactory != null) {
                 player?.openHandledScreen(screenHandlerFactory)
+                player?.incrementStat(RegisterStats.ACCURSED_ALTAR_OPENED)
             }
         }
 

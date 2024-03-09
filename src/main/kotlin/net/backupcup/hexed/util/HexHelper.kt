@@ -46,7 +46,7 @@ object HexHelper {
         return getHexList(itemStack).filterNot { itemEnchantmentMap.contains(it) }
     }
 
-    fun hasEnchantmentInSlot(stack: ItemStack, key: Enchantment): Boolean{
+    fun hasEnchantmentInSlot(stack: ItemStack, key: Enchantment): Boolean {
         return EnchantmentHelper.get(stack).containsKey(key)
     }
 

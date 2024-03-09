@@ -73,6 +73,7 @@
   "enchantment.hexed.vindictive.desc": "Applies an effect that deals multiplicative damage as it runs out, at the cost of losing regeneration.",
   "enchantment.hexed.traitorous": "Traitorous",
   "enchantment.hexed.traitorous.desc": "Attacks from behind halt enemy health regeneration briefly, while your weapon undergoes a cooldown.",
+
   "enchantment.hexed.displaced": "Displaced",
   "enchantment.hexed.displaced.desc": "Swaps the Armor and Armor Toughness values.",
   "enchantment.hexed.aquatique": "Aquatique",
@@ -94,6 +95,15 @@
   "enchantment.hexed.frantic": "Frantic",
   "enchantment.hexed.frantic.desc": "Taking damage increases movement speed, multiplying damage taken in return.",
 
+  "enchantment.hexed.amplify": "Amplify",
+  "enchantment.hexed.amplify.desc": "Expands mining capabilities to a 3x3 area, though the resources from the surrounding blocks are not always guaranteed.",
+  "enchantment.hexed.overburden": "Overburden",
+  "enchantment.hexed.overburden.desc": "Boosts mining speed with each block mined, but gradually slows down the user's movement speed over time.",
+  "enchantment.hexed.famishment": "Famishment",
+  "enchantment.hexed.famishment.desc": "Consumes player saturation instead of item durability, enabling prolonged usage without equipment degradation.",
+  "enchantment.hexed.ruinous": "Ruinous",
+  "enchantment.hexed.ruinous.desc": "Mining blocks causes them to explode, destroying nearby blocks.",
+
   "effect.hexed.aflame": "Aflame",
   "effect.hexed.ablaze": "Ablaze",
   "effect.hexed.ethereal": "Ethereal",
@@ -103,6 +113,7 @@
   "effect.hexed.traitorous": "Traitorous",
   "effect.hexed.ironclad": "Ironclad",
   "effect.hexed.frantic": "Frantic",
+  "effect.hexed.overburden": "Overburden",
 
   "death.attack.ablazed": "%1$s turned into searing ashes",
   "death.attack.ablazed.player": "%1$s turned into searing ashes whilst fighting %2$s",
@@ -138,6 +149,13 @@
   "tooltip.hexed.ultrakill.mankind_is_dead": "MANKIND IS DEAD",
   "tooltip.hexed.ultrakill.blood_is_fuel": "BLOOD IS FUEL",
   "tooltip.hexed.ultrakill.hell_is_full": "HELL IS FULL",
+
+  "stat.hexed.accused_altar_opened": "Accursed Altars Opened",
+  "stat.hexed.items_hexed": "Items Hexed",
+
+  "subtitles.hexed.accursed_altar_activate": "Brimstone Witch laughs",
+  "subtitles.hexed.accursed_altar_taint": "Brimstone Flames taint",
+  "subtitles.hexed.accursed_altar_hex": "Brimstone Flames extinguish",
 
   "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function.",
   "message.hexed.altar_used": "The Brimstone Candles extinguished, despite your efforts to keep them Lit."

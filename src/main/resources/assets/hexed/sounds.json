@@ -1,15 +1,18 @@
 {
   "accursed_altar_hex": {
+    "subtitle": "subtitles.hexed.accursed_altar_hex",
     "sounds": [
       "hexed:accursed_altar_hex"
     ]
   },
   "accursed_altar_taint": {
+    "subtitle": "subtitles.hexed.accursed_altar_taint",
   "sounds": [
     "hexed:accursed_altar_taint"
     ]
   },
   "accursed_altar_activate": {
+    "subtitle": "subtitles.hexed.accursed_altar_activate",
     "sounds": [
       "hexed:accursed_altar_activate"
     ]

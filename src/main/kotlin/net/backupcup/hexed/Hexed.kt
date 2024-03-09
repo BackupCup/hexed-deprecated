@@ -21,6 +21,7 @@ object Hexed : ModInitializer {
 		RegisterWorldGen.registerWorldGen()
 		RegisterItemGroupMain.registerItemGroup()
 		RegisterItemGroupDeco.registerItemGroup()
+		RegisterStats.registerStats()
 
 		ModifyLootTables.registerLootModifiers()
 	}

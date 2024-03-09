@@ -37,6 +37,9 @@ object RegisterStatusEffects {
     val FRANTIC: StatusEffect = FranticStatusEffect(StatusEffectCategory.BENEFICIAL, 0x7a3045, 0.025)
         .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "0c496f0a-47bb-419a-954c-58aeb2d1708a", 0.0, EntityAttributeModifier.Operation.ADDITION)
 
+    //Overburden Hex
+    val OVERBURDEN: StatusEffect = OverburdenStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe83b3b, -0.00390625)
+        .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "91ebbc45-4c4c-4772-9b21-9a6bbbef6870", 0.0, EntityAttributeModifier.Operation.MULTIPLY_BASE)
     fun registerStatusEffects() {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ablaze"), ABLAZE)
@@ -47,5 +50,6 @@ object RegisterStatusEffects {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "traitorous"), TRAITOROUS)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ironclad"), IRONCLAD)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "frantic"), FRANTIC)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "overburden"), OVERBURDEN)
     }
 }

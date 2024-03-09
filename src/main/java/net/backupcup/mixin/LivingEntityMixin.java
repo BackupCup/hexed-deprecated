@@ -125,7 +125,6 @@ public abstract class LivingEntityMixin extends Entity{
         at = @At("STORE"), ordinal = 2)
     private float hexed$AquatiqueSpeed(float value) {
         if (HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.FEET), RegisterEnchantments.INSTANCE.getAQUATIQUE_HEX())) {
-            System.out.println(value);
             return (value + 1) * 2;
         }
         return value;
@@ -142,7 +141,7 @@ public abstract class LivingEntityMixin extends Entity{
             && HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.HEAD), RegisterEnchantments.INSTANCE.getMETAMORPHOSIS_HEX())
             && (Object)this instanceof PlayerEntity) {
 
-            PlayerEntity player = (PlayerEntity) (Object)this;
+            PlayerEntity player = (PlayerEntity) (Object) this;
             amount -= getMaxHealth() - getHealth();
             player.getHungerManager().add((int) amount, 0f);
         }

@@ -5,6 +5,7 @@ import net.backupcup.hexed.packets.AltarNetworkingConstants
 import net.backupcup.hexed.register.RegisterItems
 import net.backupcup.hexed.register.RegisterScreenHandlers
 import net.backupcup.hexed.register.RegisterSounds
+import net.backupcup.hexed.register.RegisterStats
 import net.backupcup.hexed.util.HexHelper
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
@@ -15,7 +16,6 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 import net.minecraft.screen.Property
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
@@ -23,6 +23,7 @@ import net.minecraft.screen.ScreenHandlerListener
 import net.minecraft.screen.slot.Slot
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
+import net.minecraft.stat.Stats
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -110,6 +111,7 @@ class AccursedAltarScreenHandler(
                     getMaterialSlot().decrement(1)
                 }
                 item.addEnchantment(this.currentHex, 1)
+                player.incrementStat(RegisterStats.ITEMS_HEXED)
 
                 this.playerEntity.playSound(
                     RegisterSounds.ACCURSED_ALTAR_HEX,
@@ -205,7 +207,7 @@ class AccursedAltarScreenHandler(
         this.availableHexList.forEach { hex -> buf.writeString(hex.translationKey) }
         buf.writeString(this.currentHex.translationKey)
 
-        ServerPlayNetworking.send(this.playerEntity.world.server?.playerManager?.getPlayer(this.playerEntity.uuid), AltarNetworkingConstants.AVAILABLE_HEX_PACKET, buf)
+        ServerPlayNetworking.send(getServerPlayer(), AltarNetworkingConstants.AVAILABLE_HEX_PACKET, buf)
     }
 
     private fun sendActivePacket() {
