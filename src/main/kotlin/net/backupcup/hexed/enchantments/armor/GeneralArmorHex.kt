@@ -5,12 +5,12 @@ import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
 import net.minecraft.util.Identifier
 
-class MetamorphosisHex(
+class GeneralArmorHex(
     weight: Rarity?,
     target: EnchantmentTarget?,
     slotTypes: Array<out EquipmentSlot>?,
     texturepath: Identifier
-) : AbstractHex(
+): AbstractHex(
     weight,
     target,
     slotTypes,

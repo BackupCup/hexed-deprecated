@@ -95,6 +95,18 @@
   "enchantment.hexed.frantic": "Frantic",
   "enchantment.hexed.frantic.desc": "Taking damage increases movement speed, multiplying damage taken in return.",
 
+  "enchantment.hexed.celebration": "Celebration",
+  "enchantment.hexed.celebration.desc": "Converts your arrows into random fireworks and makes the crossbow have the ability to shoot automatically. Some fireworks may be faulty and not actually fly away.",
+
+  "enchantment.hexed.linger": "Linger",
+  "enchantment.hexed.linger.desc": "The trident will create an area of blazing ash when on the ground. This will cause it to slowly lose durability.",
+  "enchantment.hexed.flaring": "Flaring",
+  "enchantment.hexed.flaring.desc": "The trident will cause fire to rain down from above while it is in the air.",
+  "enchantment.hexed.seize": "Seize",
+  "enchantment.hexed.seize.desc": "Pulls the creature that the trident hits towards the user. Combines with Loyalty.",
+  "enchantment.hexed.sepulture": "Sepulture",
+  "enchantment.hexed.sepulture.desc": "Summons a couple of Blazing Skulls upon hitting an enemy.",
+
   "enchantment.hexed.amplify": "Amplify",
   "enchantment.hexed.amplify.desc": "Expands mining capabilities to a 3x3 area, though the resources from the surrounding blocks are not always guaranteed.",
   "enchantment.hexed.overburden": "Overburden",
@@ -114,6 +126,8 @@
   "effect.hexed.ironclad": "Ironclad",
   "effect.hexed.frantic": "Frantic",
   "effect.hexed.overburden": "Overburden",
+
+  "entity.hexed.blazing_skull": "Blazing Skull",
 
   "death.attack.ablazed": "%1$s turned into searing ashes",
   "death.attack.ablazed.player": "%1$s turned into searing ashes whilst fighting %2$s",

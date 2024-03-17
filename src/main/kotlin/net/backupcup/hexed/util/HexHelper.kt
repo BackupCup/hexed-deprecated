@@ -1,5 +1,6 @@
 package net.backupcup.hexed.util
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.altar.AccursedAltarScreenHandler
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.register.RegisterTags.CALAMITOUS_ARMOR
@@ -14,6 +15,7 @@ import net.minecraft.registry.Registries
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.ScreenHandlerListener
+import net.minecraft.util.Identifier
 
 object HexHelper {
     fun generatorListener(context: ScreenHandlerContext, player: PlayerEntity): ScreenHandlerListener {
@@ -62,6 +64,10 @@ object HexHelper {
             if (!piece.isIn(CALAMITOUS_ARMOR)) return false
         }
         return true
+    }
+
+    fun runeTexture(string: String): Identifier {
+        return Identifier(Hexed.MOD_ID, "textures/gui/runes/$string.png")
     }
 
     fun entityMultiplyingEffect(user: LivingEntity, effect: StatusEffect, duration: Int, decayLength: Int) {

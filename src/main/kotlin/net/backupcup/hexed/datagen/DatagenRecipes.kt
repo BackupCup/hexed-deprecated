@@ -71,25 +71,6 @@ class DatagenRecipes(output: FabricDataOutput?) : FabricRecipeProvider(output) {
         //
         //SKULL CANDLES
         //
-        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, RegisterBlocks.SKELETON_SKULL_CANDLE)
-            .pattern("I")
-            .pattern("S")
-            .input('S', Items.SKELETON_SKULL).input('I', Items.IRON_NUGGET)
-
-            .criterion(hasItem(Items.SKELETON_SKULL), conditionsFromItem(Items.SKELETON_SKULL))
-            .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.IRON_NUGGET))
-            .criterion(hasItem(RegisterBlocks.SKELETON_SKULL_CANDLE), conditionsFromItem(RegisterBlocks.SKELETON_SKULL_CANDLE))
-            .offerTo(exporter)
-
-        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, RegisterBlocks.WITHER_SKULL_CANDLE)
-            .pattern("I")
-            .pattern("S")
-            .input('S', Items.WITHER_SKELETON_SKULL).input('I', Items.GOLD_NUGGET)
-
-            .criterion(hasItem(Items.WITHER_SKELETON_SKULL), conditionsFromItem(Items.WITHER_SKELETON_SKULL))
-            .criterion(hasItem(Items.GOLD_NUGGET), conditionsFromItem(Items.GOLD_NUGGET))
-            .criterion(hasItem(RegisterBlocks.WITHER_SKULL_CANDLE), conditionsFromItem(RegisterBlocks.WITHER_SKULL_CANDLE))
-            .offerTo(exporter)
 
         //
         //ALTAR

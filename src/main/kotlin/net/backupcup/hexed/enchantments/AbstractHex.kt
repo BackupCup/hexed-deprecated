@@ -1,5 +1,6 @@
 package net.backupcup.hexed.enchantments
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.register.RegisterTags
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget

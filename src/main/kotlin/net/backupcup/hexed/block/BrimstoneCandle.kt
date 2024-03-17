@@ -54,12 +54,12 @@ class BrimstoneCandle(
         builder?.add(LIT, TOP)
     }
 
-    override fun randomDisplayTick(state: BlockState?, world: World?, pos: BlockPos?, random: Random?) {
-        val randomFloat = random!!.nextFloat()
-        if (state!!.get(LIT) && state.get(TOP)) {
+    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        val randomFloat = random.nextFloat()
+        if (state.get(LIT) && state.get(TOP)) {
             if(randomFloat < .15f) {
-                world!!.addParticle(ParticleTypes.LAVA,
-                    pos!!.x + .5, pos.y + 1.0, pos.z + .5,
+                world.addParticle(ParticleTypes.LAVA,
+                    pos.x + .5, pos.y + 1.0, pos.z + .5,
                     0.0, 0.0, 0.0)
                 if(randomFloat < .07f) {
                     world.playSound(
@@ -68,8 +68,8 @@ class BrimstoneCandle(
                         random.nextFloat() + 1f, random.nextFloat() * .7f + .3f, false)
                 }
             }
-            world!!.addParticle(DustParticleEffect.DEFAULT,
-                pos!!.x + .5, pos.y + 1.0, pos.z + .5,
+            world.addParticle(DustParticleEffect.DEFAULT,
+                pos.x + .5, pos.y + 1.0, pos.z + .5,
                 0.0, 0.0, 0.0)
         }
     }

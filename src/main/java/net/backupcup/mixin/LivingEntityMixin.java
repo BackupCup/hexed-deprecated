@@ -1,20 +1,25 @@
 package net.backupcup.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.backupcup.hexed.register.RegisterDamageTypes;
-import net.backupcup.hexed.register.RegisterEnchantments;
-import net.backupcup.hexed.register.RegisterStatusEffects;
+import net.backupcup.hexed.entity.blazingSkull.BlazingSkullEntity;
+import net.backupcup.hexed.register.*;
 import net.backupcup.hexed.util.HexHelper;
+import net.backupcup.hexed.util.ItemUseCooldown;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -37,6 +42,12 @@ public abstract class LivingEntityMixin extends Entity{
         super(type, world);
     }
 
+    @Unique private boolean isFlaring = false;
+
+    @Unique private boolean hasSpawnedSkulls = false;
+
+    @Unique private boolean holdingCharged = false;
+
     @Shadow public abstract float getHealth();
 
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
@@ -54,6 +65,16 @@ public abstract class LivingEntityMixin extends Entity{
     @Shadow public abstract void damageArmor(DamageSource source, float amount);
 
     @Shadow public abstract boolean damage(DamageSource source, float amount);
+
+    @Shadow public abstract void tickRiding();
+
+    @Shadow public abstract boolean isUsingRiptide();
+
+    @Shadow public abstract ItemStack getMainHandStack();
+
+    @Shadow public abstract void writeCustomDataToNbt(NbtCompound nbt);
+
+    @Shadow public abstract void readCustomDataFromNbt(NbtCompound nbt);
 
     @Unique
     private void entityMultiplyingEffect(StatusEffect effect, int duration, int decayLength) {
@@ -74,6 +95,18 @@ public abstract class LivingEntityMixin extends Entity{
                     true, false, true
             ));
         }
+    }
+
+    @Inject(method = "writeCustomDataToNbt", at = @At("HEAD"))
+    private void hexed$LivingEntityWriteData(NbtCompound nbt, CallbackInfo ci) {
+        nbt.putBoolean("isFlaring", this.isFlaring);
+        nbt.putBoolean("hasSpawnedSkulls", this.hasSpawnedSkulls);
+    }
+
+    @Inject(method = "readCustomDataFromNbt", at = @At("HEAD"))
+    private void hexed$LivingEntityReadData(NbtCompound nbt, CallbackInfo ci) {
+        this.isFlaring = nbt.getBoolean("isFlaring");
+        this.hasSpawnedSkulls = nbt.getBoolean("hasSpawnedSkulls");
     }
 
     @Inject(method = "heal", at = @At("HEAD"), cancellable = true)
@@ -198,5 +231,75 @@ public abstract class LivingEntityMixin extends Entity{
         }
 
         return amount;
+    }
+
+    @Inject(method = "tickMovement", at = @At("HEAD"))
+    private void hexed$FlaringRiptide(CallbackInfo ci) {
+        if (isUsingRiptide() && HexHelper.INSTANCE.hasEnchantmentInSlot(getMainHandStack(), RegisterEnchantments.INSTANCE.getFLARING_HEX()) && !this.isFlaring) {
+            this.isFlaring = true;
+        }
+        if(!isUsingRiptide() && this.isFlaring) this.isFlaring = false;
+
+        if (this.isFlaring) {
+            getWorld().spawnEntity(
+                    FallingBlockEntity.spawnFromBlock(getWorld(), ((PlayerEntity) (Object) this).getBlockPos(), Blocks.FIRE.getDefaultState())
+            );
+        }
+    }
+
+    @Inject(method = "tickMovement", at = @At("HEAD"))
+    private void hexed$SepultureRiptide(CallbackInfo ci) {
+        if (isUsingRiptide() && HexHelper.INSTANCE.hasEnchantmentInSlot(getMainHandStack(), RegisterEnchantments.INSTANCE.getSEPULTURE_HEX()) && !this.hasSpawnedSkulls) {
+            this.hasSpawnedSkulls = true;
+
+            for (int i = 0; i < 3; i++) {
+                double angle = i * 2 * Math.PI / 3;
+                Vec3d spawnPos = new Vec3d(getPos().getX() + 1 * Math.cos(angle), getPos().getY() + 0.5, getPos().getZ() + 1 * Math.sin(angle));
+                Vec3d movementVec = new Vec3d((spawnPos.x - getPos().getX())/4, 0.333, (spawnPos.z - getPos().getZ())/4);
+
+                LivingEntity entity = kotlin.random.Random.Default.nextDouble(0.0, 1.0) <= 0.333 ? (LivingEntity) (Object) this : null;
+                if(HexHelper.INSTANCE.hasFullRobes(getArmorItems()) && entity != null) entity = null;
+
+                getWorld().spawnEntity(
+                        new BlazingSkullEntity(
+                                RegisterEntities.INSTANCE.getBLAZING_SKULL(), getWorld(),
+                                spawnPos, movementVec, entity)
+                );
+            }
+
+            getWorld().playSound(
+                    null, getBlockPos(),
+                    RegisterSounds.INSTANCE.getACCURSED_ALTAR_HEX(), SoundCategory.HOSTILE,
+                    (float) kotlin.random.Random.Default.nextDouble(0.5, 1.0),
+                    (float) kotlin.random.Random.Default.nextDouble(0.75, 1.25)
+            );
+        }
+        if(!isUsingRiptide() && this.hasSpawnedSkulls) this.hasSpawnedSkulls = false;
+    }
+    @Inject(method = "tickItemStackUsage", at = @At("HEAD"))
+    private void hexed$CelebrationAutoFire(ItemStack stack, CallbackInfo ci) {
+        var entity = (LivingEntity) (Object) this;
+        var charged = false;
+
+        if (entity.getWorld().isClient()) {
+            if (entity == MinecraftClient.getInstance().player) {
+                var player = MinecraftClient.getInstance().player;
+                var mainHandStack = player.getMainHandStack();
+
+                if(HexHelper.INSTANCE.hasEnchantmentInSlot(mainHandStack, RegisterEnchantments.INSTANCE.getCELEBRATION_HEX())) {
+                    var predicate = ModelPredicateProviderRegistry.get(mainHandStack.getItem(), new Identifier("pull"));
+                    if (predicate != null) {
+                        if (predicate.call(mainHandStack, (ClientWorld) entity.getWorld(), player, 1234) >= 1) {
+                            charged = true;
+                            if (holdingCharged) {
+                                MinecraftClient.getInstance().interactionManager.stopUsingItem(player);
+                                ((ItemUseCooldown) MinecraftClient.getInstance()).imposeItemUseCooldown(2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        holdingCharged = charged || holdingCharged;
     }
 }

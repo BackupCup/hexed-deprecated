@@ -63,9 +63,6 @@ object RegisterItemGroupDeco {
 
                 entries.add(ItemStack(RegisterBlocks.CALAMAIDAS_PLUSHIE))
 
-                entries.add(ItemStack(RegisterBlocks.SKELETON_SKULL_CANDLE))
-                entries.add(ItemStack(RegisterBlocks.WITHER_SKULL_CANDLE))
-
                 RegisterDecoCandles.candleTypes.forEach { (_, block, _) ->
                     entries.add(ItemStack(block))
                 }

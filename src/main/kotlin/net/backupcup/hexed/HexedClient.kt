@@ -26,23 +26,9 @@ object HexedClient: ClientModInitializer {
     override fun onInitializeClient() {
         RegisterScreenHandlers.registerScreenHandlers()
         RegisterScreens.registerScreens()
-
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.BRIMSTONE_CANDLE, RenderLayer.getCutout())
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.LICHLORE_CANDLE, RenderLayer.getCutout())
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.ACCURSED_ALTAR, RenderLayer.getCutout())
-
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.SKELETON_SKULL_CANDLE, RenderLayer.getCutout())
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.WITHER_SKULL_CANDLE, RenderLayer.getCutout())
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterBlocks.CALAMAIDAS_PLUSHIE, RenderLayer.getCutout())
-
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterSlagBlocks.BRIMSTONE_SLAG_PILLAR, RenderLayer.getCutout())
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterSlagBlocks.LAVENDIN_VERDURE, RenderLayer.getCutout())
-        BlockRenderLayerMap.INSTANCE.putBlock(RegisterSlagBlocks.LAVA_PISTIL, RenderLayer.getCutout())
-
-
-        RegisterDecoCandles.candleTypes.forEach {(_, block) ->
-            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout())
-        }
+        RegisterBlocks.registerBlockCutouts()
+        RegisterEntities.registerEntityModels()
+        RegisterPackets.registerPackets()
 
         BlockEntityRendererRegistry.register(RegisterBlockEntities.ACCURSED_ALTAR_BLOCK_ENTITY
         ) { AccursedAltarRunesRenderer() }
@@ -52,58 +38,5 @@ object HexedClient: ClientModInitializer {
                 Identifier(Hexed.MOD_ID, "block/blazing_magma_still"),
                 Identifier(Hexed.MOD_ID, "block/blazing_magma_flow")
             ))
-
-        ClientPlayNetworking.registerGlobalReceiver(
-            AltarNetworkingConstants.AVAILABLE_HEX_PACKET,
-            HexedClient::syncAltarScreenData
-        )
-
-        ClientPlayNetworking.registerGlobalReceiver(
-            AltarNetworkingConstants.ACTIVE_ALTAR_PACKET,
-            HexedClient::syncActiveScreenData
-        )
-
-        ClientPlayNetworking.registerGlobalReceiver(
-            HexNetworkingConstants.BLOODTHIRSTY_PARTICLE_PACKET,
-            HexedClient::createBloodthirstyParticles
-        )
-    }
-
-    fun syncAltarScreenData(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
-        val altarScreen = MinecraftClient.getInstance().currentScreen as? AccursedAltarScreen ?: return
-
-        val listLength = buf.readInt()
-        val availableHexList: MutableList<String> = mutableListOf()
-        for (i in 0..<listLength) {
-            availableHexList.add(i, buf.readString())
-        }
-        val currentHex: String = buf.readString()
-
-        altarScreen.updateScreenHexData(currentHex, availableHexList)
-    }
-
-    fun syncActiveScreenData(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
-        val altarScreen = MinecraftClient.getInstance().currentScreen as? AccursedAltarScreen ?: return
-        val isAltarActive = buf.readInt()
-
-        altarScreen.updateScreenActiveData(isAltarActive)
-    }
-
-    fun createBloodthirstyParticles(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
-        val random = buf.readInt()
-        val targetPos = Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble())
-
-        for (i in 0..random) {
-            client.particleManager.addParticle(
-                DustParticleEffect(Vec3d.unpackRgb(10027008).toVector3f(), 1.5f),
-                targetPos.x + randVec(), targetPos.y + 0.5 + randVec(), targetPos.z + randVec(),
-                0.0, 0.5,
-                0.0
-            )
-        }
-    }
-
-    private fun randVec(): Double {
-        return Random.nextDouble(-.5, .5) * if (Random.nextInt(0, 1) == 0) -1 else 1
     }
 }

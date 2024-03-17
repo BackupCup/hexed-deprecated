@@ -33,7 +33,7 @@ class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> 
     ) {
 
         if(entity.world?.getBlockState(entity.pos)?.block == RegisterBlocks.ACCURSED_ALTAR) {
-            if (entity.world?.getBlockState(entity.pos)?.get(AccursedAltar.ACTIVE) != true) {
+            if (entity.world?.getBlockState(entity.pos)?.get(AccursedAltar.ACTIVE) == false) {
                 if (itemStackTexture.isNotEmpty()) itemStackTexture = listOf()
                 return
             }

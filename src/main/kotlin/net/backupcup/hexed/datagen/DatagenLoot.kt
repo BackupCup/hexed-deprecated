@@ -16,8 +16,6 @@ class DatagenLoot(dataOutput: FabricDataOutput?) : FabricBlockLootTableProvider(
         addDrop(RegisterBlocks.BRIMSTONE_CANDLE)
         addDrop(RegisterBlocks.LICHLORE_CANDLE)
         addDrop(RegisterBlocks.ACCURSED_ALTAR)
-        addDrop(RegisterBlocks.WITHER_SKULL_CANDLE)
-        addDrop(RegisterBlocks.SKELETON_SKULL_CANDLE)
 
 
         addDrop(RegisterSlagBlocks.BRIMSTONE_SLAG)

@@ -22,6 +22,7 @@ object Hexed : ModInitializer {
 		RegisterItemGroupMain.registerItemGroup()
 		RegisterItemGroupDeco.registerItemGroup()
 		RegisterStats.registerStats()
+		RegisterEntities.registerEntities()
 
 		ModifyLootTables.registerLootModifiers()
 	}

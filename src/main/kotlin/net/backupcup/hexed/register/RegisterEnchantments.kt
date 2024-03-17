@@ -2,8 +2,11 @@ package net.backupcup.hexed.register
 
 import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.armor.*
+import net.backupcup.hexed.enchantments.crossbow.GeneralCrossbowHex
 import net.backupcup.hexed.enchantments.digger.GeneralDiggerHex
+import net.backupcup.hexed.enchantments.trident.GeneralTridentHex
 import net.backupcup.hexed.enchantments.weapon.*
+import net.backupcup.hexed.util.HexHelper
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -15,74 +18,89 @@ object RegisterEnchantments {
     //WEAPON
     val AFLAME_HEX = AflameHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.WEAPON, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/aflame.png"))
+        HexHelper.runeTexture("aflame"))
     val PERSECUTED_HEX = PersecutedHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.WEAPON, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/persecuted.png"))
+        HexHelper.runeTexture("persecuted"))
     val EPHEMERAL_HEX = EphemeralHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.WEAPON, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/ephemeral.png"))
+        HexHelper.runeTexture("ephemeral"))
     val VINDICTIVE_HEX = VindictiveHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.WEAPON, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/vindictive.png"))
+        HexHelper.runeTexture("vindictive"))
     val TRAITOROUS_HEX = TraitorousHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.WEAPON, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/traitorous.png"))
+        HexHelper.runeTexture("traitorous"))
 
     //ARMOR
     val DISPLACED_HEX = DisplacedHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR, arrayOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/displaced.png"))
-    val AVERTING_HEX = AvertingHex(Enchantment.Rarity.VERY_RARE,
+        HexHelper.runeTexture("displaced"))
+    val AVERTING_HEX = GeneralArmorHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR, arrayOf(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/averting.png"))
-    val AQUATIQUE_HEX = AquatiqueHex(Enchantment.Rarity.VERY_RARE,
+        HexHelper.runeTexture("averting"))
+    val AQUATIQUE_HEX = GeneralArmorHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR_FEET, arrayOf(EquipmentSlot.FEET),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/aquatique.png"))
-    val DYNAMIQUE_HEX = DynamiqueHex(Enchantment.Rarity.VERY_RARE,
+        HexHelper.runeTexture("aquatique"))
+    val DYNAMIQUE_HEX = GeneralArmorHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR_FEET, arrayOf(EquipmentSlot.FEET),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/dynamique.png"))
-    val IRONCLAD_HEX = IroncladHex(Enchantment.Rarity.VERY_RARE,
+        HexHelper.runeTexture("dynamique"))
+    val IRONCLAD_HEX = GeneralArmorHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR_LEGS, arrayOf(EquipmentSlot.LEGS),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/ironclad.png"))
-    val FRANTIC_HEX = FranticHex(Enchantment.Rarity.VERY_RARE,
+        HexHelper.runeTexture("ironclad"))
+    val FRANTIC_HEX = GeneralArmorHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR_LEGS, arrayOf(EquipmentSlot.LEGS),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/frantic.png"))
+        HexHelper.runeTexture("frantic"))
     val BLOODTHIRSTY_HEX = BloodthirstyHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR_CHEST, arrayOf(EquipmentSlot.CHEST),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/bloodthirsty.png"))
+        HexHelper.runeTexture("bloodthirsty"))
     val DISFIGUREMENT_HEX = DisfigurementHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR_CHEST, arrayOf(EquipmentSlot.CHEST),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/disfigurement.png"))
-    val METAMORPHOSIS_HEX = MetamorphosisHex(Enchantment.Rarity.VERY_RARE,
+        HexHelper.runeTexture("disfigurement"))
+    val METAMORPHOSIS_HEX = GeneralArmorHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR_HEAD, arrayOf(EquipmentSlot.HEAD),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/metamorphosis.png"))
-    val DIVINE_HEX = DivineHex(Enchantment.Rarity.VERY_RARE,
+        HexHelper.runeTexture("metamorphosis"))
+    val DIVINE_HEX = GeneralArmorHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.ARMOR_HEAD, arrayOf(EquipmentSlot.HEAD),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/divine.png"))
+        HexHelper.runeTexture("divine"))
 
     //BOW
-    //TODO
+    val TRANSMUTATION_HEX = GeneralCrossbowHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.BOW, arrayOf(EquipmentSlot.MAINHAND),
+        HexHelper.runeTexture("transmutation"))
 
     //CROSSBOW
-    //TODO
+    val CELEBRATION_HEX = GeneralCrossbowHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.CROSSBOW, arrayOf(EquipmentSlot.MAINHAND),
+        HexHelper.runeTexture("celebration"))
 
     //TRIDENT
-    //TODO
+    val FLARING_HEX = GeneralTridentHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.TRIDENT, arrayOf(EquipmentSlot.MAINHAND),
+        HexHelper.runeTexture("flaring"))
+    val LINGER_HEX = GeneralTridentHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.TRIDENT, arrayOf(EquipmentSlot.MAINHAND),
+        HexHelper.runeTexture("linger"))
+    val SEIZE_HEX = GeneralTridentHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.TRIDENT, arrayOf(EquipmentSlot.MAINHAND),
+        HexHelper.runeTexture("seize"))
+    val SEPULTURE_HEX = GeneralTridentHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.TRIDENT, arrayOf(EquipmentSlot.MAINHAND),
+        HexHelper.runeTexture("sepulture"))
 
     //DIGGER
     val RUINOUS_HEX = GeneralDiggerHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/ruinous.png"))
+        HexHelper.runeTexture("ruinous"))
     val AMPLIFY_HEX = GeneralDiggerHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/amplify.png"))
+        HexHelper.runeTexture("amplify"))
     val OVERBURDEN_HEX = GeneralDiggerHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/overburden.png"))
+        HexHelper.runeTexture("overburden"))
     val FAMISHMENT_HEX = GeneralDiggerHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.DIGGER, arrayOf(EquipmentSlot.MAINHAND),
-        Identifier(Hexed.MOD_ID, "textures/gui/runes/famishment.png"))
+        HexHelper.runeTexture("famishment"))
 
     fun registerHexes() {
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME_HEX)
@@ -102,12 +120,20 @@ object RegisterEnchantments {
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "metamorphosis"), METAMORPHOSIS_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "divine"), DIVINE_HEX)
 
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "transmutation"), TRANSMUTATION_HEX)
 
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "celebration"), CELEBRATION_HEX)
+
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "flaring"), FLARING_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "linger"), LINGER_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "seize"), SEIZE_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "sepulture"), SEPULTURE_HEX)
 
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "ruinous"), RUINOUS_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "amplify"), AMPLIFY_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "overburden"), OVERBURDEN_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "famishment"), FAMISHMENT_HEX)
+
         /*
         Status Descriptions:
         - Logic: No logic implemented
@@ -118,16 +144,9 @@ object RegisterEnchantments {
 
         Hex Ideas:
         - Bow:
-          Idea: ???
+          : Arrows shot will have random effects on them
 
         - Crossbow:
-          Text: FIREWORK RAPID LAUNCHER
-
-        - Trident:
-          Idea: ???
-
-        - Digger:
-          Logic + Transl + Text + Idea: Rapaciousness - ???
         */
     }
 }
