@@ -4,8 +4,8 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.sugar.Local;
 import kotlin.random.Random;
+import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.enchantments.AbstractHex;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterStatusEffects;
@@ -17,16 +17,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.MutableText;
@@ -36,15 +31,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.apache.commons.codec.binary.Hex;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import static net.minecraft.item.ItemStack.ENCHANTMENTS_KEY;
 
 @Mixin(value = ItemStack.class, priority = 10)
 public abstract class ItemStackMixin {
@@ -53,6 +49,8 @@ public abstract class ItemStackMixin {
     @Shadow public abstract NbtList getEnchantments();
 
     @Shadow public abstract Text getName();
+
+    @Shadow private @Nullable NbtCompound nbt;
 
     @Unique
     private void iterateOverBox(Box box, World world, PlayerEntity player, ItemStack tool, BlockState state) {
@@ -68,7 +66,9 @@ public abstract class ItemStackMixin {
                             !world.getBlockState(pos).isAir() &&
                             world.getBlockState(pos).getBlock().getHardness() <= state.getBlock().getHardness()+2) {
 
-                        boolean shouldDrop = Random.Default.nextBoolean();
+                        boolean shouldDrop = (Hexed.INSTANCE.getConfig() != null) ?
+                                Random.Default.nextDouble(0, 1) >= Hexed.INSTANCE.getConfig().getAmplifyHex().getDropChance() :
+                                Random.Default.nextDouble(0, 1) >= 0.5;
                         if (HexHelper.INSTANCE.hasFullRobes(player.getArmorItems())) {
                             shouldDrop = true;
                         }
@@ -77,13 +77,24 @@ public abstract class ItemStackMixin {
                         world.breakBlock(pos, shouldDrop, player);
 
                         player.incrementStat(Stats.USED.getOrCreateStat(tool.getItem()));
-                        if (!world.isClient) tool.damage(1, player, entity -> entity.sendToolBreakStatus(player.getActiveHand()));
+                        if (!world.isClient) tool.damage(
+                                (Hexed.INSTANCE.getConfig() != null) ? Hexed.INSTANCE.getConfig().getAmplifyHex().getToolDamage() : 1,
+                                player, entity -> entity.sendToolBreakStatus(player.getActiveHand()));
 
-                        player.addExhaustion(0.01f);
+                        if(Hexed.INSTANCE.getConfig() != null)
+                            player.addExhaustion((float)Hexed.INSTANCE.getConfig().getAmplifyHex().getExhaustionAmount());
                     }
                 }
             }
         }
+    }
+
+    @ModifyReturnValue(method = "hasEnchantments", at = @At("RETURN"))
+    private boolean hexed$EnchantableHexes(boolean original) {
+        if (nbt != null && nbt.contains(ENCHANTMENTS_KEY, NbtElement.LIST_TYPE)) {
+            return !HexHelper.INSTANCE.getEnchantments((ItemStack) (Object) this).stream().filter(it -> !(it instanceof AbstractHex)).toList().isEmpty();
+        }
+        return false;
     }
 
     @ModifyReturnValue(method = "getAttributeModifiers", at = @At("RETURN"))

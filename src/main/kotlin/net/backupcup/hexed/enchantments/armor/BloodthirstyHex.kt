@@ -1,6 +1,7 @@
 package net.backupcup.hexed.enchantments.armor
 
 import com.google.common.collect.Multimap
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.packets.HexNetworkingConstants
 import net.backupcup.hexed.register.RegisterEnchantments
@@ -49,7 +50,10 @@ class BloodthirstyHex(
         super.onTargetDamaged(user, target, level)
         if (target is LivingEntity) {
             if (target.isDead) {
-                var additionalHealth = if (target.maxHealth * 0.125f >= 3f) 10f.coerceAtMost(target.maxHealth * 0.125f) else 3f
+
+                var additionalHealth = if (target.maxHealth * (Hexed.getConfig()?.bloodthirstyHex?.healModifier ?: 0.125f) >= (Hexed.getConfig()?.bloodthirstyHex?.minimumHealAmount ?: 3f))
+                    (Hexed.getConfig()?.bloodthirstyHex?.maximumHealAmount ?: 10f).coerceAtMost(target.maxHealth * (Hexed.getConfig()?.bloodthirstyHex?.healModifier ?: 0.125f))
+                    else Hexed.getConfig()?.bloodthirstyHex?.minimumHealAmount ?: 3f
 
                 for (player in PlayerLookup.tracking(target)) {
                     ServerPlayNetworking.send(player, HexNetworkingConstants.BLOODTHIRSTY_PARTICLE_PACKET, sendParticlePacket(target.x, target.y, target.z,

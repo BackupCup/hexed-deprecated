@@ -1,5 +1,6 @@
 package net.backupcup.hexed.altar
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.packets.AltarNetworkingConstants
 import net.backupcup.hexed.register.RegisterItems
@@ -23,7 +24,6 @@ import net.minecraft.screen.ScreenHandlerListener
 import net.minecraft.screen.slot.Slot
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.sound.SoundCategory
-import net.minecraft.stat.Stats
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 
@@ -76,7 +76,7 @@ class AccursedAltarScreenHandler(
 
         this.addSlot(object: Slot(inventory, 1, 18, 82) {
             override fun canInsert(stack: ItemStack): Boolean {
-                return HexHelper.getAvailableHexList(stack).isNotEmpty()
+                return HexHelper.getAvailableHexList(stack).isNotEmpty() && Hexed.getConfig()?.isListed(stack.item) == false
             }
         })
 
@@ -110,6 +110,7 @@ class AccursedAltarScreenHandler(
                 if (!player.isCreative) {
                     getMaterialSlot().decrement(1)
                 }
+
                 item.addEnchantment(this.currentHex, 1)
                 player.incrementStat(RegisterStats.ITEMS_HEXED)
 

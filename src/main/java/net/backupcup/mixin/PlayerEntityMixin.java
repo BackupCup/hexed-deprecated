@@ -3,6 +3,7 @@ package net.backupcup.mixin;
 
 import io.netty.buffer.Unpooled;
 import net.backupcup.hexed.Hexed;
+import net.backupcup.hexed.enchantments.crossbow.ServerPlayerGetter;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.util.HexHelper;
@@ -48,12 +49,11 @@ public abstract class PlayerEntityMixin extends Entity {
 
     @Shadow public abstract Iterable<ItemStack> getArmorItems();
 
-    @Shadow protected abstract void takeShieldHit(LivingEntity attacker);
-
     @Unique private boolean provisionUI = true;
     @Unique private int provisionIndicatorPos = 0;
     @Unique private int provisionBuffAmplifier = 0;
     @Unique private int provisionBuffTime = 0;
+
 
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
     private void hexed$TraitorousCancelAttack(Entity target, CallbackInfo ci) {
@@ -81,24 +81,7 @@ public abstract class PlayerEntityMixin extends Entity {
         return f;
     }
 
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void hexed$ProvisionTick(CallbackInfo ci) {
-        if (this.provisionUI) {
-            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            buf.writeBoolean(this.provisionUI);
-            buf.writeInt(this.provisionIndicatorPos);
-
-            ServerPlayerEntity player = ((PlayerEntity)(Object)this).getWorld().getServer().getPlayerManager().getPlayer(getUuid());
-
-            System.out.println(player);
-            /*
-            ServerPlayNetworking.send(
-                    player,
-                    new Identifier(Hexed.MOD_ID, "provision_update_packet"), buf);
-
-             */
-        }
-    }
+    /*
 
     @Inject(method = "writeCustomDataToNbt", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getLastDeathPos()Ljava/util/Optional;", shift = At.Shift.AFTER))
     private void hexed$ProvisionWriteData(NbtCompound nbt, CallbackInfo ci) {
@@ -120,4 +103,23 @@ public abstract class PlayerEntityMixin extends Entity {
         provisionBuffAmplifier = provisionNbt.getInt("BuffAmplifier");
         provisionBuffTime = provisionNbt.getInt("BuffTime");
     }
+
+
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void hexed$ProvisionTick(CallbackInfo ci) {
+        if (this.provisionUI) {
+            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+            buf.writeBoolean(this.provisionUI);
+            buf.writeInt(this.provisionIndicatorPos);
+
+            /*
+            ServerPlayNetworking.send(
+                    player,
+                    new Identifier(Hexed.MOD_ID, "provision_update_packet"), buf);
+
+        }
+    }
+
+    */
 }

@@ -15,10 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BowItem.class)
 public class BowItemMixin {
+
+    /*
     @Inject(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getProjectileType(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", shift = At.Shift.AFTER))
     private void hexed$TransmutationArrows(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci, @Local LocalRef<ItemStack> arrowItem) {
         if (HexHelper.INSTANCE.hasEnchantmentInSlot(stack, RegisterEnchantments.INSTANCE.getTRANSMUTATION_HEX())) {
             System.out.println(arrowItem.get());
         }
     }
+
+     */
 }

@@ -171,6 +171,12 @@
   "subtitles.hexed.accursed_altar_taint": "Brimstone Flames taint",
   "subtitles.hexed.accursed_altar_hex": "Brimstone Flames extinguish",
 
+  "subtitles.hexed.provision_fail": "Quick Reload Failed",
+  "subtitles.hexed.provision_charge": "Quick Reload Succeeded",
+  "subtitles.hexed.provision_in_range": "Quick Reload is in range",
+
   "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function.",
-  "message.hexed.altar_used": "The Brimstone Candles extinguished, despite your efforts to keep them Lit."
+  "message.hexed.altar_used": "The Brimstone Candles extinguished, despite your efforts to keep them Lit.",
+
+  "message.hexed.error.config.general": "An error occured while loading config. Using defaults. Check out logs for details"
 }

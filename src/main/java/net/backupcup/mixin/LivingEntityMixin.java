@@ -1,6 +1,7 @@
 package net.backupcup.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.entity.blazingSkull.BlazingSkullEntity;
 import net.backupcup.hexed.register.*;
 import net.backupcup.hexed.util.HexHelper;
@@ -45,8 +46,6 @@ public abstract class LivingEntityMixin extends Entity{
     @Unique private boolean isFlaring = false;
 
     @Unique private boolean hasSpawnedSkulls = false;
-
-    @Unique private boolean holdingCharged = false;
 
     @Shadow public abstract float getHealth();
 
@@ -158,7 +157,7 @@ public abstract class LivingEntityMixin extends Entity{
         at = @At("STORE"), ordinal = 2)
     private float hexed$AquatiqueSpeed(float value) {
         if (HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.FEET), RegisterEnchantments.INSTANCE.getAQUATIQUE_HEX())) {
-            return (value + 1) * 2;
+            return (value + 1) * (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAquatiqueHex().getSpeedMultiplier() : 2);
         }
         return value;
     }
@@ -196,7 +195,8 @@ public abstract class LivingEntityMixin extends Entity{
 
     @Inject(method = "getJumpVelocity", at = @At("RETURN"), cancellable = true)
     private void hexed$DynamiqueJump(CallbackInfoReturnable<Float> cir) {
-        float DynamiqueJumpModifier = HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.FEET), RegisterEnchantments.INSTANCE.getDYNAMIQUE_HEX()) ? 0.15625f : 0f;
+        float DynamiqueJumpModifier = HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.FEET), RegisterEnchantments.INSTANCE.getDYNAMIQUE_HEX()) ?
+                (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDynamiqueHex().getJumpModifier() : 0.15625f) : 0f;
         cir.setReturnValue(cir.getReturnValue() + DynamiqueJumpModifier);
     }
 
@@ -208,7 +208,7 @@ public abstract class LivingEntityMixin extends Entity{
         }
 
         if((1-Math.exp(-avertingArmor)) * (1-amount/getMaxHealth()) > new Random().nextFloat()) {
-            float newAmount = amount * (1 - 0.125f*avertingArmor);
+            float newAmount = amount * (1 - (Hexed.INSTANCE.getConfig() != null ? (Hexed.INSTANCE.getConfig().getAvertingHex().getDamageReduction()) : 0.125f)*avertingArmor);
             damageArmor(source, newAmount);
             return newAmount;
         }
@@ -275,31 +275,5 @@ public abstract class LivingEntityMixin extends Entity{
             );
         }
         if(!isUsingRiptide() && this.hasSpawnedSkulls) this.hasSpawnedSkulls = false;
-    }
-    @Inject(method = "tickItemStackUsage", at = @At("HEAD"))
-    private void hexed$CelebrationAutoFire(ItemStack stack, CallbackInfo ci) {
-        var entity = (LivingEntity) (Object) this;
-        var charged = false;
-
-        if (entity.getWorld().isClient()) {
-            if (entity == MinecraftClient.getInstance().player) {
-                var player = MinecraftClient.getInstance().player;
-                var mainHandStack = player.getMainHandStack();
-
-                if(HexHelper.INSTANCE.hasEnchantmentInSlot(mainHandStack, RegisterEnchantments.INSTANCE.getCELEBRATION_HEX())) {
-                    var predicate = ModelPredicateProviderRegistry.get(mainHandStack.getItem(), new Identifier("pull"));
-                    if (predicate != null) {
-                        if (predicate.call(mainHandStack, (ClientWorld) entity.getWorld(), player, 1234) >= 1) {
-                            charged = true;
-                            if (holdingCharged) {
-                                MinecraftClient.getInstance().interactionManager.stopUsingItem(player);
-                                ((ItemUseCooldown) MinecraftClient.getInstance()).imposeItemUseCooldown(2);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        holdingCharged = charged || holdingCharged;
     }
 }

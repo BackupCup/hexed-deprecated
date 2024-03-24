@@ -1,5 +1,6 @@
 package net.backupcup.hexed.enchantments.weapon
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.register.RegisterStatusEffects
 import net.backupcup.hexed.util.HexHelper
@@ -27,14 +28,14 @@ class AflameHex(
             if (target.isAlive) {
                 target.addStatusEffect(StatusEffectInstance(
                     RegisterStatusEffects.ABLAZE,
-                    80, 1,
+                    Hexed.getConfig()?.aflameHex?.AblazeDuration ?: 80, Hexed.getConfig()?.aflameHex?.AblazeAmplifier ?: 1,
                     true, true, true
                 ))
             }
             if (user.isAlive && !HexHelper.hasFullRobes(user)) {
                 user.addStatusEffect(StatusEffectInstance(
                     RegisterStatusEffects.AFLAME,
-                    40, 0,
+                    Hexed.getConfig()?.aflameHex?.AflameDuration ?: 40, Hexed.getConfig()?.aflameHex?.AflameAmplifier ?: 0,
                     true, true, true
                 ))
             }

@@ -67,12 +67,15 @@ object RegisterEnchantments {
     //BOW
     val TRANSMUTATION_HEX = GeneralCrossbowHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.BOW, arrayOf(EquipmentSlot.MAINHAND),
-        HexHelper.runeTexture("transmutation"))
+        HexHelper.runeTexture("transmutation")) //TODO
 
     //CROSSBOW
     val CELEBRATION_HEX = GeneralCrossbowHex(Enchantment.Rarity.VERY_RARE,
         EnchantmentTarget.CROSSBOW, arrayOf(EquipmentSlot.MAINHAND),
         HexHelper.runeTexture("celebration"))
+    val PROVISION_HEX = GeneralCrossbowHex(Enchantment.Rarity.VERY_RARE,
+        EnchantmentTarget.CROSSBOW, arrayOf(EquipmentSlot.MAINHAND),
+        HexHelper.runeTexture("provision"))
 
     //TRIDENT
     val FLARING_HEX = GeneralTridentHex(Enchantment.Rarity.VERY_RARE,
@@ -120,9 +123,10 @@ object RegisterEnchantments {
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "metamorphosis"), METAMORPHOSIS_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "divine"), DIVINE_HEX)
 
-        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "transmutation"), TRANSMUTATION_HEX)
+        //TODO: Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "transmutation"), TRANSMUTATION_HEX)
 
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "celebration"), CELEBRATION_HEX)
+        //TODO: Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "provision"), PROVISION_HEX)
 
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "flaring"), FLARING_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "linger"), LINGER_HEX)
@@ -143,10 +147,17 @@ object RegisterEnchantments {
         - Idea: Idea still under consideration
 
         Hex Ideas:
+        - Sword:
+          basically "Blinding Assault" of the ROR2 Merc, but instead of "cooldown" the user just cant attack for a few seconds
+
         - Bow:
           : Arrows shot will have random effects on them
+          TODO 3 more here
 
         - Crossbow:
+          : Banish - Creates a miniature black hole at the position of the enemy that the projectile hits.
+          : Provision - Active Reload mechanic (Rad Gun from Gungeon / Railgunner from ROR2)
+          TODO 2 more here
         */
     }
 }

@@ -1,6 +1,7 @@
 package net.backupcup.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.register.RegisterTags;
@@ -45,18 +46,18 @@ public class LootableContainerMixin {
             debuffList.add(RegisterStatusEffects.INSTANCE.getTRAITOROUS());
 
             StatusEffect randomEffect = debuffList.get((int)(Math.random() * debuffList.size()));
-            int amplifier = 0;
-            int durationModifier = 20;
+            int amplifier = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDivineHex().getDefaultAmplifier() : 0;
+            int durationModifier = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDivineHex().getDefaultDuration() : 20;
 
             if (randomEffect.equals(RegisterStatusEffects.INSTANCE.getIRONCLAD())) {
-                amplifier = 3;
-                durationModifier = 40;}
+                amplifier = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDivineHex().getIroncladAmplifier() : 3;
+                durationModifier = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDivineHex().getIroncladDuration() : 40;}
             else if (randomEffect.equals(RegisterStatusEffects.INSTANCE.getEXHAUSTION())) {
-                amplifier = 9;
-                durationModifier = 60;}
+                amplifier = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDivineHex().getExhaustionAmplifier() : 9;
+                durationModifier = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDivineHex().getExhaustionDuration() : 60;}
             else if (randomEffect.equals(RegisterStatusEffects.INSTANCE.getETHEREAL())) {
-                amplifier = 5;
-                durationModifier = 80;}
+                amplifier = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDivineHex().getEtherealAmplifier() : 5;
+                durationModifier = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getDivineHex().getEtherealDuration() : 80;}
 
             if (HexHelper.INSTANCE.hasFullRobes(player.getArmorItems())) durationModifier /= 2;
 

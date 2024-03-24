@@ -1,5 +1,6 @@
 package net.backupcup.hexed.enchantments.armor
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.util.HexHelper
 import net.minecraft.enchantment.EnchantmentTarget
@@ -10,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.Box
+import org.apache.commons.codec.binary.Hex
 
 class DisfigurementHex(
     weight: Rarity?,
@@ -23,9 +25,11 @@ class DisfigurementHex(
     texturepath
 ) {
     override fun onUserDamaged(user: LivingEntity, attacker: Entity?, level: Int) {
+        val boxRadius: Int = Hexed.getConfig()?.disfigurementHex?.boxRadius ?: 3
+
         val box = Box(
-            user.x-3, user.y-3, user.z-3,
-            user.x+3, user.y+3, user.z+3)
+            user.x-boxRadius, user.y-boxRadius, user.z-boxRadius,
+            user.x+boxRadius, user.y+boxRadius, user.z+boxRadius)
         val affectedEntities = user.world.getNonSpectatingEntities(
             LivingEntity::class.java, box)
 
@@ -34,13 +38,13 @@ class DisfigurementHex(
             livingEntity.addStatusEffect(
                 StatusEffectInstance(
                     StatusEffects.WEAKNESS,
-                    100, 0,
+                    Hexed.getConfig()?.disfigurementHex?.weaknessDuration ?: 100, Hexed.getConfig()?.disfigurementHex?.weaknessAmplifier ?: 0,
                     true, true, true
                 ))
             livingEntity.addStatusEffect(
                 StatusEffectInstance(
                     StatusEffects.HUNGER,
-                    100, 0,
+                    Hexed.getConfig()?.disfigurementHex?.hungerDuration ?: 100, Hexed.getConfig()?.disfigurementHex?.hungerAmplifier ?: 0,
                     true, true, true
                 ))
         }

@@ -38,8 +38,8 @@ class PistilBlock(settings: Settings?) : Block(settings), Fertilizable {
             .with(TYPE, 0)
     }
 
-    val SHAPE_FULL: VoxelShape = createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0)
-    val SHAPE_TOP: VoxelShape = createCuboidShape(6.0, 0.0, 6.0, 10.0, 11.0, 10.0)
+    private val SHAPE_FULL: VoxelShape = createCuboidShape(6.0, 0.0, 6.0, 10.0, 16.0, 10.0)
+    private val SHAPE_TOP: VoxelShape = createCuboidShape(6.0, 0.0, 6.0, 10.0, 11.0, 10.0)
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>?) {
         builder?.add(AGE, TYPE)
@@ -113,7 +113,7 @@ class PistilBlock(settings: Settings?) : Block(settings), Fertilizable {
         return true
     }
 
-    override fun grow(world: ServerWorld, random: Random?, pos: BlockPos, state: BlockState) {
+    override fun grow(world: ServerWorld, random: Random, pos: BlockPos, state: BlockState) {
         for (currentAge in (0..maxAge-state.get(AGE))) {
             if (world.getBlockState(pos.up(currentAge+1)).isOf(this)) continue
             if (world.getBlockState(pos.up(currentAge+1)).isReplaceable && world.getBlockState(pos.up(currentAge)).get(AGE) < maxAge) {

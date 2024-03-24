@@ -16,5 +16,23 @@
     "sounds": [
       "hexed:accursed_altar_activate"
     ]
+  },
+  "provision_charge": {
+    "subtitle": "subtitles.hexed.provision_charge",
+    "sounds": [
+      "hexed:provision_charge"
+    ]
+  },
+  "provision_fail": {
+    "subtitle": "subtitles.hexed.provision_fail",
+    "sounds": [
+      "hexed:provision_fail"
+    ]
+  },
+  "provision_in_range": {
+    "subtitle": "subtitles.hexed.provision_in_range",
+    "sounds": [
+      "hexed:provision_in_range"
+    ]
   }
 }

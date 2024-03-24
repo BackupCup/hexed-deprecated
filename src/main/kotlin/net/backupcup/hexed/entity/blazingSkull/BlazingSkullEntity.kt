@@ -63,7 +63,7 @@ class BlazingSkullEntity(
                 Random.nextDouble(0.25, 0.5).toFloat(), Random.nextDouble(1.0, 1.5).toFloat())
 
         if (!this.world.isClient) {
-            if (this.ticksAlive >= 1200) this.discard()
+            if (this.ticksAlive >= 1200) this.remove(RemovalReason.DISCARDED)
 
             if (this.ticksUntilNewTarget > 0) {
                 this.ticksUntilNewTarget--
@@ -83,7 +83,7 @@ class BlazingSkullEntity(
 
                 if (this.boundingBox.expand(0.125).intersects(target?.boundingBox) && !this.isDead) {
                     this.explodeYourself()
-                    this.discard()
+                    this.remove(RemovalReason.KILLED)
                 }
 
                 val distanceSq = this.squaredDistanceTo(target)
@@ -97,7 +97,7 @@ class BlazingSkullEntity(
             this.yaw = (MathHelper.atan2(this.velocity.z, this.velocity.x) * (180.0 / Math.PI) - 90.0).toFloat()
             // Adjust pitch based on vertical velocity //doesn't work for some godforsaken reason
             val pitchLimit = 30.0
-            this.pitch = MathHelper.clamp(-this.velocity.y * pitchLimit, -pitchLimit, pitchLimit).toFloat()
+            this.roll = MathHelper.clamp(-this.velocity.y * pitchLimit, -pitchLimit, pitchLimit).toInt()
         }
     }
 
@@ -106,7 +106,7 @@ class BlazingSkullEntity(
         if (!state.isSolid) return
 
         this.explodeYourself()
-        this.discard()
+        this.remove(RemovalReason.KILLED)
     }
 
     override fun onDeath(damageSource: DamageSource?) {
