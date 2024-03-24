@@ -1,5 +1,6 @@
 package net.backupcup.mixin;
 
+import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.entity.blazingSkull.BlazingSkullEntity;
 import net.backupcup.hexed.packets.HexNetworkingConstants;
 import net.backupcup.hexed.register.RegisterEnchantments;
@@ -53,7 +54,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
         if (!inGround) return;
 
         if (HexHelper.INSTANCE.hasEnchantmentInSlot(tridentStack, RegisterEnchantments.INSTANCE.getLINGER_HEX())) {
-            int radius = 3;
+            int radius = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getLingerHex().getLingerRadius() : 3;
             TridentEntity tridentEntity = (TridentEntity) (Object) this;
 
             if (getWorld().getTime() % 20 == 0) {
@@ -62,11 +63,14 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
 
                     ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(
                             RegisterStatusEffects.INSTANCE.getABLAZE(),
-                            25, 0, true, false, true
+                            Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getLingerHex().getDebuffDuration() : 25,
+                            Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getLingerHex().getDebuffAmplifier() : 0,
+                            true, false, true
                     ));
 
                     if (HexHelper.INSTANCE.hasFullRobes(tridentEntity.getOwner().getArmorItems())) continue;
-                    tridentStack.damage(1, Random.create(), null);
+                    tridentStack.damage(Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getLingerHex().getTridentDamage() : 1,
+                            Random.create(), null);
                     if (tridentStack.getDamage() == tridentStack.getMaxDamage()) {
                         getWorld().playSound(null, tridentEntity.getBlockPos(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS);
                         tridentEntity.discard();
@@ -98,7 +102,14 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
             TridentEntity tridentEntity = (TridentEntity) (Object) this;
 
             getWorld().spawnEntity(
-                    FallingBlockEntity.spawnFromBlock(getWorld(), tridentEntity.getBlockPos(), Blocks.FIRE.getDefaultState())
+                    FallingBlockEntity.spawnFromBlock(getWorld(), tridentEntity.getBlockPos(), (
+                            Hexed.INSTANCE.getConfig() != null ?
+                                    Hexed.INSTANCE.getConfig().getFlaringHex().isSoulFire() ?
+                                            Blocks.SOUL_FIRE.getDefaultState() :
+                                            Blocks.FIRE.getDefaultState() :
+                                    Blocks.FIRE.getDefaultState()
+                            )
+                    )
             );
         }
     }
@@ -115,7 +126,8 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
         if (!(this.hitEntity instanceof LivingEntity) || this.hitEntity == null) return;
         TridentEntity tridentEntity = (TridentEntity) (Object) this;
 
-        int maxPullableHP = HexHelper.INSTANCE.hasFullRobes(tridentEntity.getOwner().getArmorItems()) ? 100 : 50;
+        int maxPullableHP = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSeizeHex().getMaxPullableHP() : 50;
+        maxPullableHP *= HexHelper.INSTANCE.hasFullRobes(tridentEntity.getOwner().getArmorItems()) ? 2 : 1;
 
         if (((LivingEntity) this.hitEntity).getMaxHealth() > maxPullableHP || ((LivingEntity) this.hitEntity).isBlocking()) return;
 
@@ -126,7 +138,9 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
 
             double distance = tridentEntity.getOwner().getPos().distanceTo(this.hitEntity.getPos());
             double maxDistance = distance/2;
-            Pair<Double, Double> pullStrengthBound = new Pair<>(1.0, 4.0);
+            Pair<Double, Double> pullStrengthBound = new Pair<>(
+                    Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSeizeHex().getMinimumPullStrength() : 1.0,
+                    Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSeizeHex().getMaximumPullStrength() : 4.0);
             double pullStrength = pullStrengthBound.getLeft() + (pullStrengthBound.getRight() - pullStrengthBound.getLeft()) * (1 - Math.min(distance / maxDistance, 1));
 
             this.hitEntity.addVelocity(pullDirection.multiply(pullStrength));
@@ -145,13 +159,17 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
                 Vec3d spawnPos = new Vec3d(getPos().getX() + 1 * Math.cos(angle), getPos().getY() + 0.5, getPos().getZ() + 1 * Math.sin(angle));
                 Vec3d movementVec = new Vec3d((spawnPos.x - getPos().getX())/4, 0.333, (spawnPos.z - getPos().getZ())/4);
 
-                LivingEntity entity = kotlin.random.Random.Default.nextDouble(0.0, 1.0) <= 0.333 ? (LivingEntity) getOwner() : null;
+                LivingEntity entity = kotlin.random.Random.Default.nextDouble(0.0, 1.0) <=
+                        (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSepultureHex().getAngerChance() : 0.333) ?
+                        (LivingEntity) getOwner() : null;
                 if(HexHelper.INSTANCE.hasFullRobes(getOwner().getArmorItems()) && entity != null) entity = null;
+
+                float explosionPower = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSepultureHex().getExplosionPower() : 1.5f;
 
                 getWorld().spawnEntity(
                         new BlazingSkullEntity(
                                 RegisterEntities.INSTANCE.getBLAZING_SKULL(), getWorld(),
-                                spawnPos, movementVec, entity)
+                                spawnPos, movementVec, entity, explosionPower)
                 );
             }
 

@@ -1,5 +1,6 @@
 package net.backupcup.hexed.enchantments.weapon
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.register.RegisterStatusEffects
 import net.backupcup.hexed.util.HexHelper
@@ -23,15 +24,21 @@ class VindictiveHex(
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (target is LivingEntity) {
             if (target.hasStatusEffect(RegisterStatusEffects.VINDICTIVE)) {
-                if (target.getStatusEffect(RegisterStatusEffects.VINDICTIVE)?.amplifier!! < 10) {
-                    HexHelper.entityMultiplyingEffect(target, RegisterStatusEffects.VINDICTIVE, 60, 20)
+                if (target.getStatusEffect(RegisterStatusEffects.VINDICTIVE)?.amplifier!! < (Hexed.getConfig()?.vindictiveHex?.maxAmplifier ?: 10)) {
+                    HexHelper.entityMultiplyingEffect(target, RegisterStatusEffects.VINDICTIVE,
+                        Hexed.getConfig()?.vindictiveHex?.vindictiveDuration ?: 60,
+                        Hexed.getConfig()?.vindictiveHex?.vindictiveDecayLength ?: 20)
                 }
             } else {
-                HexHelper.entityMultiplyingEffect(target, RegisterStatusEffects.VINDICTIVE, 60, 20)
+                HexHelper.entityMultiplyingEffect(target, RegisterStatusEffects.VINDICTIVE,
+                    Hexed.getConfig()?.vindictiveHex?.vindictiveDuration ?: 60,
+                    Hexed.getConfig()?.vindictiveHex?.vindictiveDecayLength ?: 20)
             }
         }
         if (!HexHelper.hasFullRobes(user)) {
-            HexHelper.entityMultiplyingEffect(user, RegisterStatusEffects.SMOULDERING, 60, 20)
+            HexHelper.entityMultiplyingEffect(user, RegisterStatusEffects.SMOULDERING,
+                Hexed.getConfig()?.vindictiveHex?.smoulderingDuration ?: 60,
+                Hexed.getConfig()?.vindictiveHex?.smoulderingDecayLength ?: 20)
         }
     }
 }

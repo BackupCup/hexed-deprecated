@@ -133,7 +133,8 @@ public abstract class LivingEntityMixin extends Entity{
     private float hexed$PersecutedDamage(float amount, DamageSource source) {
         if (source.getSource() instanceof LivingEntity) {
             if (HexHelper.INSTANCE.hasEnchantmentInSlot(((LivingEntity) source.getSource()).getMainHandStack(), RegisterEnchantments.INSTANCE.getPERSECUTED_HEX())) {
-                return (amount <= 25f) ? (amount * 0.01f * getHealth()) : 25f;
+                float healthCap = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getPersecutedHex().getHealthCap() : 25f;
+                return (amount <= healthCap) ? (amount * 0.01f * getHealth()) : healthCap;
             }
         }
         return amount;
@@ -175,20 +176,25 @@ public abstract class LivingEntityMixin extends Entity{
 
             PlayerEntity player = (PlayerEntity) (Object) this;
             amount -= getMaxHealth() - getHealth();
-            player.getHungerManager().add((int) amount, 0f);
+            player.getHungerManager().add(
+                    (int) (amount * (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getMetamorphosisHex().getFoodModifier() : 1)),
+                    Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getMetamorphosisHex().getSaturationAmount() : 0f);
         }
     }
 
     @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private float hexed$IroncladDamage(float amount, DamageSource source) {
         if (HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.LEGS), RegisterEnchantments.INSTANCE.getIRONCLAD_HEX())) {
-            int duration = 200;
-            if (HexHelper.INSTANCE.hasFullRobes(getArmorItems())) duration /= 2;
+            int duration = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getIroncladHex().getDebuffDuration() : 200;
+            if (HexHelper.INSTANCE.hasFullRobes(getArmorItems()))
+                duration /= Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getIroncladHex().getRobesDebuffModifier() : 2;
 
             if (getHealth() < getMaxHealth() && amount >= 1) {
-                entityMultiplyingEffect(RegisterStatusEffects.INSTANCE.getIRONCLAD(), duration, 10);
+                entityMultiplyingEffect(RegisterStatusEffects.INSTANCE.getIRONCLAD(),
+                        duration,
+                        Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getIroncladHex().getDebuffDecayLength() : 10);
             }
-            return amount * 0.66f;
+            return amount * (1f - (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getIroncladHex().getDamageReductionAmount() : 0.33f));
         }
         return amount;
     }
@@ -221,12 +227,15 @@ public abstract class LivingEntityMixin extends Entity{
         if (source.isOf(RegisterDamageTypes.INSTANCE.getFRANTIC_DAMAGE())) return amount;
 
         if (HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.LEGS), RegisterEnchantments.INSTANCE.getFRANTIC_HEX())) {
-            entityMultiplyingEffect(RegisterStatusEffects.INSTANCE.getFRANTIC(), 100, 50);
+            entityMultiplyingEffect(RegisterStatusEffects.INSTANCE.getFRANTIC(),
+                    Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getFranticHex().getFranticDuration() : 100,
+                    Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getFranticHex().getFranticDecayLength() : 50);
 
             if (HexHelper.INSTANCE.hasFullRobes(getArmorItems())) return amount;
 
             damage(RegisterDamageTypes.INSTANCE.of(getWorld(), RegisterDamageTypes.INSTANCE.getFRANTIC_DAMAGE()),
-                    amount *= 1 + (float) getStatusEffect(RegisterStatusEffects.INSTANCE.getFRANTIC()).getAmplifier() /2);
+                    amount *= 1 + (float) getStatusEffect(RegisterStatusEffects.INSTANCE.getFRANTIC()).getAmplifier() /
+                            (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getFranticHex().getDamageModifier() : 2f));
             return 0;
         }
 
@@ -242,7 +251,14 @@ public abstract class LivingEntityMixin extends Entity{
 
         if (this.isFlaring) {
             getWorld().spawnEntity(
-                    FallingBlockEntity.spawnFromBlock(getWorld(), ((PlayerEntity) (Object) this).getBlockPos(), Blocks.FIRE.getDefaultState())
+                    FallingBlockEntity.spawnFromBlock(getWorld(), ((PlayerEntity) (Object) this).getBlockPos(),
+                            (Hexed.INSTANCE.getConfig() != null ?
+                                Hexed.INSTANCE.getConfig().getFlaringHex().isSoulFire() ?
+                                    Blocks.SOUL_FIRE.getDefaultState() :
+                                    Blocks.FIRE.getDefaultState() :
+                                Blocks.FIRE.getDefaultState()
+                            )
+                    )
             );
         }
     }
@@ -257,13 +273,17 @@ public abstract class LivingEntityMixin extends Entity{
                 Vec3d spawnPos = new Vec3d(getPos().getX() + 1 * Math.cos(angle), getPos().getY() + 0.5, getPos().getZ() + 1 * Math.sin(angle));
                 Vec3d movementVec = new Vec3d((spawnPos.x - getPos().getX())/4, 0.333, (spawnPos.z - getPos().getZ())/4);
 
-                LivingEntity entity = kotlin.random.Random.Default.nextDouble(0.0, 1.0) <= 0.333 ? (LivingEntity) (Object) this : null;
+                LivingEntity entity = kotlin.random.Random.Default.nextDouble(0.0, 1.0) <=
+                        (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSepultureHex().getAngerChance() : 0.333) ?
+                        (LivingEntity) (Object) this : null;
                 if(HexHelper.INSTANCE.hasFullRobes(getArmorItems()) && entity != null) entity = null;
+
+                float explosionPower = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSepultureHex().getExplosionPower() : 1.5f;
 
                 getWorld().spawnEntity(
                         new BlazingSkullEntity(
                                 RegisterEntities.INSTANCE.getBLAZING_SKULL(), getWorld(),
-                                spawnPos, movementVec, entity)
+                                spawnPos, movementVec, entity, explosionPower)
                 );
             }
 

@@ -49,6 +49,7 @@ public abstract class PlayerEntityMixin extends Entity {
 
     @Shadow public abstract Iterable<ItemStack> getArmorItems();
 
+    @Shadow @Final public static float DEFAULT_EYE_HEIGHT;
     @Unique private boolean provisionUI = true;
     @Unique private int provisionIndicatorPos = 0;
     @Unique private int provisionBuffAmplifier = 0;
@@ -76,7 +77,8 @@ public abstract class PlayerEntityMixin extends Entity {
     private float hexed$OverburdenBreakSpeed(float f) {
         PlayerEntity entity = (PlayerEntity) (Object) this;
         if (entity.hasStatusEffect(RegisterStatusEffects.INSTANCE.getOVERBURDEN())) {
-            return f *= 1.0f + entity.getStatusEffect(RegisterStatusEffects.INSTANCE.getOVERBURDEN()).getAmplifier() * 0.025;
+            return f *= 1.0f + entity.getStatusEffect(RegisterStatusEffects.INSTANCE.getOVERBURDEN()).getAmplifier() *
+                    (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getOverburdenHex().getMovementSpeedModifier() : 0.025f);
         }
         return f;
     }

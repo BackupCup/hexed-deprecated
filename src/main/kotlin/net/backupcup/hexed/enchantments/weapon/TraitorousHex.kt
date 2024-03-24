@@ -1,5 +1,6 @@
 package net.backupcup.hexed.enchantments.weapon
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.register.RegisterStatusEffects
 import net.backupcup.hexed.util.HexHelper
@@ -33,12 +34,13 @@ class TraitorousHex(
             target.addStatusEffect(
                 StatusEffectInstance(
                     RegisterStatusEffects.TRAITOROUS,
-                    80, 0,
+                    Hexed.getConfig()?.traitorousHex?.debuffDuration ?: 80, 0,
                     true, true, true
                 ))
 
             if (!HexHelper.hasFullRobes(user)) {
-                if (HexHelper.getEnchantments(user.mainHandStack).contains(this)) user.itemCooldownManager.set(user.mainHandStack.item, 40)
+                if (HexHelper.getEnchantments(user.mainHandStack).contains(this))
+                    user.itemCooldownManager.set(user.mainHandStack.item, Hexed.getConfig()?.traitorousHex?.cooldownDuration ?: 40)
             }
         }
 

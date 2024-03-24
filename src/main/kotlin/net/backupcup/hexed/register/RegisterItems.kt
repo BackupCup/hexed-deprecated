@@ -11,6 +11,8 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.Identifier
 
 object RegisterItems {
+    var itemsToBeRegisteredList = mutableListOf<Item>()
+
     val CALAMITOUS_FABRIC: Item = TooltipItem(FabricItemSettings(),
         listOf(
             Text.translatable("tooltip.hexed.calamitous_fabric.line_1").formatted(Formatting.DARK_RED, Formatting.ITALIC, Formatting.BOLD),

@@ -64,7 +64,9 @@ class BloodthirstyHex(
                     && HexHelper.hasEnchantmentInSlot(user.getEquippedStack(EquipmentSlot.HEAD), RegisterEnchantments.METAMORPHOSIS_HEX)
                     && user is PlayerEntity) {
                     additionalHealth -= (user.maxHealth - user.health)
-                    user.hungerManager.add(additionalHealth.toInt(), 0f)
+                    user.hungerManager.add(
+                        (additionalHealth * (Hexed.getConfig()?.metamorphosisHex?.foodModifier ?: 1f)).toInt(),
+                        Hexed.getConfig()?.metamorphosisHex?.saturationAmount ?: 0f)
                 }
 
                 user.health += additionalHealth

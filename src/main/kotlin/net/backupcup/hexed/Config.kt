@@ -300,11 +300,18 @@ class Config {
     //EPHEMERAL
     class EphemeralHexParams {
         var shouldRegister: Boolean = true
+
+        var damageAddition: Float = 4f
+        var debuffDuration: Int = 150
+        var debuffDecayLength: Int = 50
     }
 
     @Comment(
         "Ephemeral Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "damageAddition - how much more damage the weapon does at first\n" +
+        "debuffDuration - the initial duration of the debuff (in ticks)\n" +
+        "debuffDecayLength - how much each additional level of the debuff lasts\n"
     ) var ephemeralHex: EphemeralHexParams = EphemeralHexParams()
 
     //FAMISHMENT
@@ -320,120 +327,199 @@ class Config {
     //FLARING
     class FlaringHexParams {
         var shouldRegister: Boolean = true
+
+        var isSoulFire: Boolean = false
     }
 
     @Comment(
         "Flaring Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "isSoulFire - whether the fire spawned should be Soul Fire"
     ) var flaringHex: FlaringHexParams = FlaringHexParams()
 
     //FRANTIC
     class FranticHexParams {
         var shouldRegister: Boolean = true
+
+        var franticDuration: Int = 100
+        var franticDecayLength: Int = 50
+
+        var damageModifier: Float = 2f
     }
 
     @Comment(
         "Frantic Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "franticDuration - the initial duration of the debuff (in ticks)\n" +
+        "franticDecayLength - how much each additional level of the debuff lasts\n" +
+        "damageModifier - the amplifier of the debuff is divided by this to get the actual damage modifier\n" +
+        "Formula: damage = damage * (1 + (FranticDebuffLevel / damageModifier))"
     ) var franticHex: FranticHexParams = FranticHexParams()
 
     //IRONCLAD
     class IroncladHexParams {
         var shouldRegister: Boolean = true
+
+        var debuffDuration: Int = 200
+        var debuffDecayLength: Int = 10
+        var robesDebuffModifier: Int = 2
+        var damageReductionAmount: Float = 0.33f
+
     }
 
     @Comment(
         "Ironclad Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "debuffDuration - the initial duration of the debuff (in ticks)\n" +
+        "debuffDecayLength - how much each additional level of the debuff lasts\n" +
+        "robesDebuffModifier - by how much the initial duration of the debuff is divided\n" +
+        "damageReductionAmount - the amount of damage reduction this hex provides\n" +
+        "Formula: damage = damage * (1 - damageReductionAmount)"
     ) var ironcladHex: IroncladHexParams = IroncladHexParams()
 
     //LINGER
     class LingerHexParams {
         var shouldRegister: Boolean = true
+
+        var lingerRadius: Int = 3
+        var debuffDuration: Int = 25
+        var debuffAmplifier: Int = 0
+        var tridentDamage: Int = 1
     }
 
     @Comment(
         "Linger Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "lingerRadius - the radius from the trident in which the debuff is applied\n" +
+        "debuffDuration/Amplifier - The duration (in seconds) & the amplifier of the Ablaze debuff\n" +
+        "tridentDamage - the amount of durability damage the trident receives overtime (This is affected by the amount of creatures in the radius)"
     ) var lingerHex: LingerHexParams = LingerHexParams()
 
     //METAMORPHOSIS
     class MetamorphosisHexParams {
         var shouldRegister: Boolean = true
+
+        var foodModifier: Float = 1f
+        var saturationAmount: Float = 0f
     }
 
     @Comment(
         "Metamorphosis Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "foodModifier - modifies the amount of food recieved per half heart (anything below 1 will nullify the effect of the hex)\n" +
+        "saturationAmount - how much saturation is applied"
     ) var metamorphosisHex: MetamorphosisHexParams = MetamorphosisHexParams()
 
     //OVERBURDEN
     class OverburdenHexParams {
         var shouldRegister: Boolean = true
+
+        var buffDuration: Int = 200
+        var movementSpeedModifier: Float = 0.025f
     }
 
     @Comment(
         "Overburden Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "buffDuration - the initial duration of the buff (in ticks)\n" +
+        "movementSpeedModifier - how much speed is removed for each level of the buff"
     ) var overburdenHex: OverburdenHexParams = OverburdenHexParams()
 
     //PERSECUTED
     class PersecutedHexParams {
         var shouldRegister: Boolean = true
+
+        var healthCap: Float = 25f
+        var debuffDurationModifier: Int = 10
     }
 
     @Comment(
         "Persecuted Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "healthCap - the maximum amount of damage a weapon with this hex can deal\n" +
+        "debuffDurationModifier - a modifier determining how much the debuff lasts for"
     ) var persecutedHex: PersecutedHexParams = PersecutedHexParams()
 
     //RUINOUS
     class RuinousHexParams {
         var shouldRegister: Boolean = true
+
+        var explosionPower: Float = 1.25f
     }
 
     @Comment(
         "Ruinous Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "explosionPower - the power of the explosion"
     ) var ruinousHex: RuinousHexParams = RuinousHexParams()
 
     //SEIZE
     class SeizeHexParams {
         var shouldRegister: Boolean = true
+
+        var maxPullableHP: Int = 50
+        var minimumPullStrength: Double = 1.0
+        var maximumPullStrength: Double = 4.0
     }
 
     @Comment(
         "Seize Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "maxPullableHP - determines whether the creature can be pulled based on it's max Health\n" +
+        "minimumPullStrength - the minimum strength of the pull if the trident doesn't have Loyalty\n" +
+        "maximumPullStrength - the maximum strength of the pull if the trident doesn't have Loyalty\n"
     ) var seizeHex: SeizeHexParams = SeizeHexParams()
 
     //SEPULTURE
     class SepultureHexParams {
         var shouldRegister: Boolean = true
+
+        var angerChance: Double = 0.333
+        var explosionPower: Float = 1.5f
     }
 
     @Comment(
         "Sepulture Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "angerChance - chance that a skull will target the user instead of the nearest entity\n" +
+        "explosionPower - the power of the produced explosion\n"
     ) var sepultureHex: SepultureHexParams = SepultureHexParams()
 
     //TRAITOROUS
     class TraitorousHexParams {
         var shouldRegister: Boolean = true
+
+        var debuffDuration: Int = 80
+        var cooldownDuration: Int = 40
     }
 
     @Comment(
         "Traitorous Hex settings" + skip +
-		"shouldRegister - whether the hex should be obtainable"
+		"shouldRegister - whether the hex should be obtainable\n" +
+        "debuffDuration - The duration (in ticks) of the Traitorous debuff\n" +
+        "cooldownDuration - The duration (in ticks) of the weapon cooldown\n"
     ) var traitorousHex: TraitorousHexParams = TraitorousHexParams()
 
     //VINDICTIVE
     class VindictiveHexParams {
         var shouldRegister: Boolean = true
+
+        var maxAmplifier: Int = 10
+
+        var vindictiveDuration: Int = 60
+        var vindictiveDecayLength: Int = 20
+
+        var smoulderingDuration: Int = 60
+        var smoulderingDecayLength: Int = 20
     }
 
     @Comment(
         "Vindictive Hex settings" + skip +
-	    "shouldRegister - whether the hex should be obtainable"
+	    "shouldRegister - whether the hex should be obtainable\n" +
+        "maxAmplifier - max amount of damage this hex can do when the debuff runs out\n" +
+        "vindictiveDuration - the initial duration of the Vindictive debuff (in ticks)\n" +
+        "vindictiveDecayLength - how much each additional level of the Vindictive debuff lasts\n" +
+        "smoulderingDuration - the initial duration of the Smouldering debuff (in ticks)\n" +
+        "smoulderingDecayLength - how much each additional level of the Smouldering debuff lasts"
     ) var vindictiveHex: VindictiveHexParams = VindictiveHexParams()
 }

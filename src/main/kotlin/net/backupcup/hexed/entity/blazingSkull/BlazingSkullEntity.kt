@@ -26,7 +26,8 @@ class BlazingSkullEntity(
     world: World?,
     spawnPos: Vec3d = Vec3d(0.0, 0.0, 0.0),
     initialVelocity: Vec3d = Vec3d(0.0, 0.0, 0.0),
-    initialTarget: LivingEntity? = null
+    initialTarget: LivingEntity? = null,
+    private val explosionPower: Float = 1.5f
 ) : FlyingEntity(entityType, world), Monster {
     companion object {
         fun createAttributes(): DefaultAttributeContainer.Builder {
@@ -35,7 +36,6 @@ class BlazingSkullEntity(
                 .add(EntityAttributes.GENERIC_ARMOR, 2.0)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 4.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.5)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64.0)
         }
     }
@@ -115,7 +115,7 @@ class BlazingSkullEntity(
     }
 
     private fun explodeYourself() {
-        this.world.createExplosion(this, this.x, this.y, this.z, this.attributes.getValue(EntityAttributes.GENERIC_ATTACK_DAMAGE).toFloat(), World.ExplosionSourceType.NONE)
+        this.world.createExplosion(this, this.x, this.y, this.z, explosionPower, World.ExplosionSourceType.NONE)
         this.world.playSound(
             null, this.blockPos,
             RegisterSounds.ACCURSED_ALTAR_HEX, SoundCategory.HOSTILE,

@@ -1,5 +1,6 @@
 package net.backupcup.hexed.enchantments.weapon
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.register.RegisterStatusEffects
 import net.backupcup.hexed.util.HexHelper
@@ -22,13 +23,15 @@ class EphemeralHex(
     texturepath
 ) {
     override fun getAttackDamage(level: Int, group: EntityGroup?): Float {
-        return 4f
+        return Hexed.getConfig()?.ephemeralHex?.damageAddition ?: 4f
     }
 
     override fun onTargetDamaged(user: LivingEntity, target: Entity, level: Int) {
         if (target is LivingEntity) {
             if(!HexHelper.hasFullRobes(user)) {
-                HexHelper.entityMultiplyingEffect(user, RegisterStatusEffects.EXHAUSTION, 150, 50)
+                HexHelper.entityMultiplyingEffect(user, RegisterStatusEffects.EXHAUSTION,
+                    Hexed.getConfig()?.ephemeralHex?.debuffDuration ?: 150,
+                    Hexed.getConfig()?.ephemeralHex?.debuffDecayLength ?: 50)
             }
         }
     }

@@ -1,5 +1,6 @@
 package net.backupcup.hexed.enchantments.weapon
 
+import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.enchantments.AbstractHex
 import net.backupcup.hexed.register.RegisterStatusEffects
 import net.minecraft.enchantment.EnchantmentTarget
@@ -30,7 +31,7 @@ class PersecutedHex(
             user.addStatusEffect(
                 StatusEffectInstance(
                     RegisterStatusEffects.ETHEREAL,
-                    1 + (armorPoints - i) * 10, i,
+                    1 + (armorPoints - i) * (Hexed.getConfig()?.persecutedHex?.debuffDurationModifier ?: 10), i,
                     true, false, true
                 )
             )

@@ -162,13 +162,15 @@ public abstract class ItemStackMixin {
         if(HexHelper.INSTANCE.hasEnchantmentInSlot(tool, RegisterEnchantments.INSTANCE.getOVERBURDEN_HEX())) {
             if (miner.hasStatusEffect(RegisterStatusEffects.INSTANCE.getOVERBURDEN())) {
                 if (miner.getStatusEffect(RegisterStatusEffects.INSTANCE.getOVERBURDEN()).getAmplifier() < 256)
-                    HexHelper.INSTANCE.entityMultiplyingEffect(miner, RegisterStatusEffects.INSTANCE.getOVERBURDEN(), 200, decayLength);
-            } else HexHelper.INSTANCE.entityMultiplyingEffect(miner, RegisterStatusEffects.INSTANCE.getOVERBURDEN(), 200, decayLength);
+                    HexHelper.INSTANCE.entityMultiplyingEffect(miner, RegisterStatusEffects.INSTANCE.getOVERBURDEN(),
+                            Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getOverburdenHex().getBuffDuration() : 200, decayLength);
+            } else HexHelper.INSTANCE.entityMultiplyingEffect(miner, RegisterStatusEffects.INSTANCE.getOVERBURDEN(),
+                    Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getOverburdenHex().getBuffDuration() : 200, decayLength);
         }
     }
 
     @Inject(method = "postMine", at = @At("HEAD"))
-    private void hexed$RapaciousExplode(World world, BlockState state, BlockPos pos, PlayerEntity miner, CallbackInfo ci) {
+    private void hexed$RuinousExplode(World world, BlockState state, BlockPos pos, PlayerEntity miner, CallbackInfo ci) {
         ItemStack tool = (ItemStack) (Object) this;
         if (!tool.getItem().isSuitableFor(state)) return;
 
@@ -180,7 +182,8 @@ public abstract class ItemStackMixin {
                     pos.getX()+Random.Default.nextDouble(-0.25,1.25),
                     pos.getY()+Random.Default.nextDouble(-0.25,1.25),
                     pos.getZ()+Random.Default.nextDouble(-0.25,1.25),
-                    1.25f, World.ExplosionSourceType.BLOCK);
+                    Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getRuinousHex().getExplosionPower() : 1.25f,
+                    World.ExplosionSourceType.BLOCK);
         }
     }
 
