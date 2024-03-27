@@ -1,0 +1,87 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pink_wool": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:pink_wool"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_red_dye": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:red_dye"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_milky_plushie": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "hexed:bonfire_plushie"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_light_blue_wool": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:light_blue_wool"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "hexed:bonefire_plushie"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_wool": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:white_wool"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_pink_wool",
+      "has_red_dye",
+      "has_light_blue_wool",
+      "has_white_wool",
+      "has_milky_plushie",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "hexed:milkyfur_plushie"
+    ]
+  },
+  "sends_telemetry_event": false
+}

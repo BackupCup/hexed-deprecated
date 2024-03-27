@@ -1,6 +1,5 @@
 package net.backupcup.hexed.block
 
-import net.backupcup.hexed.register.RegisterSounds
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -12,6 +11,7 @@ import net.minecraft.item.Equipment
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
 import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvent
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
@@ -25,7 +25,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import kotlin.random.Random
 
-class PlushieBlock(settings: Settings?) : Block(settings), Equipment {
+class PlushieBlock(settings: Settings?, val playSound: SoundEvent, val descriptionText: String) : Block(settings), Equipment {
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
     }
@@ -47,7 +47,7 @@ class PlushieBlock(settings: Settings?) : Block(settings), Equipment {
         tooltip: MutableList<Text>?,
         options: TooltipContext?
     ) {
-        tooltip?.add(Text.translatable("tooltip.hexed.calamaidas_plushie").formatted(Formatting.RED, Formatting.BOLD))
+        tooltip?.add(Text.translatable(descriptionText).formatted(Formatting.RED, Formatting.BOLD))
         super.appendTooltip(stack, world, tooltip, options)
     }
 
@@ -104,7 +104,7 @@ class PlushieBlock(settings: Settings?) : Block(settings), Equipment {
     ): ActionResult {
         world.playSound(
             null, pos,
-            RegisterSounds.ACCURSED_ALTAR_ACTIVATE,
+            playSound,
             SoundCategory.BLOCKS,
             Random.nextFloat() * 0.25f + 0.25f, Random.nextFloat() * 0.5f + 0.75f)
 

@@ -62,6 +62,9 @@ object RegisterItemGroupDeco {
                 entries.add(RegisterSlagBlocks.CHISELED_BRIMSTONE_SLAG)
 
                 entries.add(ItemStack(RegisterBlocks.CALAMAIDAS_PLUSHIE))
+                entries.add(ItemStack(RegisterBlocks.BON_PLUSHIE))
+                entries.add(ItemStack(RegisterBlocks.MIRI_PLUSHIE))
+                entries.add(ItemStack(RegisterBlocks.MILKY_PLUSHIE))
 
                 RegisterDecoCandles.candleTypes.forEach { (_, block, _) ->
                     entries.add(ItemStack(block))

@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#WL",
+        "#RL",
+        "WWW"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:pink_wool"
+        },
+        "W": {
+            "item": "minecraft:white_wool"
+        },
+        "L": {
+            "item": "minecraft:light_blue_wool"
+        },
+        "R": {
+            "item": "minecraft:red_dye"
+        }
+    },
+    "result": {
+        "item": "hexed:milkyfur_plushie",
+        "count": 1
+    }
+}

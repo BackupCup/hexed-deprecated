@@ -1,0 +1,25 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "BGB",
+        "EEE"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:brown_wool"
+        },
+        "B": {
+            "item": "minecraft:blue_wool"
+        },
+        "G": {
+            "item": "minecraft:gold_block"
+        },
+        "E": {
+            "item": "minecraft:black_wool"
+        }
+    },
+    "result": {
+        "item": "hexed:yirmiri_plushie"
+    }
+}

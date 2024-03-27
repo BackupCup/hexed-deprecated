@@ -6,6 +6,9 @@
   "advancements.hexed.ultrakill.description": "Get all 3 ULTRAKILL Reference hexes.",
 
   "block.hexed.calamaidas_plushie": "Supreme Maid Plushie",
+  "block.hexed.bonfire_plushie": "Higher Artist Plushie",
+  "block.hexed.yirmiri_plushie": "Architect's Patron Plushie",
+  "block.hexed.milkyfur_plushie": "Pixel Queen Plushie",
 
   "block.hexed.brimstone_candle": "Brimstone Candle",
   "block.hexed.lichlore_candle": "Lichlore Candle",
@@ -137,6 +140,9 @@
   "death.attack.frantic.player": "%1$s's pain receptors got overloaded whilst fighting %2$s",
 
   "tooltip.hexed.calamaidas_plushie": "Things are about to get calamitous!",
+  "tooltip.hexed.bonfire_plushie": "Hey, who set 8 on fire?",
+  "tooltip.hexed.miri_plushie": "We're gonna build so many Miri-acles.",
+  "tooltip.hexed.milky_plushie": "Pouring out pixelated purrfection.",
 
   "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
   "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",
