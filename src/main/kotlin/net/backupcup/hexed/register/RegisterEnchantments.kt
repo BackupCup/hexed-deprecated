@@ -152,7 +152,8 @@ object RegisterEnchantments {
 
         - Bow:
           : Arrows shot will have random effects on them
-          TODO 3 more here
+          : Aggravate - holding down the bow after charging it will add more arrows to the shot
+          TODO 2 more here
 
         - Crossbow:
           : Banish - Creates a miniature black hole at the position of the enemy that the projectile hits.

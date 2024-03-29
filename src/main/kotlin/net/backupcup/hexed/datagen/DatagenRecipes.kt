@@ -49,25 +49,6 @@ class DatagenRecipes(output: FabricDataOutput?) : FabricRecipeProvider(output) {
             .criterion(hasItem(RegisterBlocks.LICHLORE_CANDLE), conditionsFromItem(RegisterBlocks.LICHLORE_CANDLE))
             .offerTo(exporter)
 
-
-
-        //
-        //CALAMAIDAS PLUSHIE
-        //
-        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, RegisterBlocks.CALAMAIDAS_PLUSHIE)
-            .pattern("GWG")
-            .pattern("BPB")
-            .pattern("WBW")
-            .input('G', Items.LIGHT_GRAY_WOOL).input('W', Items.WHITE_WOOL)
-            .input('B', Items.BLACK_WOOL).input('P', Items.BLAZE_POWDER)
-
-            .criterion(hasItem(Items.LIGHT_GRAY_WOOL), conditionsFromItem(Items.LIGHT_GRAY_WOOL))
-            .criterion(hasItem(Items.WHITE_WOOL), conditionsFromItem(Items.WHITE_WOOL))
-            .criterion(hasItem(Items.BLACK_WOOL), conditionsFromItem(Items.BLACK_WOOL))
-            .criterion(hasItem(Items.BLAZE_POWDER), conditionsFromItem(Items.BLAZE_POWDER))
-            .criterion(hasItem(RegisterBlocks.CALAMAIDAS_PLUSHIE), conditionsFromItem(RegisterBlocks.CALAMAIDAS_PLUSHIE))
-            .offerTo(exporter)
-
         //
         //SKULL CANDLES
         //

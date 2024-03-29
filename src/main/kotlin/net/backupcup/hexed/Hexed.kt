@@ -70,8 +70,7 @@ object Hexed : ModInitializer {
 		RegisterEnchantments.registerHexes()
 		RegisterTags.registerTags()
 		//RegisterWorldGen.registerWorldGen()
-		RegisterItemGroupMain.registerItemGroup()
-		RegisterItemGroupDeco.registerItemGroup()
+		registerAllGroups()
 		RegisterStats.registerStats()
 		RegisterEntities.registerEntities()
 

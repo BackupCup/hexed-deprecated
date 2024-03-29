@@ -46,46 +46,6 @@ object RegisterBlocks {
         .nonOpaque()
         .pistonBehavior(PistonBehavior.BLOCK))
 
-    val CALAMAIDAS_PLUSHIE: Block = PlushieBlock(FabricBlockSettings.create()
-        .strength(1f)
-        .sounds(BlockSoundGroup.WOOL)
-        .mapColor(MapColor.WHITE_GRAY)
-        .nonOpaque()
-        .pistonBehavior(PistonBehavior.NORMAL),
-        RegisterSounds.ACCURSED_ALTAR_ACTIVATE,
-        "tooltip.hexed.calamaidas_plushie"
-    )
-
-    val BON_PLUSHIE: Block = PlushieBlock(FabricBlockSettings.create()
-        .strength(1f)
-        .sounds(BlockSoundGroup.WOOL)
-        .mapColor(MapColor.ORANGE)
-        .nonOpaque()
-        .pistonBehavior(PistonBehavior.NORMAL),
-        SoundEvents.BLOCK_CAMPFIRE_CRACKLE,
-        "tooltip.hexed.bonfire_plushie"
-    )
-
-    val MIRI_PLUSHIE: Block = PlushieBlock(FabricBlockSettings.create()
-        .strength(1f)
-        .sounds(BlockSoundGroup.WOOL)
-        .mapColor(MapColor.ORANGE)
-        .nonOpaque()
-        .pistonBehavior(PistonBehavior.NORMAL),
-        SoundEvents.BLOCK_BEACON_ACTIVATE,
-        "tooltip.hexed.miri_plushie"
-    )
-
-    val MILKY_PLUSHIE: Block = PlushieBlock(FabricBlockSettings.create()
-        .strength(1f)
-        .sounds(BlockSoundGroup.WOOL)
-        .mapColor(MapColor.ORANGE)
-        .nonOpaque()
-        .pistonBehavior(PistonBehavior.NORMAL),
-        SoundEvents.ENTITY_CAT_PURREOW,
-        "tooltip.hexed.milky_plushie"
-    )
-
     fun registerBlocks() {
         Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "brimstone_candle"), BRIMSTONE_CANDLE)
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "brimstone_candle"), BlockItem(BRIMSTONE_CANDLE, FabricItemSettings()))
@@ -96,22 +56,8 @@ object RegisterBlocks {
         Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "accursed_altar"), ACCURSED_ALTAR)
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "accursed_altar"), BlockItem(ACCURSED_ALTAR, FabricItemSettings()))
 
-        Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "calamaidas_plushie"), CALAMAIDAS_PLUSHIE)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "calamaidas_plushie"),
-            BlockItem(CALAMAIDAS_PLUSHIE, FabricItemSettings().rarity(Rarity.EPIC)))
-
-        Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "bonfire_plushie"), BON_PLUSHIE)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "bonfire_plushie"),
-            BlockItem(BON_PLUSHIE, FabricItemSettings().rarity(Rarity.EPIC)))
-
-        Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "yirmiri_plushie"), MIRI_PLUSHIE)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "yirmiri_plushie"),
-            BlockItem(MIRI_PLUSHIE, FabricItemSettings().rarity(Rarity.EPIC)))
-
-        Registry.register(Registries.BLOCK, Identifier(Hexed.MOD_ID, "milkyfur_plushie"), MILKY_PLUSHIE)
-        Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "milkyfur_plushie"),
-            BlockItem(MILKY_PLUSHIE, FabricItemSettings().rarity(Rarity.EPIC)))
         RegisterSlagBlocks.registerSlagBlocks()
+        RegisterPlushies.registerPlushies()
     }
 
     fun registerBlockCutouts() {

@@ -61,15 +61,32 @@ object RegisterItemGroupDeco {
                 entries.add(RegisterSlagBlocks.BRIMSTONE_SLAG_PILLAR)
                 entries.add(RegisterSlagBlocks.CHISELED_BRIMSTONE_SLAG)
 
-                entries.add(ItemStack(RegisterBlocks.CALAMAIDAS_PLUSHIE))
-                entries.add(ItemStack(RegisterBlocks.BON_PLUSHIE))
-                entries.add(ItemStack(RegisterBlocks.MIRI_PLUSHIE))
-                entries.add(ItemStack(RegisterBlocks.MILKY_PLUSHIE))
-
                 RegisterDecoCandles.candleTypes.forEach { (_, block, _) ->
                     entries.add(ItemStack(block))
                 }
             }.build()
         )
     }
+}
+
+object RegisterItemGroupPlushies {
+    fun registerItemGroup(): ItemGroup {
+        return Registry.register(Registries.ITEM_GROUP, Identifier(Hexed.MOD_ID, "hexed_plushie_group"), FabricItemGroup.builder()
+            .displayName(Text.translatable("itemGroup.hexed.hexed_plushie_group"))
+            .icon { ItemStack(RegisterPlushies.CALAMAIDAS_PLUSHIE) }
+            .entries { _, entries ->
+                entries.add(ItemStack(RegisterPlushies.CALAMAIDAS_PLUSHIE))
+                entries.add(ItemStack(RegisterPlushies.BON_PLUSHIE))
+                entries.add(ItemStack(RegisterPlushies.MIRI_PLUSHIE))
+                entries.add(ItemStack(RegisterPlushies.MILKY_PLUSHIE))
+            }
+            .build()
+        )
+    }
+}
+
+fun registerAllGroups() {
+    RegisterItemGroupMain.registerItemGroup()
+    RegisterItemGroupDeco.registerItemGroup()
+    RegisterItemGroupPlushies.registerItemGroup()
 }
