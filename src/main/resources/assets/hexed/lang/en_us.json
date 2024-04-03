@@ -96,6 +96,8 @@
 
   "enchantment.hexed.celebration": "Celebration",
   "enchantment.hexed.celebration.desc": "Converts your arrows into random fireworks and makes the crossbow have the ability to shoot automatically. Some fireworks may be faulty and not actually fly away.",
+  "enchantment.hexed.provision": "Provision",
+  "enchantment.hexed.provision.desc": "Upon shooting, a quick time event for a \"Quick Reload\" will appear. Succeeding will reload the crossbow prematurely, failing will put it on a cooldown.",
 
   "enchantment.hexed.linger": "Linger",
   "enchantment.hexed.linger.desc": "The trident will create an area of blazing ash when on the ground. This will cause it to slowly lose durability.",

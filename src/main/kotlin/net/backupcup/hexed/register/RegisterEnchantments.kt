@@ -126,7 +126,7 @@ object RegisterEnchantments {
         //TODO: Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "transmutation"), TRANSMUTATION_HEX)
 
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "celebration"), CELEBRATION_HEX)
-        //TODO: Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "provision"), PROVISION_HEX)
+        Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "provision"), PROVISION_HEX)
 
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "flaring"), FLARING_HEX)
         Registry.register(Registries.ENCHANTMENT, Identifier(Hexed.MOD_ID, "linger"), LINGER_HEX)
