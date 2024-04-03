@@ -140,11 +140,6 @@ object RegisterEnchantments {
 
         /*
         Status Descriptions:
-        - Logic: No logic implemented
-        - Transl: Translation feature missing
-        - Name: Name not assigned
-        - Text: Texture missing
-        - Idea: Idea still under consideration
 
         Hex Ideas:
         - Sword:
@@ -157,7 +152,6 @@ object RegisterEnchantments {
 
         - Crossbow:
           : Banish - Creates a miniature black hole at the position of the enemy that the projectile hits.
-          : Provision - Active Reload mechanic (Rad Gun from Gungeon / Railgunner from ROR2)
           TODO 2 more here
         */
     }

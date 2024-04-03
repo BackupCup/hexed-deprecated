@@ -107,6 +107,7 @@ public abstract class CrossbowItemMixin {
     private static void hexed$ProvisionTrigger(World world, LivingEntity entity, ItemStack stack, CallbackInfo ci) {
         if (HexHelper.INSTANCE.hasEnchantmentInSlot(stack, RegisterEnchantments.INSTANCE.getPROVISION_HEX())) {
             if (!(entity instanceof ServerPlayerEntity)) return;
+
             ProvisionData data = ((ProvisionInterface)entity).getProvisionData();
             ((ProvisionInterface)entity).setProvisionData(new ProvisionData(true, 0, data.getReloadSpeed()));
         }

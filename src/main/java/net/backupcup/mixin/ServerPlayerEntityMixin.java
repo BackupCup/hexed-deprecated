@@ -84,19 +84,4 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Pr
             }
         }
     }
-
-    /*
-    @Inject(method = "onDisconnect", at = @At("HEAD"))
-    private void hexed$ProvisionDisconnect(CallbackInfo ci) {
-        getItemCooldownManager().set(Items.CROSSBOW, 80);
-
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeBoolean(false);
-        buf.writeInt(0);
-
-        ServerPlayNetworking.send(
-                (ServerPlayerEntity) (Object) this,
-                HexNetworkingConstants.INSTANCE.getPROVISION_UPDATE_PACKET(), buf);
-    }
-    */
 }

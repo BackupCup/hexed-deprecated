@@ -62,6 +62,7 @@ object ProvisionHexUI {
                 itemStack.nbt?.getBoolean("Charged") == true ||
                 MinecraftClient.getInstance().isPaused ||
                 !player.isPartOfGame || !this.shouldRender) {
+                this.shouldRender = false
                 return@register
             }
 
