@@ -25,7 +25,7 @@ import net.minecraft.world.BlockView
 import net.minecraft.world.World
 import kotlin.random.Random
 
-class PlushieBlock(settings: Settings?, val playSound: SoundEvent, val descriptionText: String) : Block(settings), Equipment {
+class PlushieBlock(settings: Settings?, val playSound: SoundEvent?, val descriptionText: String?) : Block(settings), Equipment {
     companion object {
         val FACING: DirectionProperty = Properties.HORIZONTAL_FACING
     }
@@ -47,7 +47,7 @@ class PlushieBlock(settings: Settings?, val playSound: SoundEvent, val descripti
         tooltip: MutableList<Text>?,
         options: TooltipContext?
     ) {
-        tooltip?.add(Text.translatable(descriptionText).formatted(Formatting.RED, Formatting.BOLD))
+        if (descriptionText != null) tooltip?.add(Text.translatable(descriptionText).formatted(Formatting.RED, Formatting.BOLD))
         super.appendTooltip(stack, world, tooltip, options)
     }
 
@@ -102,11 +102,13 @@ class PlushieBlock(settings: Settings?, val playSound: SoundEvent, val descripti
         hand: Hand?,
         hit: BlockHitResult?
     ): ActionResult {
-        world.playSound(
-            null, pos,
-            playSound,
-            SoundCategory.BLOCKS,
-            Random.nextFloat() * 0.25f + 0.25f, Random.nextFloat() * 0.5f + 0.75f)
+        if (playSound != null) {
+            world.playSound(
+                null, pos,
+                playSound,
+                SoundCategory.BLOCKS,
+                Random.nextFloat() * 0.25f + 0.25f, Random.nextFloat() * 0.5f + 0.75f)
+        }
 
         return ActionResult.success(world.isClient)
     }

@@ -1,0 +1,8 @@
+{
+	"parent": "hexed:block/plushies/base_plushie",
+	"texture_size": [64, 64],
+	"textures": {
+		"plushie_texture": "hexed:block/plushies/crafter_plushie",
+		"particle": "minecraft:block/brown_wool"
+	}
+}

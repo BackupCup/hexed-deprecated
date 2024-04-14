@@ -54,6 +54,9 @@
   "block.hexed.chiseled_brimstone_slag": "Chiseled Brimstone Slag",
   "block.hexed.brimstone_slag_pillar": "Brimstone Slag Pillar",
 
+  "item.hexed.lunar_music_disc": "Lunar Music Disc",
+  "item.hexed.lunar_music_disc.desc": "Chris Christodoulou - ...con lentitud poderosa (Piano Cover)",
+
   "item.hexed.brimstone_crystal": "Brimstone Crystal",
   "item.hexed.calamitous_fabric": "Calamitous Fabric",
 
@@ -94,10 +97,17 @@
   "enchantment.hexed.frantic": "Frantic",
   "enchantment.hexed.frantic.desc": "Taking damage increases movement speed, multiplying damage taken in return.",
 
+  "enchantment.hexed.volatility": "Volatility",
+  "enchantment.hexed.volatility.desc": "Arrows explode upon impact, dealing area-of-effect damage to nearby entities. Not pulling the bow fully makes the arrow explode prematurely (aka right in your face).",
+  "enchantment.hexed.aggravate": "Aggravate",
+  "enchantment.hexed.aggravate.desc": "Holding down the bow after charging it will add more arrows to the shot.",
+
   "enchantment.hexed.celebration": "Celebration",
   "enchantment.hexed.celebration.desc": "Converts your arrows into random fireworks and makes the crossbow have the ability to shoot automatically. Some fireworks may be faulty and not actually fly away.",
   "enchantment.hexed.provision": "Provision",
   "enchantment.hexed.provision.desc": "Upon shooting, a quick time event for a \"Quick Reload\" will appear. Succeeding will reload the crossbow prematurely, failing will put it on a cooldown.",
+  "enchantment.hexed.overclock": "Overclock",
+  "enchantment.hexed.overclock.desc": "The crossbow fires automatically, each consecutive shot will charge up faster, but \"Overheats\" the crossbow.",
 
   "enchantment.hexed.linger": "Linger",
   "enchantment.hexed.linger.desc": "The trident will create an area of blazing ash when on the ground. This will cause it to slowly lose durability.",
@@ -146,9 +156,38 @@
   "block.hexed.milkyfur_plushie": "Pixel Queen Plushie",
   "tooltip.hexed.milky_plushie": "Pouring out pixelated purrfection.",
 
+  "block.hexed.chronos_plushie": "Chronos Plushie",
+  "block.hexed.maggie_plushie": "Maggie Plushie",
+  "block.hexed.zarra_plushie": "Zarra Plushie",
+  "block.hexed.wagon_plushie": "Wagon Plushie",
+  "block.hexed.josh_plushie": "Josh Plushie",
+  "block.hexed.solace_plushie": "Solace Plushie",
+  "block.hexed.nightfall_solace_plushie": "Nightfall Solace Plushie",
+  "block.hexed.phoenix_plushie": "Phoenix Plushie",
+  "block.hexed.tiger_plushie": "Tiger Plushie",
+  "block.hexed.eternal_plushie": "Eternal Plushie",
+  "block.hexed.tollish_plushie": "Tollish Plushie",
+  "block.hexed.crafter_plushie": "Crafter Plushie",
+  "block.hexed.den_plushie": "Den Plushie",
+  "block.hexed.fzzy_plushie": "Fzzy Plushie",
+  "block.hexed.kami_plushie": "Kami Plushie",
+  "block.hexed.gobby_plushie": "Gobby Plushie",
+  "block.hexed.silver_plushie": "Silver Plushie",
+  "block.hexed.bread_plushie": "Bread Plushie",
+  "block.hexed.assistance_plushie": "Assistance Plushie",
+  "block.hexed.monk_plushie": "Empyrean Plushie",
+  "block.hexed.tenno_plushie": "Tenno Plushie",
+  "block.hexed.toboe_plushie": "Toboe Plushie",
+  "block.hexed.reader_plushie": "Reader Plushie",
+
   "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
   "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",
   "tooltip.hexed.brimstone_candle.line_3": "Required to make the Altar of the Accursed function.",
+
+  "tooltip.hexed.accursed_altar.line_1": "A terrific display of great power,",
+  "tooltip.hexed.accursed_altar.line_2": "knowledge, but recklessness",
+  "tooltip.hexed.accursed_altar.line_3": "Has the ability to apply special enchantments on items",
+  "tooltip.hexed.accursed_altar.line_4": "Requires Brimstone Candles to function",
 
   "tooltip.hexed.lichlore_candle.line_1": "Spectral force echoes from",
   "tooltip.hexed.lichlore_candle.line_2": "the metal of this candle.",
@@ -182,6 +221,9 @@
   "subtitles.hexed.provision_fail": "Quick Reload Failed",
   "subtitles.hexed.provision_charge": "Quick Reload Succeeded",
   "subtitles.hexed.provision_in_range": "Quick Reload is in range",
+
+  "subtitles.hexed.overclock_tier": "New Overclock Tier reached",
+  "subtitles.hexed.aggravate_tier": "Aggravate arrow charged",
 
   "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function.",
   "message.hexed.altar_used": "The Brimstone Candles extinguished, despite your efforts to keep them Lit.",

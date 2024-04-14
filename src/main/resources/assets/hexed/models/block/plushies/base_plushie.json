@@ -1,9 +1,6 @@
 {
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
-	"textures": {
-		"plushie_texture": "#plushie_texture"
-	},
 	"elements": [
 		{
 			"name": "leg",

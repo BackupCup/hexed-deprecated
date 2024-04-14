@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model":  "hexed:block/plushies/wagon_plushie", "y": 0 },
+    "facing=east":  { "model":  "hexed:block/plushies/wagon_plushie", "y": 90 },
+    "facing=south": { "model":  "hexed:block/plushies/wagon_plushie", "y": 180 },
+    "facing=west":  { "model":  "hexed:block/plushies/wagon_plushie", "y": 270 }
+  }
+}

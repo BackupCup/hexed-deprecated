@@ -1,11 +1,13 @@
 package net.backupcup.hexed.datagen
 
+import net.backupcup.hexed.block.PlushieBlock
 import net.backupcup.hexed.register.RegisterBlocks
 import net.backupcup.hexed.register.RegisterDecoCandles
 import net.backupcup.hexed.register.RegisterPlushies
 import net.backupcup.hexed.register.RegisterSlagBlocks
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider
+import net.minecraft.registry.Registries
 
 class DatagenLoot(dataOutput: FabricDataOutput?) : FabricBlockLootTableProvider(dataOutput){
     override fun generate() {
@@ -13,10 +15,9 @@ class DatagenLoot(dataOutput: FabricDataOutput?) : FabricBlockLootTableProvider(
             addDrop(block)
         }
 
-        addDrop(RegisterPlushies.CALAMAIDAS_PLUSHIE)
-        addDrop(RegisterPlushies.BON_PLUSHIE)
-        addDrop(RegisterPlushies.MIRI_PLUSHIE)
-        addDrop(RegisterPlushies.MILKY_PLUSHIE)
+        Registries.BLOCK.forEach { block ->
+            if (block is PlushieBlock) addDrop(block)
+        }
 
         addDrop(RegisterBlocks.BRIMSTONE_CANDLE)
         addDrop(RegisterBlocks.LICHLORE_CANDLE)

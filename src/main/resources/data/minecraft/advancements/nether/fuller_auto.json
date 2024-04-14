@@ -1,0 +1,46 @@
+{
+  "parent": "minecraft:nether/find_bastion",
+  "display": {
+    "title": {
+      "text": "Fuller Auto",
+      "bold": true
+    },
+    "description": {
+      "text": "Reach the maximum level of Overheat on a Crossbow"
+    },
+    "icon": {
+      "item": "minecraft:crossbow"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "fullOverheat": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "enchantments": [
+              {
+                "levels": {
+                  "min": 1,
+                  "max": 1
+                },
+                "enchantment": "hexed:overclock"
+              }
+            ],
+            "item": "minecraft:crossbow",
+            "nbt": "{OverclockCharge:19}"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "fullOverheat"
+    ]
+  ]
+}

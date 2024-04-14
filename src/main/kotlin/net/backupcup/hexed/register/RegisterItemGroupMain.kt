@@ -1,6 +1,7 @@
 package net.backupcup.hexed.register
 
 import net.backupcup.hexed.Hexed
+import net.backupcup.hexed.block.PlushieBlock
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
@@ -75,10 +76,9 @@ object RegisterItemGroupPlushies {
             .displayName(Text.translatable("itemGroup.hexed.hexed_plushie_group"))
             .icon { ItemStack(RegisterPlushies.CALAMAIDAS_PLUSHIE) }
             .entries { _, entries ->
-                entries.add(ItemStack(RegisterPlushies.CALAMAIDAS_PLUSHIE))
-                entries.add(ItemStack(RegisterPlushies.BON_PLUSHIE))
-                entries.add(ItemStack(RegisterPlushies.MIRI_PLUSHIE))
-                entries.add(ItemStack(RegisterPlushies.MILKY_PLUSHIE))
+                Registries.BLOCK.forEach { block ->
+                    if (block is PlushieBlock) entries.add(ItemStack(block.asItem()))
+                }
             }
             .build()
         )
