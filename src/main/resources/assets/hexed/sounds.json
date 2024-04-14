@@ -26,13 +26,37 @@
   "provision_fail": {
     "subtitle": "subtitles.hexed.provision_fail",
     "sounds": [
-      "hexed:provision_fail"
+      "hexed:fire_explosion"
     ]
   },
   "provision_in_range": {
     "subtitle": "subtitles.hexed.provision_in_range",
     "sounds": [
-      "hexed:provision_in_range"
+      "hexed:beep"
+    ]
+  },
+  "overclock_tier": {
+    "subtitle": "subtitles.hexed.overclock_tier",
+    "sounds": [
+      "hexed:beep_alt"
+    ]
+  },
+  "aggravate_tier": {
+    "subtitle": "subtitles.hexed.aggravate_tier",
+    "sounds": [
+      "hexed:beep_alt"
+    ]
+  },
+  "beep_alt": {
+    "subtitle": "subtitles.hexed.beep_alt",
+    "sounds": [
+      "hexed:beep_alt"
+    ]
+  },
+  "tech_laugh": {
+    "subtitle": "subtitles.hexed.tech_laugh",
+    "sounds": [
+      "hexed:tech_laugh"
     ]
   }
 }

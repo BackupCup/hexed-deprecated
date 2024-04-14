@@ -8,11 +8,14 @@ import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.packets.HexNetworkingConstants;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterSounds;
-import net.backupcup.hexed.util.HexHelper;
-import net.backupcup.hexed.util.ProvisionData;
-import net.backupcup.hexed.util.ProvisionInterface;
+import net.backupcup.hexed.register.RegisterStatusEffects;
+import net.backupcup.hexed.util.*;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.advancement.Advancement;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -26,8 +29,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.util.ArrayList;
@@ -48,7 +53,7 @@ public abstract class CrossbowItemMixin {
 
     @WrapOperation(method = "loadProjectile", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/CrossbowItem;putProjectile(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)V"))
     private static void hexed$CelebrationFirework(ItemStack crossbow, ItemStack projectile, Operation<Void> original) {
-        if (HexHelper.INSTANCE.hasEnchantmentInSlot(crossbow, RegisterEnchantments.INSTANCE.getCELEBRATION_HEX())) {
+        if (HexHelper.INSTANCE.stackHasEnchantment(crossbow, RegisterEnchantments.INSTANCE.getCELEBRATION_HEX())) {
             ItemStack rocket = new ItemStack(Items.FIREWORK_ROCKET);
 
             NbtCompound tag = new NbtCompound();
@@ -87,7 +92,7 @@ public abstract class CrossbowItemMixin {
     private static void hexed$CelebrationAccuracy(Args args) {
         ItemStack crossbow = args.get(3);
         LivingEntity entity = args.get(1);
-        if (HexHelper.INSTANCE.hasEnchantmentInSlot(crossbow, RegisterEnchantments.INSTANCE.getCELEBRATION_HEX())) {
+        if (HexHelper.INSTANCE.stackHasEnchantment(crossbow, RegisterEnchantments.INSTANCE.getCELEBRATION_HEX())) {
             float speed = args.get(7);
             float divergence = args.get(9);
 
@@ -105,11 +110,11 @@ public abstract class CrossbowItemMixin {
 
     @Inject(method = "postShoot", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/CrossbowItem;clearProjectiles(Lnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER))
     private static void hexed$ProvisionTrigger(World world, LivingEntity entity, ItemStack stack, CallbackInfo ci) {
-        if (HexHelper.INSTANCE.hasEnchantmentInSlot(stack, RegisterEnchantments.INSTANCE.getPROVISION_HEX())) {
+        if (HexHelper.INSTANCE.stackHasEnchantment(stack, RegisterEnchantments.INSTANCE.getPROVISION_HEX())) {
             if (!(entity instanceof ServerPlayerEntity)) return;
 
             ProvisionData data = ((ProvisionInterface)entity).getProvisionData();
-            ((ProvisionInterface)entity).setProvisionData(new ProvisionData(true, 0, data.getReloadSpeed()));
+            ((ProvisionInterface)entity).setProvisionData(new ProvisionData(true, 0, data.getReloadSpeed(), 0));
         }
     }
 
@@ -118,8 +123,7 @@ public abstract class CrossbowItemMixin {
         if (!(user instanceof ServerPlayerEntity)) return;
         ProvisionData data = ((ProvisionInterface)user).getProvisionData();
 
-        if (HexHelper.INSTANCE.hasEnchantmentInSlot(stack, RegisterEnchantments.INSTANCE.getPROVISION_HEX()) && data.isUIActive()) {
-
+        if (HexHelper.INSTANCE.stackHasEnchantment(stack, RegisterEnchantments.INSTANCE.getPROVISION_HEX()) && data.isUIActive()) {
             ServerPlayerEntity player = (ServerPlayerEntity) user;
 
             if (data.getIndicatorPos() >= 17 && data.getIndicatorPos() <= 35) {
@@ -128,22 +132,22 @@ public abstract class CrossbowItemMixin {
                 int newReloadSpeed = data.getReloadSpeed() < 5 ? data.getReloadSpeed() + 1 : data.getReloadSpeed();
 
                 player.playSound(RegisterSounds.INSTANCE.getPROVISION_CHARGE(), SoundCategory.PLAYERS, 0.5f, 0.75f);
-                ((ProvisionInterface)player).setProvisionData(new ProvisionData(false, 0, newReloadSpeed));
+                ((ProvisionInterface)player).setProvisionData(new ProvisionData(false, 0, newReloadSpeed, 0));
 
             } else if ((data.getIndicatorPos() >= 10 && data.getIndicatorPos() <= 16) || (data.getIndicatorPos() >= 36 && data.getIndicatorPos() <= 43)) {
                 loadProjectile(user, stack, new ItemStack(Items.ARROW), true, true);
                 setCharged(stack, true);
 
                 player.playSound(RegisterSounds.INSTANCE.getPROVISION_CHARGE(), SoundCategory.PLAYERS, 0.5f, 1.25f);
-                ((ProvisionInterface)player).setProvisionData(new ProvisionData(false, 0, data.getReloadSpeed()));
+                ((ProvisionInterface)player).setProvisionData(new ProvisionData(false, 0, data.getReloadSpeed(), 0));
             } else {
-                player.getItemCooldownManager().set(Items.CROSSBOW, 80);
+                if(!HexHelper.INSTANCE.hasFullRobes(player)) {
+                    player.getItemCooldownManager().set(Items.CROSSBOW, 80);
+                }
 
                 player.playSound(RegisterSounds.INSTANCE.getPROVISION_FAIL(), SoundCategory.PLAYERS, 1f, 1f);
-                ((ProvisionInterface)player).setProvisionData(new ProvisionData(false, 0, 1));
+                ((ProvisionInterface)player).setProvisionData(new ProvisionData(false, 0, 1, 0));
             }
-
-            System.out.println(((ProvisionInterface)player).getProvisionData());
 
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
             buf.writeBoolean(false);
@@ -151,5 +155,82 @@ public abstract class CrossbowItemMixin {
 
             ServerPlayNetworking.send(player, HexNetworkingConstants.INSTANCE.getPROVISION_UPDATE_PACKET(), buf);
         }
+    }
+
+    @Inject(method = "postShoot", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/CrossbowItem;clearProjectiles(Lnet/minecraft/item/ItemStack;)V", shift = At.Shift.AFTER))
+    private static void hexed$OverclockTrigger(World world, LivingEntity entity, ItemStack stack, CallbackInfo ci) {
+        if (HexHelper.INSTANCE.stackHasEnchantment(stack, RegisterEnchantments.INSTANCE.getOVERCLOCK_HEX())) {
+            if (!(entity instanceof ServerPlayerEntity)) return;
+
+            int overclockCharge = ((OverclockInterface)entity).getOverclockData().getOverheat();
+            NbtCompound stackNbt = stack.getNbt();
+
+            if(overclockCharge < 20) overclockCharge++;
+            ((OverclockInterface)entity).setOverclockData(new OverclockData(200, overclockCharge));
+
+            stackNbt.putInt("Overheat", overclockCharge);
+            stack.setNbt(stackNbt);
+
+            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+            buf.writeInt(overclockCharge);
+
+            ServerPlayNetworking.send((ServerPlayerEntity) entity, HexNetworkingConstants.INSTANCE.getOVERCLOCK_UPDATE_PACKET(), buf);
+
+            if (overclockCharge > 14) { entity.setOnFireFor(overclockCharge); }
+            if (overclockCharge > 16) { entity.addStatusEffect(new StatusEffectInstance(
+                    RegisterStatusEffects.INSTANCE.getABLAZE(), overclockCharge * 20, 0,
+                            false, false, false)); }
+
+            List<Integer> pingList = new ArrayList<>();
+            pingList.add(4); pingList.add(8); pingList.add(11);pingList.add(14);
+            pingList.add(16); pingList.add(18); pingList.add(19); pingList.add(20);
+
+            if (pingList.contains(overclockCharge))
+                ((ServerPlayerEntity)entity).playSound(RegisterSounds.INSTANCE.getOVERCLOCK_TIER(), SoundCategory.PLAYERS, 1f, 1f + overclockCharge / 20f);
+        }
+    }
+
+    @ModifyArgs(method = "loadProjectiles", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/CrossbowItem;loadProjectile(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;ZZ)Z"))
+    private static void hexed$OverclockFailedShot(Args args) {
+        LivingEntity entity = args.get(0);
+        ItemStack crossbow = args.get(1);
+        ItemStack projectile = args.get(2);
+
+        if (HexHelper.INSTANCE.stackHasEnchantment(crossbow, RegisterEnchantments.INSTANCE.getOVERCLOCK_HEX())) {
+            if (!(entity instanceof ServerPlayerEntity)) return;
+
+            if (((OverclockInterface)entity).getOverclockData().getOverheat() > 18) {
+                projectile = Random.Default.nextDouble(0, 1) > 0.5 ? projectile : new ItemStack(Items.AIR);
+                args.set(2, projectile);
+            }
+        }
+    }
+
+    @ModifyArgs(method = "shootAll", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/CrossbowItem;shoot(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;FZFFF)V"))
+    private static void hexed$OverclockAccuracy(Args args) {
+        LivingEntity entity = args.get(1);
+        ItemStack crossbow = args.get(3);
+        float simulated = args.get(9);
+
+        if (HexHelper.INSTANCE.stackHasEnchantment(crossbow, RegisterEnchantments.INSTANCE.getOVERCLOCK_HEX())) {
+            if (!(entity instanceof ServerPlayerEntity)) return;
+
+            if (((OverclockInterface)entity).getOverclockData().getOverheat() > 16) {
+                args.set(9, simulated + (float) Random.Default.nextDouble(-3, 3));
+            }
+        }
+    }
+
+    @Inject(method = "getPullTime", at = @At("RETURN"), cancellable = true)
+    private static void hexed$OverclockPullTime(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
+        int quickChargeModifier = EnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE, stack);
+        int pullTime = 25 - 5 * quickChargeModifier;
+
+        if (HexHelper.INSTANCE.stackHasEnchantment(stack, RegisterEnchantments.INSTANCE.getOVERCLOCK_HEX())) {
+            pullTime -= stack.getNbt().contains("Overheat") ? stack.getNbt().getInt("Overheat") : 0;
+            if (pullTime < 1) pullTime = 1;
+        }
+
+        cir.setReturnValue(pullTime);
     }
 }

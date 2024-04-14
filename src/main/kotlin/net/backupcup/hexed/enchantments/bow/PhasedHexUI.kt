@@ -1,4 +1,4 @@
-package net.backupcup.hexed.enchantments.crossbow
+package net.backupcup.hexed.enchantments.bow
 
 import com.mojang.blaze3d.systems.RenderSystem
 import net.backupcup.hexed.Hexed
@@ -13,51 +13,41 @@ import net.fabricmc.fabric.api.networking.v1.PacketSender
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawContext
 import net.minecraft.client.network.ClientPlayNetworkHandler
-import net.minecraft.client.util.math.Vector2f
-import net.minecraft.item.CrossbowItem
+import net.minecraft.item.BowItem
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.Identifier
 import org.joml.Vector2i
 
 @Environment(value = EnvType.CLIENT)
-object ProvisionHexUI {
-    val TEXTURE = Identifier(Hexed.MOD_ID, "textures/gui/provision_ui.png")
-    val textureSize = Vector2i(94, 19)
+object PhasedHexUI {
+    val TEXTURE = Identifier(Hexed.MOD_ID, "textures/gui/phased_ui.png")
+    val textureSize = Vector2i(39, 41)
 
-    var shouldRender: Boolean = false
-    var indicatorPos: Int = 0
+    var phaseCharge: Int = 0
 
     private fun draw(drawContext: DrawContext, tickDelta: Float) {
-        val drawPos = Vector2i((drawContext.scaledWindowWidth - textureSize.x)/2, (drawContext.scaledWindowHeight + textureSize.y)/2)
+        val drawPos = Vector2i((drawContext.scaledWindowWidth - textureSize.x)/2, (drawContext.scaledWindowHeight - textureSize.y)/2)
 
         drawContext.drawTexture(TEXTURE, drawPos.x, drawPos.y, 0f, 0f, textureSize.x, textureSize.y, 256, 256)
 
-        var cursorTextureUV = Vector2f(2f, 21f)
-
-        if(indicatorPos in 17..35) cursorTextureUV = Vector2f(17f, 21f)
-        if(indicatorPos in 10..16 || indicatorPos in 36..43) cursorTextureUV = Vector2f(32f, 21f)
-
-        drawContext.drawTexture(TEXTURE, drawPos.x + indicatorPos + 3, drawPos.y - 1, cursorTextureUV.x, cursorTextureUV.y, 12, 21, 256, 256)
+        drawContext.drawTexture(TEXTURE, drawPos.x, drawPos.y, 0f + 39f * phaseCharge, 0f, textureSize.x, textureSize.y, 256, 256)
     }
 
     fun registerClient() {
         HudRenderCallback.EVENT.register { drawContext, tickDelta ->
             val player = MinecraftClient.getInstance().player ?: return@register
 
-            val itemStack = if (player.mainHandStack.item is CrossbowItem) player.mainHandStack else {
-                return@register
-            }
+            val itemStack = if (player.mainHandStack.item is BowItem) player.mainHandStack
+                        else if (player.offHandStack.item is BowItem) player.offHandStack else return@register
 
             ClientPlayNetworking.registerGlobalReceiver(
-                HexNetworkingConstants.PROVISION_UPDATE_PACKET,
-                ProvisionHexUI::updateData
+                HexNetworkingConstants.PHASED_UPDATE_PACKET,
+                PhasedHexUI::updateData
             )
 
-            if (!HexHelper.stackHasEnchantment(itemStack, RegisterEnchantments.PROVISION_HEX) ||
-                itemStack.nbt?.getBoolean("Charged") == true ||
+            if (!HexHelper.stackHasEnchantment(itemStack, RegisterEnchantments.PHASED_HEX) ||
                 MinecraftClient.getInstance().isPaused ||
-                !player.isPartOfGame || !this.shouldRender) {
-                this.shouldRender = false
+                !player.isPartOfGame) {
                 return@register
             }
 
@@ -72,7 +62,6 @@ object ProvisionHexUI {
         buf: PacketByteBuf,
         sender: PacketSender?
     ) {
-        this.shouldRender = buf.readBoolean()
-        this.indicatorPos = buf.readInt()
+        this.phaseCharge = buf.readInt()
     }
 }

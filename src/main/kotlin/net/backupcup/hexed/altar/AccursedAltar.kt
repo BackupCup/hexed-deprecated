@@ -3,6 +3,7 @@ package net.backupcup.hexed.altar
 import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.register.RegisterBlockEntities
 import net.backupcup.hexed.register.RegisterStats
+import net.backupcup.hexed.util.TextWrapUtils
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityTicker
@@ -17,6 +18,7 @@ import net.minecraft.state.StateManager
 import net.minecraft.state.property.BooleanProperty
 import net.minecraft.state.property.DirectionProperty
 import net.minecraft.state.property.Properties
+import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.*
 import net.minecraft.util.function.BooleanBiFunction
@@ -62,6 +64,16 @@ class AccursedAltar(settings: Settings?
         tooltip: MutableList<Text>?,
         options: TooltipContext?
     ) {
+        for (i in 1..4) {
+            val formatList = mutableListOf<Formatting>()
+
+            if (i < 3) { formatList.add(0, Formatting.DARK_RED); formatList.add(1, Formatting.ITALIC); formatList.add(0, Formatting.BOLD) }
+            else { formatList.add(0, Formatting.GRAY) }
+
+            var text: MutableText = Text.translatable("tooltip.hexed.accursed_altar.line_$i")
+            formatList.forEach { text.formatted(it) }
+            tooltip?.add(text)
+        }
         super.appendTooltip(stack, world, tooltip, options)
     }
 

@@ -3,7 +3,6 @@ package net.backupcup.hexed.register
 import net.backupcup.hexed.Hexed
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
@@ -49,14 +48,5 @@ object RegisterRunes {
         RUNE_LIST.forEach { (item, id) ->
             Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, id), item)
         }
-    }
-
-    fun getRandomRunes(): List<ItemStack> {
-        val returnList = mutableListOf<ItemStack>()
-        RUNE_LIST.shuffled().forEachIndexed { index, pair ->
-            if (index >= 6) return returnList
-            returnList.add(ItemStack(pair.first))
-        }
-        return returnList
     }
 }

@@ -61,7 +61,7 @@ class BloodthirstyHex(
                 }
 
                 if (user.maxHealth < user.health + additionalHealth
-                    && HexHelper.hasEnchantmentInSlot(user.getEquippedStack(EquipmentSlot.HEAD), RegisterEnchantments.METAMORPHOSIS_HEX)
+                    && HexHelper.stackHasEnchantment(user.getEquippedStack(EquipmentSlot.HEAD), RegisterEnchantments.METAMORPHOSIS_HEX)
                     && user is PlayerEntity) {
                     additionalHealth -= (user.maxHealth - user.health)
                     user.hungerManager.add(

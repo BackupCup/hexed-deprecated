@@ -8,5 +8,6 @@ interface ProvisionInterface {
 data class ProvisionData(
     var isUIActive: Boolean,
     var indicatorPos: Int,
-    var reloadSpeed: Int
+    var reloadSpeed: Int,
+    var reloadsPlayed: Int
 )

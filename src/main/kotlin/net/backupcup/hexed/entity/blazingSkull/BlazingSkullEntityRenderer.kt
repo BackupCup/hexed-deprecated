@@ -27,6 +27,5 @@ class BlazingSkullEntityRenderer(
         i: Int
     ) {
         super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i)
-
     }
 }

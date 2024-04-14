@@ -17,8 +17,11 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.ScreenHandlerListener
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Box
+import net.minecraft.world.World
 
-object HexHelper {
+object  HexHelper {
     private val blockedHexList by lazy { generateHexAvailability() }
 
     private fun generateHexAvailability(): List<AbstractHex> {
@@ -81,12 +84,32 @@ object HexHelper {
         return getHexList(itemStack).filterNot { getEnchantments(itemStack).contains(it) }
     }
 
-    fun hasEnchantmentInSlot(stack: ItemStack, key: Enchantment): Boolean {
+    fun stackHasEnchantment(stack: ItemStack, key: Enchantment): Boolean {
         return EnchantmentHelper.get(stack).containsKey(key)
     }
 
+    fun stackHasEnchantment(stackList: List<ItemStack>, key: Enchantment): Boolean {
+        stackList.forEach { stack ->
+            if (EnchantmentHelper.get(stack).containsKey(key)) return true
+        }
+        return false
+    }
+
+    fun stackHasEnchantment(stack: ItemStack, keyList: List<Enchantment>): Boolean {
+        keyList.forEach { enchantment ->
+            if (EnchantmentHelper.get(stack).containsKey(enchantment)) return true
+        }
+        return false
+    }
+
+    fun stackHasEnchantment(stackList: List<ItemStack>, keyList: List<Enchantment>): Boolean {
+        stackList.forEach { stack ->
+            keyList.forEach { key -> if (EnchantmentHelper.get(stack).containsKey(key)) return true }
+        }
+        return false
+    }
+
     fun hasFullRobes(armorStack: Iterable<ItemStack>): Boolean {
-        println(Hexed.getConfig()?.shouldArmorApply())
         if (Hexed.getConfig()?.shouldArmorApply() == true) {
             for (piece in armorStack) {
                 if (!piece.isIn(CALAMITOUS_ARMOR)) return false
@@ -97,7 +120,6 @@ object HexHelper {
     }
 
     fun hasFullRobes(entity: LivingEntity): Boolean {
-        println(Hexed.getConfig()?.shouldArmorApply())
         if (Hexed.getConfig()?.shouldArmorApply() == true) {
             entity.armorItems.forEach { piece ->
                 if (!piece.isIn(CALAMITOUS_ARMOR)) return false
@@ -133,5 +155,9 @@ object HexHelper {
                 )
             )
         }
+    }
+
+    fun getEntitiesInRadius(world: World, pos: BlockPos, radius: Double): List<LivingEntity> {
+        return world.getNonSpectatingEntities(null, Box(pos).expand(radius))
     }
 }

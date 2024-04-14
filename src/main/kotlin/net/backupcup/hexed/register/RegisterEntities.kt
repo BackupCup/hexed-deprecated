@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttribute
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.client.render.entity.EntityRendererFactory
 import net.minecraft.client.render.entity.model.EntityModelLayer
-import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnGroup
@@ -30,7 +29,6 @@ object RegisterEntities {
 
     fun registerEntityModels() {
         val MODEL_SKULL_LAYER = EntityModelLayer(Identifier(Hexed.MOD_ID, "blazing_skull"), "skull")
-
         EntityRendererRegistry.register(BLAZING_SKULL) { context: EntityRendererFactory.Context ->
             BlazingSkullEntityRenderer(
                 context,
@@ -38,7 +36,6 @@ object RegisterEntities {
                 0.5f
             )
         }
-
         EntityModelLayerRegistry.registerModelLayer(MODEL_SKULL_LAYER, BlazingSkullModel::getTexturedModelData)
     }
 }

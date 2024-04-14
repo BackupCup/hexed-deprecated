@@ -131,7 +131,7 @@ public abstract class ItemStackMixin {
         ItemStack tool = (ItemStack) (Object) this;
         if (!tool.getItem().isSuitableFor(state)) return;
 
-        if (!player.isSneaking() && HexHelper.INSTANCE.hasEnchantmentInSlot(tool, RegisterEnchantments.INSTANCE.getAMPLIFY_HEX())) {
+        if (!player.isSneaking() && HexHelper.INSTANCE.stackHasEnchantment(tool, RegisterEnchantments.INSTANCE.getAMPLIFY_HEX())) {
             Vec3d cameraPosVec = player.getCameraPosVec(1.0f);
             Vec3d blockCenter = new Vec3d(pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5);
 
@@ -159,7 +159,7 @@ public abstract class ItemStackMixin {
 
         int decayLength = HexHelper.INSTANCE.hasFullRobes(miner) ? 0 : 1;
 
-        if(HexHelper.INSTANCE.hasEnchantmentInSlot(tool, RegisterEnchantments.INSTANCE.getOVERBURDEN_HEX())) {
+        if(HexHelper.INSTANCE.stackHasEnchantment(tool, RegisterEnchantments.INSTANCE.getOVERBURDEN_HEX())) {
             if (miner.hasStatusEffect(RegisterStatusEffects.INSTANCE.getOVERBURDEN())) {
                 if (miner.getStatusEffect(RegisterStatusEffects.INSTANCE.getOVERBURDEN()).getAmplifier() < 256)
                     HexHelper.INSTANCE.entityMultiplyingEffect(miner, RegisterStatusEffects.INSTANCE.getOVERBURDEN(),
@@ -174,7 +174,7 @@ public abstract class ItemStackMixin {
         ItemStack tool = (ItemStack) (Object) this;
         if (!tool.getItem().isSuitableFor(state)) return;
 
-        if (HexHelper.INSTANCE.hasEnchantmentInSlot(tool, RegisterEnchantments.INSTANCE.getRUINOUS_HEX())) {
+        if (HexHelper.INSTANCE.stackHasEnchantment(tool, RegisterEnchantments.INSTANCE.getRUINOUS_HEX())) {
             Entity entity = null;
             if (HexHelper.INSTANCE.hasFullRobes(miner)) entity = miner;
 
@@ -190,7 +190,7 @@ public abstract class ItemStackMixin {
     @WrapWithCondition(method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"))
     private boolean hexed$FamishmentShouldDamage(ItemStack stack, int amount, int damage, net.minecraft.util.math.random.Random random, ServerPlayerEntity player) {
-        if (HexHelper.INSTANCE.hasEnchantmentInSlot(stack, RegisterEnchantments.INSTANCE.getFAMISHMENT_HEX())) {
+        if (HexHelper.INSTANCE.stackHasEnchantment(stack, RegisterEnchantments.INSTANCE.getFAMISHMENT_HEX())) {
             if (player == null) return true;
 
             if (player.getHungerManager().getFoodLevel() >= damage) {

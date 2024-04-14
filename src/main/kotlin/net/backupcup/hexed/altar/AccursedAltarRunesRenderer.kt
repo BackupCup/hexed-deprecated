@@ -20,7 +20,14 @@ import kotlin.math.sin
 class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> {
 
     companion object {
-        var itemStackTexture = listOf<ItemStack>()
+        var itemStackTexture = listOf(
+            ItemStack(RegisterRunes.TRAITOROUS),
+            ItemStack(RegisterRunes.DISPLACED),
+            ItemStack(RegisterRunes.METAMORPHOSIS),
+            ItemStack(RegisterRunes.AFLAME),
+            ItemStack(RegisterRunes.AVERTING),
+            ItemStack(RegisterRunes.DISFIGUREMENT)
+        )
     }
 
     override fun render(
@@ -31,14 +38,7 @@ class AccursedAltarRunesRenderer: BlockEntityRenderer<AccursedAltarBlockEntity> 
         light: Int,
         overlay: Int
     ) {
-        if(entity.world?.getBlockState(entity.pos)?.block == RegisterBlocks.ACCURSED_ALTAR) {
-            if (entity.world?.getBlockState(entity.pos)?.get(AccursedAltar.ACTIVE) == false) {
-                if (itemStackTexture.isNotEmpty()) itemStackTexture = listOf()
-                return
-            }
-        }
-
-        if (itemStackTexture.isEmpty()) itemStackTexture = RegisterRunes.getRandomRunes()
+        if (entity.getActiveState() == false) return
 
         val lightAbove = WorldRenderer.getLightmapCoordinates(entity.world, entity.pos.up())
         var renderVec = Vec3d(0.0, 0.0, -1.0)

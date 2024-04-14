@@ -49,7 +49,8 @@ public abstract class PlayerEntityMixin extends Entity {
 
     @Inject(method = "canFoodHeal", at = @At("HEAD"), cancellable = true)
     private void hexed$MetamorphosisNaturalRegen(CallbackInfoReturnable<Boolean> cir) {
-        if (HexHelper.INSTANCE.hasEnchantmentInSlot(getEquippedStack(EquipmentSlot.HEAD), RegisterEnchantments.INSTANCE.getMETAMORPHOSIS_HEX()) && !HexHelper.INSTANCE.hasFullRobes(getArmorItems())) {
+        if (HexHelper.INSTANCE.stackHasEnchantment(getEquippedStack(EquipmentSlot.HEAD), RegisterEnchantments.INSTANCE.getMETAMORPHOSIS_HEX()) &&
+                !HexHelper.INSTANCE.hasFullRobes(getArmorItems())) {
             cir.setReturnValue(false);
         }
     }

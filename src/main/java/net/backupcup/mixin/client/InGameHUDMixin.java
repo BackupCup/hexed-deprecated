@@ -1,4 +1,4 @@
-package net.backupcup.mixin;
+package net.backupcup.mixin.client;
 
 import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.enchantments.AbstractHex;
@@ -23,8 +23,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import static java.util.Map.entry;

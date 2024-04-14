@@ -9,6 +9,7 @@
     "ItemStackMixin",
     "LivingEntityMixin",
     "LootableContainerMixin",
+    "PersistentProjectileEntityMixin",
     "PlayerEntityMixin",
     "ServerPlayerEntityMixin",
     "TridentEntityMixin"
@@ -17,8 +18,8 @@
     "defaultRequire": 1
   },
   "client": [
-    "InGameHUDMixin",
-    "client.MinecraftClientMixin",
-    "client.LivingEntityMixin"
+    "client.InGameHUDMixin",
+    "client.LivingEntityMixin",
+    "client.MinecraftClientMixin"
   ]
 }
