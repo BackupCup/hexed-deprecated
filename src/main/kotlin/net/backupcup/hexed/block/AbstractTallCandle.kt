@@ -149,7 +149,10 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
     ) {
         if (!newState.isOf(this)) {
             breakPieces(world, pos)
+        } else {
+            setLit(world, pos, state, newState.get(LIT))
         }
+
         super.onStateReplaced(state, world, pos, newState, moved)
     }
 

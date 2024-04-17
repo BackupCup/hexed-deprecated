@@ -23,7 +23,7 @@ object HexedClient: ClientModInitializer {
         RegisterScreens.registerScreens()
         RegisterBlocks.registerBlockCutouts()
         RegisterEntities.registerEntityModels()
-        RegisterPackets.registerPackets()
+        RegisterPackets.registerClientPackets()
 
         ProvisionHexUI.registerClient()
         OverclockHexUI.registerClient()

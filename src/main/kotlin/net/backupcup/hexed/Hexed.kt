@@ -1,6 +1,6 @@
 package net.backupcup.hexed
 
-import net.backupcup.hexed.enchantments.AbstractHex
+import net.backupcup.hexed.listener.ServerListener
 import net.backupcup.hexed.loot.ModifyLootTables
 import net.backupcup.hexed.register.*
 import net.fabricmc.api.ModInitializer
@@ -73,6 +73,9 @@ object Hexed : ModInitializer {
 		registerAllGroups()
 		RegisterStats.registerStats()
 		RegisterEntities.registerEntities()
+
+		RegisterPackets.registerServerPackets()
+		ServerListener.registerServerListeners()
 
 		ModifyLootTables.registerLootModifiers()
 	}

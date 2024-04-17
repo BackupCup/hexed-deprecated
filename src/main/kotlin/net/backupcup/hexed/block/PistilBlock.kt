@@ -1,5 +1,6 @@
 package net.backupcup.hexed.block
 
+import net.backupcup.hexed.util.HexRandom
 import net.minecraft.block.*
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.ai.pathing.NavigationType
@@ -118,9 +119,9 @@ class PistilBlock(settings: Settings?) : Block(settings), Fertilizable {
             if (world.getBlockState(pos.up(currentAge+1)).isOf(this)) continue
             if (world.getBlockState(pos.up(currentAge+1)).isReplaceable && world.getBlockState(pos.up(currentAge)).get(AGE) < maxAge) {
 
-                val randomBlockChance = kotlin.random.Random.nextInt(currentAge + state.get(AGE), maxAge+2)
+                val randomBlockChance = HexRandom.nextInt(currentAge + state.get(AGE), maxAge+2)
                 if (randomBlockChance + 1 == maxAge) {
-                    if (kotlin.random.Random.nextFloat() >= 0.5) world.setBlockState(pos.up(currentAge+1), Blocks.SHROOMLIGHT.defaultState)
+                    if (HexRandom.nextFloat() >= 0.5) world.setBlockState(pos.up(currentAge+1), Blocks.SHROOMLIGHT.defaultState)
                     else world.setBlockState(pos.up(currentAge+1), Blocks.GLOWSTONE.defaultState)
                 } else {
                     world.setBlockState(pos.up(currentAge+1), state
@@ -141,7 +142,7 @@ class PistilBlock(settings: Settings?) : Block(settings), Fertilizable {
             newAge += world.getBlockState(pos.down()).get(AGE)
             newState = if (!world.getBlockState(pos.up()).isAir) 1 else 2
         } else {
-            newAge = kotlin.random.Random.nextInt(0, maxAge)
+            newAge = HexRandom.nextInt(0, maxAge)
         }
         return Pair(newState, newAge)
     }

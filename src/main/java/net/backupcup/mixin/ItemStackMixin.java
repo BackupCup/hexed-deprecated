@@ -11,6 +11,7 @@ import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.util.AttributeProviding;
 import net.backupcup.hexed.util.HexHelper;
+import net.backupcup.hexed.util.HexRandom;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -67,8 +68,8 @@ public abstract class ItemStackMixin {
                             world.getBlockState(pos).getBlock().getHardness() <= state.getBlock().getHardness()+2) {
 
                         boolean shouldDrop = (Hexed.INSTANCE.getConfig() != null) ?
-                                Random.Default.nextDouble(0, 1) >= Hexed.INSTANCE.getConfig().getAmplifyHex().getDropChance() :
-                                Random.Default.nextDouble(0, 1) >= 0.5;
+                                HexRandom.INSTANCE.nextDouble(0, 1) >= Hexed.INSTANCE.getConfig().getAmplifyHex().getDropChance() :
+                                HexRandom.INSTANCE.nextDouble(0, 1) >= 0.5;
                         if (HexHelper.INSTANCE.hasFullRobes(player.getArmorItems())) {
                             shouldDrop = true;
                         }
@@ -179,9 +180,9 @@ public abstract class ItemStackMixin {
             if (HexHelper.INSTANCE.hasFullRobes(miner)) entity = miner;
 
             world.createExplosion(entity,
-                    pos.getX()+Random.Default.nextDouble(-0.25,1.25),
-                    pos.getY()+Random.Default.nextDouble(-0.25,1.25),
-                    pos.getZ()+Random.Default.nextDouble(-0.25,1.25),
+                    pos.getX()+HexRandom.INSTANCE.nextDouble(-0.25,1.25),
+                    pos.getY()+HexRandom.INSTANCE.nextDouble(-0.25,1.25),
+                    pos.getZ()+HexRandom.INSTANCE.nextDouble(-0.25,1.25),
                     Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getRuinousHex().getExplosionPower() : 1.25f,
                     World.ExplosionSourceType.BLOCK);
         }

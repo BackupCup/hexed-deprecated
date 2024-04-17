@@ -18,13 +18,19 @@ object RegisterSounds {
     val OVERCLOCK_TIER: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "overclock_tier"))
     val AGGRAVATE_TIER: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "aggravate_tier"))
 
+    val PHASED_SHOT: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "phased_shot"))
+    val PHASED_TIER: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "phased_tier"))
+
     val BEEP_ALT: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "beep_alt"))
     val TECH_LAUGH: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "tech_laugh"))
+
+    val YIPPEE: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "yippee"))
 
     fun registerSounds() {
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "accursed_altar_hex"), ACCURSED_ALTAR_HEX)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "accursed_altar_taint"), ACCURSED_ALTAR_TAINT)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "accursed_altar_activate"), ACCURSED_ALTAR_ACTIVATE)
+
 
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "provision_fail"), PROVISION_FAIL)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "provision_charge"), PROVISION_CHARGE)
@@ -33,7 +39,12 @@ object RegisterSounds {
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "overclock_tier"), OVERCLOCK_TIER)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "aggravate_tier"), AGGRAVATE_TIER)
 
+        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "phased_shot"), PHASED_SHOT)
+        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "phased_tier"), PHASED_TIER)
+
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "beep_alt"), BEEP_ALT)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "tech_laugh"), TECH_LAUGH)
+
+        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "yippee"), YIPPEE)
     }
 }

@@ -5,6 +5,7 @@ import net.backupcup.hexed.packets.HexNetworkingConstants;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.util.HexHelper;
 import net.backupcup.hexed.util.ItemUseCooldown;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -28,6 +29,9 @@ public abstract class LivingEntityMixin {
 
     @Unique
     private boolean holdingCharged = false;
+
+    @Unique
+    private float storedPredicate = 1f;
 
     @Inject(method = "tickItemStackUsage", at = @At("HEAD"))
     private void hexed$CrossbowAutoFire(ItemStack stack, CallbackInfo ci) {
@@ -65,7 +69,7 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(method = "tickActiveItemStack", at = @At("HEAD"))
-    private void hexed$SetActiveItemStack(CallbackInfo ci) {
+    private void hexed$predicateC2SPacket(CallbackInfo ci) {
         var entity = (LivingEntity) (Object) this;
         if (entity.getWorld().isClient()) {
             if (entity == MinecraftClient.getInstance().player) {
@@ -87,12 +91,14 @@ public abstract class LivingEntityMixin {
                         handStacks.get(0) : handStacks.get(1);
                 var predicate = ModelPredicateProviderRegistry.get(usedStack.getItem(), new Identifier("pull"));
 
-                if (player.getWorld().getTime() % 10 == 0) {
+                if (storedPredicate != (predicate != null ? predicate.call(usedStack, (ClientWorld) entity.getWorld(), player, 1234) : 0f)) {
                     var pullStrength = predicate != null ? predicate.call(usedStack, (ClientWorld) entity.getWorld(), player, 1234) : 0f;
+                    storedPredicate = pullStrength;
+
                     PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                     buf.writeFloat(pullStrength);
 
-                    ClientSidePacketRegistry.INSTANCE.sendToServer(HexNetworkingConstants.INSTANCE.getPREDICATE_GETTER_PACKET(), buf);
+                    ClientPlayNetworking.send(HexNetworkingConstants.INSTANCE.getPREDICATE_GETTER_PACKET(), buf);
                 }
             }
         }

@@ -1,6 +1,7 @@
 package net.backupcup.hexed.block
 
 import net.backupcup.hexed.register.RegisterSlagBlocks
+import net.backupcup.hexed.util.HexRandom
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
 import net.minecraft.block.Fertilizable
@@ -24,7 +25,7 @@ class LavendinCinderBlock(settings: Settings?) : NyliumBlock(settings), Fertiliz
 
     override fun grow(world: ServerWorld, random: Random, pos: BlockPos, state: BlockState?) {
         if(random.nextFloat() >= 0.5f) world.setBlockState(pos.up(), RegisterSlagBlocks.LAVENDIN_VERDURE.defaultState)
-        else world.setBlockState(pos.up(), RegisterSlagBlocks.LAVA_PISTIL.defaultState.with(PistilBlock.AGE, kotlin.random.Random.nextInt(0, PistilBlock.maxAge)))
+        else world.setBlockState(pos.up(), RegisterSlagBlocks.LAVA_PISTIL.defaultState.with(PistilBlock.AGE, HexRandom.nextInt(0, PistilBlock.maxAge)))
     }
 
     override fun randomTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random?) {

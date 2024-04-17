@@ -5,6 +5,7 @@ import net.backupcup.hexed.block.BrimstoneCandle
 import net.backupcup.hexed.register.RegisterBlockEntities
 import net.backupcup.hexed.register.RegisterBlocks
 import net.backupcup.hexed.register.RegisterSounds
+import net.backupcup.hexed.util.HexRandom
 import net.minecraft.block.BlockState
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -38,12 +39,13 @@ class AccursedAltarBlockEntity(
     private var isActive =
         if(this.world?.getBlockState(this.pos)?.block == RegisterBlocks.ACCURSED_ALTAR)
             { world?.getBlockState(this.pos)?.get(AccursedAltar.ACTIVE) }
-        else
-            { false }
+        else false
 
     fun getActiveState(): Boolean? {
         markDirty()
-        return this.world?.getBlockState(this.pos)?.get(AccursedAltar.ACTIVE)
+        return if(this.world?.getBlockState(this.pos)?.block == RegisterBlocks.ACCURSED_ALTAR)
+                    { world?.getBlockState(this.pos)?.get(AccursedAltar.ACTIVE) }
+               else false
     }
 
     override fun createMenu(syncId: Int, playerInventory: PlayerInventory, player: PlayerEntity): ScreenHandler {
@@ -103,7 +105,7 @@ class AccursedAltarBlockEntity(
                         pos.x + 0.5,
                         pos.y + 1.0,
                         pos.z + 0.5,
-                        Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025)
+                        HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025)
                     )}
             } else {
                 world.addParticle(
@@ -111,7 +113,7 @@ class AccursedAltarBlockEntity(
                     pos.x + 0.5,
                     pos.y + 1.0,
                     pos.z + 0.5,
-                    Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025)
+                    HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025)
                 )
             }
         }
@@ -206,7 +208,7 @@ class AccursedAltarBlockEntity(
                 pos.x + particlePos.x.toDouble() + 0.5,
                 pos.y + particlePos.y.toDouble() + 0.5,
                 pos.z + particlePos.z.toDouble() + 0.5,
-                Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025)
+                HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025)
             )
         } else {
             if(!blockEntity.posGetCandleLit(world, pos, particlePos)) {
@@ -215,7 +217,7 @@ class AccursedAltarBlockEntity(
                     pos.x + particlePos.x.toDouble() + 0.5,
                     pos.y + particlePos.y.toDouble() + 2.0,
                     pos.z + particlePos.z.toDouble() + 0.5,
-                    Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025), Random.nextDouble(-.025, .025)
+                    HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025)
                 )
             }
         }

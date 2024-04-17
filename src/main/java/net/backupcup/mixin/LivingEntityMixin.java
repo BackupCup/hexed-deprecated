@@ -5,6 +5,7 @@ import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.entity.blazingSkull.BlazingSkullEntity;
 import net.backupcup.hexed.register.*;
 import net.backupcup.hexed.util.HexHelper;
+import net.backupcup.hexed.util.HexRandom;
 import net.backupcup.hexed.util.ItemUseCooldown;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -37,7 +39,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
 @Mixin(value = LivingEntity.class, priority = 10)
 public abstract class LivingEntityMixin extends Entity{
@@ -219,7 +220,7 @@ public abstract class LivingEntityMixin extends Entity{
             if(EnchantmentHelper.get(itemStack).containsKey(RegisterEnchantments.INSTANCE.getAVERTING_HEX())) avertingArmor += 1;
         }
 
-        if((1-Math.exp(-avertingArmor)) * (1-amount/getMaxHealth()) > new Random().nextFloat()) {
+        if((1-Math.exp(-avertingArmor)) * (1-amount/getMaxHealth()) > HexRandom.INSTANCE.nextFloat()) {
             float newAmount = amount * (1 - (Hexed.INSTANCE.getConfig() != null ? (Hexed.INSTANCE.getConfig().getAvertingHex().getDamageReduction()) : 0.125f)*avertingArmor);
             damageArmor(source, newAmount);
             return newAmount;
@@ -255,15 +256,13 @@ public abstract class LivingEntityMixin extends Entity{
         }
         if(!isUsingRiptide() && this.isFlaring) this.isFlaring = false;
 
-        if (this.isFlaring) {
-            getWorld().spawnEntity(
-                    FallingBlockEntity.spawnFromBlock(getWorld(), ((PlayerEntity) (Object) this).getBlockPos(),
-                            (Hexed.INSTANCE.getConfig() != null ?
-                                Hexed.INSTANCE.getConfig().getFlaringHex().isSoulFire() ?
-                                    Blocks.SOUL_FIRE.getDefaultState() :
-                                    Blocks.FIRE.getDefaultState() :
-                                Blocks.FIRE.getDefaultState()
-                            )
+        if (this.isFlaring && getEntityWorld().getNonSpectatingEntities(FallingBlockEntity.class, new Box(getBlockPos()).expand(1)).isEmpty()) {
+            FallingBlockEntity.spawnFromBlock(getWorld(), getBlockPos(), (
+                            Hexed.INSTANCE.getConfig() != null ?
+                                    Hexed.INSTANCE.getConfig().getFlaringHex().isSoulFire() ?
+                                            Blocks.SOUL_FIRE.getDefaultState() :
+                                            Blocks.FIRE.getDefaultState() :
+                                    Blocks.FIRE.getDefaultState()
                     )
             );
         }
@@ -279,7 +278,7 @@ public abstract class LivingEntityMixin extends Entity{
                 Vec3d spawnPos = new Vec3d(getPos().getX() + 1 * Math.cos(angle), getPos().getY() + 0.5, getPos().getZ() + 1 * Math.sin(angle));
                 Vec3d movementVec = new Vec3d((spawnPos.x - getPos().getX())/4, 0.333, (spawnPos.z - getPos().getZ())/4);
 
-                LivingEntity entity = kotlin.random.Random.Default.nextDouble(0.0, 1.0) <=
+                LivingEntity entity = HexRandom.INSTANCE.nextDouble(0.0, 1.0) <=
                         (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSepultureHex().getAngerChance() : 0.333) ?
                         (LivingEntity) (Object) this : null;
                 if(HexHelper.INSTANCE.hasFullRobes(getArmorItems()) && entity != null) entity = null;
@@ -296,8 +295,8 @@ public abstract class LivingEntityMixin extends Entity{
             getWorld().playSound(
                     null, getBlockPos(),
                     RegisterSounds.INSTANCE.getACCURSED_ALTAR_HEX(), SoundCategory.HOSTILE,
-                    (float) kotlin.random.Random.Default.nextDouble(0.5, 1.0),
-                    (float) kotlin.random.Random.Default.nextDouble(0.75, 1.25)
+                    (float) HexRandom.INSTANCE.nextDouble(0.5, 1.0),
+                    (float) HexRandom.INSTANCE.nextDouble(0.75, 1.25)
             );
         }
         if(!isUsingRiptide() && this.hasSpawnedSkulls) this.hasSpawnedSkulls = false;

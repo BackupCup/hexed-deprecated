@@ -6,22 +6,18 @@ import net.backupcup.hexed.packets.HexNetworkingConstants;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterSounds;
 import net.backupcup.hexed.util.*;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,6 +26,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.UUID;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class ServerPlayerEntityMixin
@@ -99,16 +97,25 @@ public abstract class ServerPlayerEntityMixin
         nbt.put("OverclockData", overclockNbt);
     }
 
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void hexed$RecievePredicatePacket(CallbackInfo ci) {
-        ServerSidePacketRegistry.INSTANCE.register(HexNetworkingConstants.INSTANCE.getPREDICATE_GETTER_PACKET(), (packetContext, attachedData) -> {
-            float predicate = attachedData.readFloat();
-            packetContext.getTaskQueue().execute(() -> {
-                this.pullPredicate = predicate;
-            });
-        });
-    }
+    @Inject(method = "onDeath", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;emitGameEvent(Lnet/minecraft/world/event/GameEvent;)V", shift = At.Shift.AFTER))
+    private void hexed$resetClientDataOnDeath(DamageSource source, CallbackInfo ci) {
+        PacketByteBuf hexed$overclockBuf = new PacketByteBuf(Unpooled.buffer());
+        hexed$overclockBuf.writeInt(0);
+        ServerPlayNetworking.send((ServerPlayerEntity)(Object)this, HexNetworkingConstants.INSTANCE.getOVERCLOCK_UPDATE_PACKET(), hexed$overclockBuf);
 
+        PacketByteBuf hexed$provisionBuf = new PacketByteBuf(Unpooled.buffer());
+        hexed$provisionBuf.writeBoolean(false);
+        hexed$provisionBuf.writeInt(0);
+        ServerPlayNetworking.send((ServerPlayerEntity) (Object) this, HexNetworkingConstants.INSTANCE.getPROVISION_UPDATE_PACKET(), hexed$provisionBuf);
+
+        PacketByteBuf hexed$aggravateBuf = new PacketByteBuf(Unpooled.buffer());
+        hexed$aggravateBuf.writeInt(0);
+        ServerPlayNetworking.send((ServerPlayerEntity)(Object)this, HexNetworkingConstants.INSTANCE.getAGGRAVATE_UPDATE_PACKET(), hexed$aggravateBuf);
+
+        PacketByteBuf hexed$phasedBuf = new PacketByteBuf(Unpooled.buffer());
+        hexed$phasedBuf.writeInt(0);
+        ServerPlayNetworking.send((ServerPlayerEntity)(Object)this, HexNetworkingConstants.INSTANCE.getPHASED_UPDATE_PACKET(), hexed$phasedBuf);
+    }
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void hexed$PlayerTick(CallbackInfo ci) {
@@ -181,7 +188,6 @@ public abstract class ServerPlayerEntityMixin
                             RegisterSounds.INSTANCE.getAGGRAVATE_TIER(), SoundCategory.PLAYERS,
                             1f, 1f + this.aggravateData.getChargeAmount() / 6f
                     );
-                    System.out.println(this.aggravateData.getChargeAmount());
 
                 } else if (this.aggravateData.getChargedTicks() >= 100 && this.aggravateData.getChargeAmount() == 6) {
                     this.aggravateData.setChargedTicks(0);
@@ -195,7 +201,6 @@ public abstract class ServerPlayerEntityMixin
                             RegisterSounds.INSTANCE.getACCURSED_ALTAR_TAINT(), SoundCategory.PLAYERS,
                             0.5f, 2f
                     );
-                    System.out.println(this.aggravateData.getChargeAmount());
                 }
             }
         }

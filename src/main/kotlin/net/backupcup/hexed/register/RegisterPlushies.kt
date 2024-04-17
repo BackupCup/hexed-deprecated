@@ -61,11 +61,11 @@ object RegisterPlushies {
 
     //thumbsup people
     val BON_PLUSHIE: Block = createPlushie("tooltip.hexed.bonfire_plushie", SoundEvents.BLOCK_CAMPFIRE_CRACKLE, MapColor.ORANGE)
-    val MIRI_PLUSHIE: Block = createPlushie("tooltip.hexed.miri_plushie", SoundEvents.BLOCK_BEACON_ACTIVATE, MapColor.GOLD)
-    val MILKY_PLUSHIE: Block = createPlushie("tooltip.hexed.milky_plushie", SoundEvents.ENTITY_CAT_PURREOW, MapColor.PINK)
+    val MIRI_PLUSHIE: Block = createPlushie("tooltip.hexed.miri_plushie", RegisterSounds.TECH_LAUGH, MapColor.GOLD)
+    val MILKY_PLUSHIE: Block = createPlushie("tooltip.hexed.milky_plushie", RegisterSounds.YIPPEE, MapColor.PINK)
 
     fun registerPlushies() {
-        val chestChance = 0.5f
+        val chestChance = 0.3125f
 
         val specialPlushieList: List<Block> = listOf(CALAMAIDAS_PLUSHIE, MILKY_PLUSHIE, MIRI_PLUSHIE, BON_PLUSHIE)
 
@@ -107,7 +107,7 @@ object RegisterPlushies {
                     poolBuilder
                         .rolls(ConstantLootNumberProvider.create(1.0F))
                         .conditionally(RandomChanceLootCondition.builder(
-                            if (specialPlushieList.contains(plushie)) chestChance else chestChance *5
+                            if (specialPlushieList.contains(plushie)) chestChance else chestChance * 8
                         ))
                         .with(ItemEntry.builder(plushie))
                 }

@@ -160,14 +160,14 @@ object RegisterEnchantments {
         /*
         Hex Ideas:
         - Bow:
-          TEXTURE : Aggravate - Holding down the bow after charging it will add more arrows to the shot --3
-          : Phased - Charge a piercing arrow with increased damage. Deals more damage every time it passes through an enemy. Locks all bows into cooldown once shot
-          : ??? - The bow now fires a slow, heat seeking Spirits. They get all the benefits of other enchantments that are present on the bow. --3
+          HITSCAN LOGIC + LANG: Phased - Charge a piercing arrow with increased damage. Deals more damage every time it passes through an enemy. Locks all bows into cooldown once shot
+          EVERYTHING: ??? - The bow now fires a slow, heat seeking Spirits. They get all the benefits of other enchantments that are present on the bow. TODO: Leave for now, may come in an update
 
         - Crossbow:
-          : Banish - The crossbow can only fire slowly moving black holes that pull entities into itself and detonate upon hitting an obstacle. Each shot consumes a dragon's breath.
-        */
+          : Commencement - Diablo Strike TODO: Leave for now, may come in an update
 
-        //TODO: ADD DESCRIPTION TO ALTAR OF ACCURSED
+          FIX:
+          isAltarActive should be initialized before get TODO: FIND WHERE THE ISSUE STEMS FROM IG? -- Couldn't replicate the crash, may be because it was linked to altar's state on block entity not udpating
+        */
     }
 }

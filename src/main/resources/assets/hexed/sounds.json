@@ -1,4 +1,10 @@
 {
+  "yippee": {
+    "subtitle": "subtitles.hexed.yippee",
+    "sounds": [
+      "hexed:yippee"
+    ]
+  },
   "accursed_altar_hex": {
     "subtitle": "subtitles.hexed.accursed_altar_hex",
     "sounds": [
@@ -45,6 +51,18 @@
     "subtitle": "subtitles.hexed.aggravate_tier",
     "sounds": [
       "hexed:beep_alt"
+    ]
+  },
+  "phased_tier": {
+    "subtitle": "subtitles.hexed.phased_tier",
+    "sounds": [
+      "hexed:beep_alt"
+    ]
+  },
+  "phased_shot": {
+    "subtitle": "subtitles.hexed.phased_shot",
+    "sounds": [
+      "hexed:phased_shot"
     ]
   },
   "beep_alt": {

@@ -8,6 +8,7 @@ import net.backupcup.hexed.register.RegisterEntities;
 import net.backupcup.hexed.register.RegisterSounds;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.util.HexHelper;
+import net.backupcup.hexed.util.HexRandom;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -27,6 +28,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Pair;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
@@ -58,18 +60,15 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
             TridentEntity tridentEntity = (TridentEntity) (Object) this;
 
             if (getWorld().getTime() % 20 == 0) {
-                for (LivingEntity entity : HexHelper.INSTANCE.getEntitiesInRadius(getWorld(), getBlockPos(), radius)) {
-                    if (!(entity instanceof LivingEntity)) continue;
+                var entityList = getEntityWorld().getNonSpectatingEntities(LivingEntity.class, getBoundingBox().expand(radius));
 
+                for (LivingEntity entity : entityList) {
                     entity.addStatusEffect(new StatusEffectInstance(
                             RegisterStatusEffects.INSTANCE.getABLAZE(),
                             Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getLingerHex().getDebuffDuration() : 25,
                             Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getLingerHex().getDebuffAmplifier() : 0,
                             true, false, true
                     ));
-
-                    if (tridentEntity.getOwner() != null)
-                        if (HexHelper.INSTANCE.hasFullRobes(tridentEntity.getOwner().getArmorItems())) continue;
 
                     tridentStack.damage(Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getLingerHex().getTridentDamage() : 1,
                             Random.create(), null);
@@ -103,16 +102,16 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
         if (HexHelper.INSTANCE.stackHasEnchantment(tridentStack, RegisterEnchantments.INSTANCE.getFLARING_HEX())) {
             TridentEntity tridentEntity = (TridentEntity) (Object) this;
 
-            getWorld().spawnEntity(
-                    FallingBlockEntity.spawnFromBlock(getWorld(), tridentEntity.getBlockPos(), (
-                            Hexed.INSTANCE.getConfig() != null ?
-                                    Hexed.INSTANCE.getConfig().getFlaringHex().isSoulFire() ?
-                                            Blocks.SOUL_FIRE.getDefaultState() :
-                                            Blocks.FIRE.getDefaultState() :
-                                    Blocks.FIRE.getDefaultState()
-                            )
-                    )
-            );
+            if (getEntityWorld().getNonSpectatingEntities(FallingBlockEntity.class, new Box(getBlockPos()).expand(1)).isEmpty()) {
+                FallingBlockEntity.spawnFromBlock(getWorld(), tridentEntity.getBlockPos(), (
+                                Hexed.INSTANCE.getConfig() != null ?
+                                        Hexed.INSTANCE.getConfig().getFlaringHex().isSoulFire() ?
+                                                Blocks.SOUL_FIRE.getDefaultState() :
+                                                Blocks.FIRE.getDefaultState() :
+                                        Blocks.FIRE.getDefaultState()
+                        )
+                );
+            }
         }
     }
 
@@ -163,7 +162,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
                 Vec3d spawnPos = new Vec3d(getPos().getX() + 1 * Math.cos(angle), getPos().getY() + 0.5, getPos().getZ() + 1 * Math.sin(angle));
                 Vec3d movementVec = new Vec3d((spawnPos.x - getPos().getX())/4, 0.333, (spawnPos.z - getPos().getZ())/4);
 
-                LivingEntity entity = kotlin.random.Random.Default.nextDouble(0.0, 1.0) <=
+                LivingEntity entity = HexRandom.INSTANCE.nextDouble(0.0, 1.0) <=
                         (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getSepultureHex().getAngerChance() : 0.333) ?
                         (LivingEntity) getOwner() : null;
 
@@ -182,8 +181,8 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntity {
             getWorld().playSound(
                     null, getBlockPos(),
                     RegisterSounds.INSTANCE.getACCURSED_ALTAR_HEX(), SoundCategory.HOSTILE,
-                    (float) kotlin.random.Random.Default.nextDouble(0.5, 1.0),
-                    (float) kotlin.random.Random.Default.nextDouble(0.75, 1.25)
+                    HexRandom.INSTANCE.nextFloat(0.5f, 1f),
+                    HexRandom.INSTANCE.nextFloat(0.75f, 1.25f)
             );
         }
     }

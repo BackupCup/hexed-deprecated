@@ -3,13 +3,13 @@
 	"id": "hexed",
 	"version": "${version}",
 	"name": "Hexed",
-	"description": "TODO",
+	"description": "Bringing Calamity's Enchantment mechanic into Minecraft",
 	"authors": [
 		"BackupCup"
 	],
 	"contact": {
-		"homepage": "TODO",
-		"sources": "TODO"
+		"homepage": "https://modrinth.com/project/hexed",
+		"sources": "https://github.com/BackupCup/hexed"
 	},
 	"license": "Timefall Development License 1.2",
 	"icon": "assets/hexed/icon.png",

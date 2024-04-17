@@ -54,7 +54,7 @@
   ],
   "rewards": {
     "recipes": [
-      "hexed:brimstone_slag_slab"
+      "hexed:brimstone_slag"
     ]
   },
   "sends_telemetry_event": false

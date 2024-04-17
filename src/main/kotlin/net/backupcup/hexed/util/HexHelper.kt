@@ -156,8 +156,4 @@ object  HexHelper {
             )
         }
     }
-
-    fun getEntitiesInRadius(world: World, pos: BlockPos, radius: Double): List<LivingEntity> {
-        return world.getNonSpectatingEntities(null, Box(pos).expand(radius))
-    }
 }

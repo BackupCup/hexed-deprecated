@@ -1,20 +1,27 @@
 package net.backupcup.hexed.register
 
-import net.backupcup.hexed.HexedClient
 import net.backupcup.hexed.altar.AccursedAltarScreen
 import net.backupcup.hexed.packets.AltarNetworkingConstants
 import net.backupcup.hexed.packets.HexNetworkingConstants
+import net.backupcup.hexed.util.PredicateInterface
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketSender
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.particle.DustParticleEffect
+import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.MinecraftServer
+import net.minecraft.server.network.ServerPlayNetworkHandler
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.Vec3d
 import kotlin.random.Random
 
 object RegisterPackets {
-    fun registerPackets() {
+    val minecraftRandom = net.minecraft.util.math.random.Random.create()
+
+    fun registerClientPackets() {
         ClientPlayNetworking.registerGlobalReceiver(
             AltarNetworkingConstants.AVAILABLE_HEX_PACKET,
             RegisterPackets::syncAltarScreenData
@@ -36,7 +43,18 @@ object RegisterPackets {
         )
     }
 
-    fun syncAltarScreenData(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
+    fun registerServerPackets() {
+        ServerPlayNetworking.registerGlobalReceiver(
+            HexNetworkingConstants.PREDICATE_GETTER_PACKET,
+            RegisterPackets::updatePlayerPullPredicate
+        )
+    }
+
+    private fun updatePlayerPullPredicate(server: MinecraftServer, player: ServerPlayerEntity, handler: ServerPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
+        (player as PredicateInterface).setPredicate(buf.readFloat())
+    }
+
+    private fun syncAltarScreenData(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
         val altarScreen = MinecraftClient.getInstance().currentScreen as? AccursedAltarScreen ?: return
 
         val listLength = buf.readInt()
@@ -49,18 +67,18 @@ object RegisterPackets {
         altarScreen.updateScreenHexData(currentHex, availableHexList)
     }
 
-    fun syncActiveScreenData(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
+    private fun syncActiveScreenData(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
         val altarScreen = MinecraftClient.getInstance().currentScreen as? AccursedAltarScreen ?: return
         val isAltarActive = buf.readInt()
 
         altarScreen.updateScreenActiveData(isAltarActive)
     }
 
-    fun createBloodthirstyParticles(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
-        val random = buf.readInt()
+    private fun createBloodthirstyParticles(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
+        val particleAmount = buf.readInt()
         val targetPos = Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble())
 
-        for (i in 0..random) {
+        for (i in 0..particleAmount) {
             client.particleManager.addParticle(
                 DustParticleEffect(Vec3d.unpackRgb(10027008).toVector3f(), 1.5f),
                 targetPos.x + randVec(), targetPos.y + 0.5 + randVec(), targetPos.z + randVec(),
@@ -71,10 +89,10 @@ object RegisterPackets {
     }
 
     private fun randVec(): Double {
-        return Random.nextDouble(-.5, .5) * if (Random.nextInt(0, 1) == 0) -1 else 1
+        return (minecraftRandom.nextBetween(-5, 5) * 0.1) * if (minecraftRandom.nextBoolean()) -1 else 1
     }
 
-    fun createLingerParticles(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
+    private fun createLingerParticles(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
         val pos = Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble())
 
         client.particleManager.addParticle(

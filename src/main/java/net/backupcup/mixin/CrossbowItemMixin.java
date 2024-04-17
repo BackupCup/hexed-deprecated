@@ -3,7 +3,7 @@ package net.backupcup.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import io.netty.buffer.Unpooled;
-import kotlin.random.Random;
+import net.minecraft.util.math.random.Random;
 import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.packets.HexNetworkingConstants;
 import net.backupcup.hexed.register.RegisterEnchantments;
@@ -61,22 +61,22 @@ public abstract class CrossbowItemMixin {
             NbtList explosionsList = new NbtList();
             NbtCompound explosion = new NbtCompound();
 
-            for (int i = 0; i < Random.Default.nextInt(1, 7); i++) {
+            for (int i = 0; i < Random.create().nextBetween(1, 7); i++) {
                 List<Integer> fullColorList = new ArrayList<>(List.of(11743532, 14602026, 15435844, 1743258066, -510577374, -1222464768, -709004448));
                 List<Integer> colorList = new ArrayList<>();
 
                 Collections.shuffle(fullColorList);
-                int itemsToSelect = Math.min(Random.Default.nextInt(1, 4), fullColorList.size());
+                int itemsToSelect = Math.min(Random.create().nextBetween(1, 4), fullColorList.size());
 
                 for (int colorIndex = 0; colorIndex < itemsToSelect; colorIndex++) {colorList.add(fullColorList.get(colorIndex));}
 
-                explosion.putByte("Type", (byte) Random.Default.nextInt(1, 4));
+                explosion.putByte("Type", (byte) Random.create().nextBetween(1, 4));
                 explosion.putIntArray("Colors", colorList);
                 explosionsList.add(explosion);
             }
 
             fireworks.put("Explosions", explosionsList);
-            fireworks.putByte("Flight", (byte) Random.Default.nextInt(0, 2));
+            fireworks.putByte("Flight", (byte) Random.create().nextBetween(0, 2));
 
 
             tag.put("Fireworks", fireworks);
@@ -97,14 +97,15 @@ public abstract class CrossbowItemMixin {
             float divergence = args.get(9);
 
             args.set(7,
-                    Random.Default.nextDouble(0, 1) <= (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getCelebrationHex().getFaulyChance() : 0.333f)
+                    HexRandom.INSTANCE.nextDouble() <= (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getCelebrationHex().getFaulyChance() : 0.333f)
                             && !HexHelper.INSTANCE.hasFullRobes(entity) ?
                             (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getCelebrationHex().getFaultySpeed() : 0.0625f) :
-                            speed + (float) Random.Default.nextDouble(-0.75, 0));
-            args.set(9, divergence + (float) Random.Default.nextDouble(
-                    (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getCelebrationHex().getMinimumDivergence() : -5),
-                    (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getCelebrationHex().getMaximumDivergence() : 5)
-            ));
+                            speed - Random.create().nextBetween(0, 75) * 0.01f);
+            args.set(9, divergence +
+                    HexRandom.INSTANCE.nextDouble(
+                            (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getCelebrationHex().getMinimumDivergence() : -5.0),
+                            (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getCelebrationHex().getMaximumDivergence() : 5.0)
+                    ));
         }
     }
 
@@ -129,7 +130,7 @@ public abstract class CrossbowItemMixin {
             if (data.getIndicatorPos() >= 17 && data.getIndicatorPos() <= 35) {
                 loadProjectile(user, stack, new ItemStack(Items.ARROW), true, true);
                 setCharged(stack, true);
-                int newReloadSpeed = data.getReloadSpeed() < 5 ? data.getReloadSpeed() + 1 : data.getReloadSpeed();
+                int newReloadSpeed = data.getReloadSpeed() < 10 ? data.getReloadSpeed() + 1 : data.getReloadSpeed();
 
                 player.playSound(RegisterSounds.INSTANCE.getPROVISION_CHARGE(), SoundCategory.PLAYERS, 0.5f, 0.75f);
                 ((ProvisionInterface)player).setProvisionData(new ProvisionData(false, 0, newReloadSpeed, 0));
@@ -200,7 +201,7 @@ public abstract class CrossbowItemMixin {
             if (!(entity instanceof ServerPlayerEntity)) return;
 
             if (((OverclockInterface)entity).getOverclockData().getOverheat() > 18) {
-                projectile = Random.Default.nextDouble(0, 1) > 0.5 ? projectile : new ItemStack(Items.AIR);
+                projectile = HexRandom.INSTANCE.nextDouble(0, 1) > 0.5 ? projectile : new ItemStack(Items.AIR);
                 args.set(2, projectile);
             }
         }
@@ -216,7 +217,7 @@ public abstract class CrossbowItemMixin {
             if (!(entity instanceof ServerPlayerEntity)) return;
 
             if (((OverclockInterface)entity).getOverclockData().getOverheat() > 16) {
-                args.set(9, simulated + (float) Random.Default.nextDouble(-3, 3));
+                args.set(9, simulated + (float) HexRandom.INSTANCE.nextDouble(-3, 3));
             }
         }
     }

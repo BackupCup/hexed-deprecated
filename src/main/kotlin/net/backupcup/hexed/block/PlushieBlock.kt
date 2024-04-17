@@ -1,5 +1,6 @@
 package net.backupcup.hexed.block
 
+import net.backupcup.hexed.util.HexRandom
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.ShapeContext
@@ -107,7 +108,7 @@ class PlushieBlock(settings: Settings?, val playSound: SoundEvent?, val descript
                 null, pos,
                 playSound,
                 SoundCategory.BLOCKS,
-                Random.nextFloat() * 0.25f + 0.25f, Random.nextFloat() * 0.5f + 0.75f)
+                HexRandom.nextFloat() * 0.25f + 0.25f, HexRandom.nextFloat() * 0.5f + 0.75f)
         }
 
         return ActionResult.success(world.isClient)

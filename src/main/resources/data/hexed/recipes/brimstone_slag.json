@@ -15,7 +15,7 @@
     }
   },
   "result": {
-    "item": "minecraft:cobblestone",
+    "item": "hexed:brimstone_slag",
     "count": 8
   },
   "show_notification": true

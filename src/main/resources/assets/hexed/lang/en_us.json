@@ -54,9 +54,6 @@
   "block.hexed.chiseled_brimstone_slag": "Chiseled Brimstone Slag",
   "block.hexed.brimstone_slag_pillar": "Brimstone Slag Pillar",
 
-  "item.hexed.lunar_music_disc": "Lunar Music Disc",
-  "item.hexed.lunar_music_disc.desc": "Chris Christodoulou - ...con lentitud poderosa (Piano Cover)",
-
   "item.hexed.brimstone_crystal": "Brimstone Crystal",
   "item.hexed.calamitous_fabric": "Calamitous Fabric",
 
@@ -101,6 +98,8 @@
   "enchantment.hexed.volatility.desc": "Arrows explode upon impact, dealing area-of-effect damage to nearby entities. Not pulling the bow fully makes the arrow explode prematurely (aka right in your face).",
   "enchantment.hexed.aggravate": "Aggravate",
   "enchantment.hexed.aggravate.desc": "Holding down the bow after charging it will add more arrows to the shot.",
+  "enchantment.hexed.phased": "Phased",
+  "enchantment.hexed.phased.desc": "Charge a piercing projectile with increased damage. Deals more damage every time it passes through an enemy. Locks all bows into cooldown once shot.",
 
   "enchantment.hexed.celebration": "Celebration",
   "enchantment.hexed.celebration.desc": "Converts your arrows into random fireworks and makes the crossbow have the ability to shoot automatically. Some fireworks may be faulty and not actually fly away.",
@@ -224,6 +223,11 @@
 
   "subtitles.hexed.overclock_tier": "New Overclock Tier reached",
   "subtitles.hexed.aggravate_tier": "Aggravate arrow charged",
+  "subtitles.hexed.phased_tier": "Phased arrow charged",
+  "subtitles.hexed.phased_shot": "Phased projectile shot",
+  "subtitles.hexed.tech_laugh": "Distorted Laugh",
+
+  "subtitles.hexed.yippee": "Yippee",
 
   "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function.",
   "message.hexed.altar_used": "The Brimstone Candles extinguished, despite your efforts to keep them Lit.",

@@ -26,7 +26,7 @@ class AblazeStatusEffect(category: StatusEffectCategory?, color: Int) : Abstract
         applyAblazeDamage(entity)
     }
 
-    fun applyAblazeDamage(entity: LivingEntity) {
-        entity.damage(RegisterDamageTypes.of(entity.world, RegisterDamageTypes.ABLAZE_DAMAGE), 2f)
+    private fun applyAblazeDamage(entity: LivingEntity) {
+        entity.damage(RegisterDamageTypes.of(entity.world, RegisterDamageTypes.ABLAZE_DAMAGE), 1f)
     }
 }
