@@ -1,12 +1,11 @@
 package net.backupcup.mixin;
 
+import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.util.VolatilityInterface;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,7 +42,7 @@ public abstract class PersistentProjectileEntityMixin extends Entity implements 
             entityHitResult.getEntity().getEntityWorld().createExplosion(
                     null,
                     getX(), getY(), getZ(),
-                    1f,
+                    Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getVolatilityHex().getExplosionPower() / 2f : 2f,
                     World.ExplosionSourceType.NONE);
 
             remove(RemovalReason.DISCARDED);

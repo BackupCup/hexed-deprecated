@@ -17,9 +17,6 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.screen.ScreenHandlerListener
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.BlockPos
-import net.minecraft.util.math.Box
-import net.minecraft.world.World
 
 object  HexHelper {
     private val blockedHexList by lazy { generateHexAvailability() }
@@ -51,6 +48,11 @@ object  HexHelper {
         if (Hexed.getConfig()?.amplifyHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.AMPLIFY_HEX) }
         if (Hexed.getConfig()?.overburdenHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.OVERBURDEN_HEX) }
         if (Hexed.getConfig()?.famishmentHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.FAMISHMENT_HEX) }
+        if (Hexed.getConfig()?.aggravateHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.AGGRAVATE_HEX) }
+        if (Hexed.getConfig()?.volatilityHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.VOLATILITY_HEX) }
+        if (Hexed.getConfig()?.phasedHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.PHASED_HEX) }
+        if (Hexed.getConfig()?.overclockHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.OVERCLOCK_HEX) }
+        if (Hexed.getConfig()?.provisionHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.PROVISION_HEX) }
 
         return tempList
     }

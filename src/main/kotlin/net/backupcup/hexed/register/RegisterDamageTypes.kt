@@ -14,6 +14,9 @@ object RegisterDamageTypes {
     val VINDICTIVE_DAMAGE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier(Hexed.MOD_ID, "vindictive"))
     val FRANTIC_DAMAGE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier(Hexed.MOD_ID, "frantic"))
 
+    //THIS DAMAGE TYPE BYPASSES I-FRAMES
+    val ABYSSAL_CRUSH = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier(Hexed.MOD_ID, "abyssal_crush"))
+
     fun of(world: World, key: RegistryKey<DamageType>?): DamageSource {
         return DamageSource(world.registryManager.get(RegistryKeys.DAMAGE_TYPE).entryOf(key))
     }

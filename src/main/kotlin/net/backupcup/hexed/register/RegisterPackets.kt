@@ -3,6 +3,7 @@ package net.backupcup.hexed.register
 import net.backupcup.hexed.altar.AccursedAltarScreen
 import net.backupcup.hexed.packets.AltarNetworkingConstants
 import net.backupcup.hexed.packets.HexNetworkingConstants
+import net.backupcup.hexed.util.HexRandom
 import net.backupcup.hexed.util.PredicateInterface
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.networking.v1.PacketSender
@@ -11,15 +12,12 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.particle.DustParticleEffect
-import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayNetworkHandler
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.Vec3d
-import kotlin.random.Random
 
 object RegisterPackets {
-    val minecraftRandom = net.minecraft.util.math.random.Random.create()
 
     fun registerClientPackets() {
         ClientPlayNetworking.registerGlobalReceiver(
@@ -89,7 +87,7 @@ object RegisterPackets {
     }
 
     private fun randVec(): Double {
-        return (minecraftRandom.nextBetween(-5, 5) * 0.1) * if (minecraftRandom.nextBoolean()) -1 else 1
+        return HexRandom.nextDouble(-0.5, 0.5) * if (HexRandom.nextBoolean()) -1 else 1
     }
 
     private fun createLingerParticles(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {

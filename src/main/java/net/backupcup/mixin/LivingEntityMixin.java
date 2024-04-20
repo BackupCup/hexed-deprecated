@@ -6,13 +6,8 @@ import net.backupcup.hexed.entity.blazingSkull.BlazingSkullEntity;
 import net.backupcup.hexed.register.*;
 import net.backupcup.hexed.util.HexHelper;
 import net.backupcup.hexed.util.HexRandom;
-import net.backupcup.hexed.util.ItemUseCooldown;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
@@ -21,7 +16,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -29,10 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -51,6 +42,8 @@ public abstract class LivingEntityMixin extends Entity{
 
     @Unique private boolean hasSpawnedSkulls = false;
 
+    @Unique private int avertingTicks = 0;
+
     @Shadow public abstract float getHealth();
 
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
@@ -64,8 +57,6 @@ public abstract class LivingEntityMixin extends Entity{
     @Shadow @Nullable public abstract StatusEffectInstance getStatusEffect(StatusEffect effect);
 
     @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
-
-    @Shadow public abstract void damageArmor(DamageSource source, float amount);
 
     @Shadow public abstract boolean damage(DamageSource source, float amount);
 
@@ -104,12 +95,14 @@ public abstract class LivingEntityMixin extends Entity{
     private void hexed$LivingEntityWriteData(NbtCompound nbt, CallbackInfo ci) {
         nbt.putBoolean("isFlaring", this.isFlaring);
         nbt.putBoolean("hasSpawnedSkulls", this.hasSpawnedSkulls);
+        nbt.putInt("avertingTicks", this.avertingTicks);
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At("HEAD"))
     private void hexed$LivingEntityReadData(NbtCompound nbt, CallbackInfo ci) {
         this.isFlaring = nbt.getBoolean("isFlaring");
         this.hasSpawnedSkulls = nbt.getBoolean("hasSpawnedSkulls");
+        this.avertingTicks = nbt.getInt("avertingTicks");
     }
 
     @Inject(method = "heal", at = @At("HEAD"), cancellable = true)
@@ -213,20 +206,46 @@ public abstract class LivingEntityMixin extends Entity{
         cir.setReturnValue(cir.getReturnValue() + DynamiqueJumpModifier);
     }
 
-    @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-    private float hexed$AvertingDamage(float amount, DamageSource source) {
+    @ModifyVariable(method = "damage", at = @At("HEAD"), argsOnly = true)
+    private DamageSource hexed$AvertingSource(DamageSource source) {
         int avertingArmor = 0;
+
         for (ItemStack itemStack : getArmorItems()) {
-            if(EnchantmentHelper.get(itemStack).containsKey(RegisterEnchantments.INSTANCE.getAVERTING_HEX())) avertingArmor += 1;
+            if(HexHelper.INSTANCE.stackHasEnchantment(itemStack, RegisterEnchantments.INSTANCE.getAVERTING_HEX())) avertingArmor += 1;
         }
 
-        if((1-Math.exp(-avertingArmor)) * (1-amount/getMaxHealth()) > HexRandom.INSTANCE.nextFloat()) {
-            float newAmount = amount * (1 - (Hexed.INSTANCE.getConfig() != null ? (Hexed.INSTANCE.getConfig().getAvertingHex().getDamageReduction()) : 0.125f)*avertingArmor);
-            damageArmor(source, newAmount);
-            return newAmount;
+        if (this.avertingTicks > 0 && avertingArmor > 0) {
+            source = RegisterDamageTypes.INSTANCE.of(getEntityWorld(), RegisterDamageTypes.INSTANCE.getABYSSAL_CRUSH());
+        }
+
+        return source;
+    }
+
+    @ModifyVariable(method = "damage", at = @At("HEAD"), argsOnly = true)
+    private float hexed$AvertingDamage(float amount) {
+        int avertingArmor = 0;
+
+        for (ItemStack itemStack : getArmorItems()) {
+            if(HexHelper.INSTANCE.stackHasEnchantment(itemStack, RegisterEnchantments.INSTANCE.getAVERTING_HEX())) avertingArmor += 1;
+        }
+
+        if(this.avertingTicks == 0 && avertingArmor * (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAvertingHex().getDamageReduction() : 0.125) > HexRandom.INSTANCE.nextFloat()) {
+            amount = 0f;
+            this.avertingTicks = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAvertingHex().getAvertingCooldown() : 50;
+            if ((LivingEntity)(Object) this instanceof PlayerEntity) {
+                ((PlayerEntity) (Object) this).playSound(
+                        RegisterSounds.INSTANCE.getACCURSED_ALTAR_TAINT(),
+                        SoundCategory.PLAYERS, 0.25f, 2f
+                );
+            }
         }
 
         return amount;
+    }
+
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;sendEquipmentChanges()V", shift = At.Shift.AFTER))
+    private void hexed$AvertingTick(CallbackInfo ci) {
+        if (this.avertingTicks > 0) { this.avertingTicks -= 1; }
     }
 
     @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0, argsOnly = true)

@@ -2,6 +2,7 @@ package net.backupcup.mixin;
 
 import com.mojang.authlib.GameProfile;
 import io.netty.buffer.Unpooled;
+import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.packets.HexNetworkingConstants;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterSounds;
@@ -26,8 +27,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.UUID;
 
 @Mixin(ServerPlayerEntity.class)
 public abstract class ServerPlayerEntityMixin
@@ -125,7 +124,8 @@ public abstract class ServerPlayerEntityMixin
 
             if(this.provisionData.getIndicatorPos() >= indicatorLimit) {
                 this.provisionData.setUIActive(false);
-                if(!HexHelper.INSTANCE.hasFullRobes(((ServerPlayerEntity)(Object)this))) getItemCooldownManager().set(Items.CROSSBOW, 80);
+                if(!HexHelper.INSTANCE.hasFullRobes(((ServerPlayerEntity)(Object)this)))
+                    getItemCooldownManager().set(Items.CROSSBOW, Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getProvisionHex().getItemCooldown() : 80);
             } else { this.provisionData.setIndicatorPos(this.provisionData.getIndicatorPos() + this.provisionData.getReloadSpeed()); }
 
             if ((this.provisionData.getIndicatorPos() >= 10 && this.provisionData.getIndicatorPos() <= 16) &&
@@ -176,7 +176,8 @@ public abstract class ServerPlayerEntityMixin
             if (this.pullPredicate >= 1) {
                 if(this.aggravateData.getChargeAmount() < 7) this.aggravateData.setChargedTicks(this.aggravateData.getChargedTicks() + 1L);
 
-                if(this.aggravateData.getChargedTicks() >= 10 && this.aggravateData.getChargeAmount() < 6) {
+                if(this.aggravateData.getChargedTicks() >= (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAggravateHex().getChargeTicks() : 10) &&
+                        this.aggravateData.getChargeAmount() < 6) {
                     this.aggravateData.setChargedTicks(0);
                     this.aggravateData.setChargeAmount(this.aggravateData.getChargeAmount() + 1);
 
@@ -189,7 +190,8 @@ public abstract class ServerPlayerEntityMixin
                             1f, 1f + this.aggravateData.getChargeAmount() / 6f
                     );
 
-                } else if (this.aggravateData.getChargedTicks() >= 100 && this.aggravateData.getChargeAmount() == 6) {
+                } else if (this.aggravateData.getChargedTicks() >= (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAggravateHex().getChargeTicks() : 10)* 10L &&
+                        this.aggravateData.getChargeAmount() == 6) {
                     this.aggravateData.setChargedTicks(0);
                     this.aggravateData.setChargeAmount(7);
 

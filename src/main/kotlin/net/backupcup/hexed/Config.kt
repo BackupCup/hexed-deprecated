@@ -184,13 +184,15 @@ class Config {
     class AvertingHexParams {
         var shouldRegister: Boolean = true
 
-        var damageReduction: Float = 0.125f
+        var damageReduction: Double = 0.125
+        var avertingCooldown: Int = 50
     }
 
     @Comment(
         "Averting Hex settings" + skip +
         "shouldRegister - whether the hex should be obtainable\n" +
-        "damageReduction - how much each armor piece with Averting reduces damage taken (Percentage value, 0.125 = 12.5%)"
+        "damageReduction - how much each armor piece with Averting adds to the chance of negating damage (Percentage value, 0.125 = 12.5%)\n" +
+        "avertingCooldown - for how much time (in ticks) the invinsibility frames will be taken away after dodging damage"
     ) var avertingHex: AvertingHexParams = AvertingHexParams()
 
     //BLOODTHIRSTY
@@ -214,8 +216,8 @@ class Config {
     class CelebrationHexParams {
         var shouldRegister: Boolean = true
 
-        var minimumDivergence: Double = -5.0
-        var maximumDivergence: Double = 5.0
+        var minimumDivergence: Float = -5.0f
+        var maximumDivergence: Float = 5.0f
         var faulyChance: Double = 0.333
         var faultySpeed: Float = 0.0625f
     }
@@ -522,4 +524,82 @@ class Config {
         "smoulderingDuration - the initial duration of the Smouldering debuff (in ticks)\n" +
         "smoulderingDecayLength - how much each additional level of the Smouldering debuff lasts"
     ) var vindictiveHex: VindictiveHexParams = VindictiveHexParams()
+
+    //AGGRAVATE
+    class AggravateHexParams {
+        var shouldRegister: Boolean = true
+
+        var chargeTicks: Int = 10
+        var arrowsPerCharge: Int = 1
+        var explosionPower: Float = 2f
+    }
+
+    @Comment(
+        "Aggravate Hex settings" + skip +
+                "shouldRegister - whether the hex should be obtainable\n" +
+                "chargeTicks - How much ticks does it take to add a single charge\n" +
+                "arrowsPerCharge - How much arrows is a single charge equal to\n" +
+                "explosionPower - The power of the explosion on an overcharge"
+    ) var aggravateHex: AggravateHexParams = AggravateHexParams()
+
+    //VOLATILITY
+    class VolatilityHexParams {
+        var shouldRegister: Boolean = true
+
+        var explosionPower: Float = 1f
+    }
+
+    @Comment(
+        "Volatility Hex settings" + skip +
+                "shouldRegister - whether the hex should be obtainable\n" +
+                "explosionPower - the power of the explosion"
+    ) var volatilityHex: VolatilityHexParams = VolatilityHexParams()
+
+    //PHASED
+    class PhasedHexParams {
+        var shouldRegister: Boolean = true
+
+        var hitscanDistance: Int = 64
+        var initialDamage: Float = 5f
+        var damageMultiplier: Float = 0.4f
+            var powerModifier: Float = 1f
+            var flameSeconds: Int = 5
+    }
+
+    @Comment(
+        "Phased Hex settings" + skip +
+                "shouldRegister - whether the hex should be obtainable\n" +
+                "initialDamage - the initial damage the hitscan does\n" +
+                "damageMultiplier - by how much the initial damage is multiplied for each pierced enemy\n" +
+                "powerModifier - how much damage does a level of Power adds to the initial damage (Setting to 0 will make hitscan ignore Power)\n" +
+                "flameSeconds - for how much seconds the enemy will be set on fire (Settings to 0 will make hitscan ignore Flame)"
+    ) var phasedHex: PhasedHexParams = PhasedHexParams()
+
+    //PROVISION
+    class ProvisionHexParams {
+        var shouldRegister: Boolean = true
+
+        var maxReloadSpeed: Int = 10
+        var itemCooldown: Int = 80
+    }
+
+    @Comment(
+        "Provision Hex settings" + skip +
+                "shouldRegister - whether the hex should be obtainable\n" +
+                "maxReloadSpeed - the max speed the reload indicator can have\n" +
+                "itemCooldown - the cooldown penalty in ticks\n"
+    ) var provisionHex: ProvisionHexParams = ProvisionHexParams()
+
+    //OVERCLOCK
+    class OverclockHexParams {
+        var shouldRegister: Boolean = true
+
+        var overheatLasting: Int = 200
+    }
+
+    @Comment(
+        "Overclock Hex settings" + skip +
+                "shouldRegister - whether the hex should be obtainable\n" +
+                "overheatLasting - how much ticks will the game wait before removing overheat stacks\n"
+    ) var overclockHex: OverclockHexParams = OverclockHexParams()
 }

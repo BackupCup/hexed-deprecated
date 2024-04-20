@@ -1,22 +1,15 @@
 package net.backupcup.mixin;
 
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import io.netty.buffer.Unpooled;
+import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.packets.HexNetworkingConstants;
-import net.backupcup.hexed.register.RegisterDamageTypes;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterSounds;
 import net.backupcup.hexed.util.*;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.ModelPredicateProviderRegistry;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -26,39 +19,30 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
-import org.apache.commons.codec.binary.Hex;
-import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @Mixin(BowItem.class)
 public abstract class BowItemMixin {
     @Inject(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V", shift = At.Shift.BEFORE))
-    private void hexed$PullModifier(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci, @Local PersistentProjectileEntity projectile) {
+    private void hexed$VolatilityShoot(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci, @Local PersistentProjectileEntity projectile) {
         if (HexHelper.INSTANCE.stackHasEnchantment(stack, RegisterEnchantments.INSTANCE.getVOLATILITY_HEX())) {
             if (!(user instanceof ServerPlayerEntity)) return;
 
             float pullStrength = ((PredicateInterface) user).getPredicate();
+
+            System.out.println(pullStrength);
 
             if (pullStrength >= 1 || HexHelper.INSTANCE.hasFullRobes(user)) {
                 ((VolatilityInterface) projectile).setVolatility(true);
@@ -68,7 +52,7 @@ public abstract class BowItemMixin {
                         projectile.getOwner().getX(),
                         projectile.getOwner().getBoundingBox().getCenter().getY(),
                         projectile.getOwner().getZ(),
-                        2f - pullStrength,
+                        (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getVolatilityHex().getExplosionPower() : 2f) - pullStrength,
                         World.ExplosionSourceType.NONE);
             }
         }
@@ -93,10 +77,13 @@ public abstract class BowItemMixin {
                 if(charge == 7 && !HexHelper.INSTANCE.hasFullRobes(user)) {
                     user.getEntityWorld().createExplosion(null,
                             user.getX(), user.getBoundingBox().getCenter().getY(), user.getZ(),
-                            2f, World.ExplosionSourceType.NONE);
+                            Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAggravateHex().getExplosionPower() : 2f,
+                            World.ExplosionSourceType.NONE);
                 }
 
-                for (int arrow = 0; arrow < charge; arrow++) {
+                for (int arrow = 0;
+                     arrow < charge * (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAggravateHex().getArrowsPerCharge() : 1);
+                     arrow++) {
                     ArrowItem arrowItem = (ArrowItem)(Items.ARROW);
                     PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, new ItemStack(Items.ARROW), user);
                     persistentProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 3.0f, 20.0f);
@@ -151,7 +138,7 @@ public abstract class BowItemMixin {
                     }
 
                     //HITSCAN HERE
-                    double distance = 64;
+                    double distance = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getPhasedHex().getHitscanDistance() : 64;
                     double stepSize = 0.5;
 
                     Vec3d start = user.getCameraPosVec(1.0f);
@@ -172,10 +159,13 @@ public abstract class BowItemMixin {
                         if(!searchList.isEmpty()) for (LivingEntity livingEntity : searchList) {
                             if(!hitList.contains(livingEntity) && livingEntity != user) hitList.add(livingEntity);
 
-                            float initialDamage = 5f + 1f * EnchantmentHelper.getLevel(Enchantments.FLAME, stack);
+                            float initialDamage = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getPhasedHex().getInitialDamage() : 5f +
+                                    (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getPhasedHex().getPowerModifier() : 1f) * EnchantmentHelper.getLevel(Enchantments.POWER, stack);
 
-                            livingEntity.damage(livingEntity.getDamageSources().magic(), initialDamage * (1f + 0.4f * hitList.size()));
-                            if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0) livingEntity.setOnFireFor(5);
+                            livingEntity.damage(livingEntity.getDamageSources().magic(), initialDamage *
+                                    (1f + (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getPhasedHex().getDamageMultiplier() : 0.4f) * hitList.size()));
+                            if (EnchantmentHelper.getLevel(Enchantments.FLAME, stack) > 0)
+                                livingEntity.setOnFireFor(Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getPhasedHex().getFlameSeconds() : 5);
                         }
 
                         ((ServerPlayerEntity)user).getServerWorld().spawnParticles(
