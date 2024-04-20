@@ -52,14 +52,14 @@ object OverclockHexUI {
         HudRenderCallback.EVENT.register { drawContext, tickDelta ->
             val player = MinecraftClient.getInstance().player ?: return@register
 
-            val itemStack = if (player.mainHandStack.item is CrossbowItem) player.mainHandStack else {
-                return@register
-            }
-
             ClientPlayNetworking.registerGlobalReceiver(
                 HexNetworkingConstants.OVERCLOCK_UPDATE_PACKET,
                 OverclockHexUI::updateData
             )
+
+            val itemStack = if (player.mainHandStack.item is CrossbowItem) player.mainHandStack else {
+                return@register
+            }
 
             if (!HexHelper.stackHasEnchantment(itemStack, RegisterEnchantments.OVERCLOCK_HEX) ||
                 MinecraftClient.getInstance().isPaused ||

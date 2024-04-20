@@ -15,6 +15,10 @@ abstract class AbstractHex(
     target,
     slotTypes
 ) {
+    private fun isHex(enchantment: Enchantment?): Boolean {
+        return (enchantment is AbstractHex)
+    }
+
     override fun canAccept(other: Enchantment?): Boolean {
         if (isHex(other)) {
             return false
@@ -40,9 +44,5 @@ abstract class AbstractHex(
 
     override fun getMaxLevel(): Int {
         return 1
-    }
-
-    private fun isHex(enchantment: Enchantment?): Boolean {
-        return (enchantment is AbstractHex)
     }
 }

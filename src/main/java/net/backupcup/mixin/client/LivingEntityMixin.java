@@ -73,6 +73,7 @@ public abstract class LivingEntityMixin {
         if (entity.getWorld().isClient()) {
             if (entity == MinecraftClient.getInstance().player) {
                 var player = MinecraftClient.getInstance().player;
+
                 List<ItemStack> handStacks = new ArrayList<>(); handStacks.add(player.getMainHandStack()); handStacks.add(player.getOffHandStack());
 
                 List<Enchantment> chargeHexes = new ArrayList<>();
@@ -96,8 +97,6 @@ public abstract class LivingEntityMixin {
 
                     PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                     buf.writeFloat(pullStrength);
-
-                    System.out.println(pullStrength);
 
                     ClientPlayNetworking.send(HexNetworkingConstants.INSTANCE.getPREDICATE_GETTER_PACKET(), buf);
                 }

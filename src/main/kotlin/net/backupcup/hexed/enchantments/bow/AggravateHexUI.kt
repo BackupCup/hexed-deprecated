@@ -40,13 +40,13 @@ object AggravateHexUI {
         HudRenderCallback.EVENT.register { drawContext, tickDelta ->
             val player = MinecraftClient.getInstance().player ?: return@register
 
-            val itemStack = if (player.mainHandStack.item is BowItem) player.mainHandStack
-                        else if (player.offHandStack.item is BowItem) player.offHandStack else return@register
-
             ClientPlayNetworking.registerGlobalReceiver(
                 HexNetworkingConstants.AGGRAVATE_UPDATE_PACKET,
                 AggravateHexUI::updateData
             )
+
+            val itemStack = if (player.mainHandStack.item is BowItem) player.mainHandStack
+                        else if (player.offHandStack.item is BowItem) player.offHandStack else return@register
 
             if (!HexHelper.stackHasEnchantment(itemStack, RegisterEnchantments.AGGRAVATE_HEX) ||
                 MinecraftClient.getInstance().isPaused ||

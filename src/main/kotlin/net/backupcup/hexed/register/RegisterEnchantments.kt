@@ -12,6 +12,7 @@ import net.backupcup.hexed.enchantments.digger.GeneralDiggerHex
 import net.backupcup.hexed.enchantments.trident.GeneralTridentHex
 import net.backupcup.hexed.enchantments.weapon.*
 import net.backupcup.hexed.util.HexHelper
+import net.minecraft.client.network.ClientPlayerEntity
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.enchantment.EnchantmentTarget
 import net.minecraft.entity.EquipmentSlot
@@ -160,7 +161,6 @@ object RegisterEnchantments {
         /*
         Hex Ideas:
         - Bow:
-          HITSCAN LOGIC + LANG: Phased - Charge a piercing arrow with increased damage. Deals more damage every time it passes through an enemy. Locks all bows into cooldown once shot
           EVERYTHING: ??? - The bow now fires a slow, heat seeking Spirits. They get all the benefits of other enchantments that are present on the bow. TODO: Leave for now, may come in an update
 
         - Crossbow:

@@ -1,16 +1,6 @@
 {
   "replace": false,
   "values": [
-    "hexed:aflame",
-    "hexed:persecuted",
-    "hexed:ephemeral",
-    "hexed:vindictive",
-    "hexed:traitorous",
-    "hexed:displaced",
-    "hexed:aquatique",
-    "hexed:bloodthirsty",
-    "hexed:disfigurement",
-    "hexed:metamorphosis",
-    "hexed:ironclad"
+    "#hexed:hex_enchantments"
   ]
 }

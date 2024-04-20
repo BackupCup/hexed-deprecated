@@ -44,14 +44,14 @@ object ProvisionHexUI {
         HudRenderCallback.EVENT.register { drawContext, tickDelta ->
             val player = MinecraftClient.getInstance().player ?: return@register
 
-            val itemStack = if (player.mainHandStack.item is CrossbowItem) player.mainHandStack else {
-                return@register
-            }
-
             ClientPlayNetworking.registerGlobalReceiver(
                 HexNetworkingConstants.PROVISION_UPDATE_PACKET,
                 ProvisionHexUI::updateData
             )
+
+            val itemStack = if (player.mainHandStack.item is CrossbowItem) player.mainHandStack else {
+                return@register
+            }
 
             if (!HexHelper.stackHasEnchantment(itemStack, RegisterEnchantments.PROVISION_HEX) ||
                 itemStack.nbt?.getBoolean("Charged") == true ||

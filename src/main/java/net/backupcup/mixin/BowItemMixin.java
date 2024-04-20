@@ -42,7 +42,7 @@ public abstract class BowItemMixin {
 
             float pullStrength = ((PredicateInterface) user).getPredicate();
 
-            System.out.println(pullStrength);
+            //System.out.println(pullStrength); //TODO: REMOVE, THIS IS DEBUGGINGe
 
             if (pullStrength >= 1 || HexHelper.INSTANCE.hasFullRobes(user)) {
                 ((VolatilityInterface) projectile).setVolatility(true);
