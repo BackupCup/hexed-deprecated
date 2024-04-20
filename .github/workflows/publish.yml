@@ -24,9 +24,10 @@ jobs:
     steps:
       - name: Set Release Name
         id: set_release_name
-        run: echo "::set-output name=RELEASE_NAME::${{ env.MOD_NAME }}-${{ env.VERSION }}-MC${{ env.MINECRAFT_VERSION }}"
+        run: echo "::set-output name=RELEASE_NAME::${{ env.MOD_NAME }} ${{ env.VERSION }}+MC${{ env.MINECRAFT_VERSION }}"
 
   build:
+    needs: set_release_name
     runs-on: ubuntu-latest
     steps:
       - name: Check Environment Variables
@@ -50,46 +51,20 @@ jobs:
       - name: Build
         run: ./gradlew clean build
 
-
-      - name: Publish CurseForge
+      - name: Publish
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           curseforge-id: 996912
           curseforge-token: "${{env.CURSEFORGE_TOKEN}}"
 
-          name: "${{env.RELEASE_NAME}}"
-          version: "${{env.VERSION}}"
-          version-type: "${{env.VERSION_TYPE}}"
-          changelog-file: CHANGELOG.md
-
-          loaders: fabric
-          game-versions: "${{env.MINECRAFT_VERSION}}"
-          java: "${{env.JAVA_VERSION}}"
-
-
-      - name: Publish Github
-        uses: Kir-Antipov/mc-publish@v3.3
-        with:
           github-tag: "v${{env.VERSION}}+${{ env.MINECRAFT_VERSION }}"
           github-token: "${{env.GITHUB_TOKEN}}"
 
-          name: "${{env.RELEASE_NAME}}"
-          version: "${{env.VERSION}}"
-          version-type: "${{env.VERSION_TYPE}}"
-          changelog-file: CHANGELOG.md
-
-          loaders: fabric
-          game-versions: "${{env.MINECRAFT_VERSION}}"
-          java: "${{env.JAVA_VERSION}}"
-
-
-      - name: Publish Modrinth
-        uses: Kir-Antipov/mc-publish@v3.3
-        with:
           modrinth-id: wUMNoII3
           modrinth-token: "${{env.MODRINTH_TOKEN}}"
+          modrinth-featured: true
 
-          name: "${{env.RELEASE_NAME}}"
+          name: "${{ needs.set_release_name.outputs.RELEASE_NAME }}"
           version: "${{env.VERSION}}"
           version-type: "${{env.VERSION_TYPE}}"
           changelog-file: CHANGELOG.md
