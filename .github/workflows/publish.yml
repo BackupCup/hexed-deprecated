@@ -15,15 +15,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up JAVA ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: temurin
+
+      - name: Make Gradle Wrapper Executable
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
+
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v2.6.0
         with:
           arguments: build
+
       - name: Publish
         uses: Kir-Antipov/mc-publish@v3.3
         with:
