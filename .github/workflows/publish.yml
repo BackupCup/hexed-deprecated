@@ -1,4 +1,5 @@
 name: Publish on GitHub, CurseForge & Modrinth
+on: workflow_dispatch
 
 env:
   JAVA_VERSION: 17
