@@ -22,7 +22,6 @@ These powerful enchantments offer unique mechanics that can turn the tide of any
   - Accursed Altar - A new variation of the Enchanting Table, in which you're able to choose what Hex do you want to put on the item, each Hex has a detailed description that is visible when hovering over it's Alchemical Symbol. Consumes a Brimstone Crystal on use and extinguishes all 6 Brimstone Candles in the marked places.
 
 ## **Hexed** also adds new building blocks, flora and most importantly - ***Plushies***
-## ![A picture showcasing all the new blocks in the mod](https://media.forgecdn.net/attachments/837/851/java_io0ld9e0la.png)
 
 ## All recipes show up in EMI, REI, JEI and the Vanilla Recipe Book.
 
