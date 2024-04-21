@@ -4,7 +4,7 @@ import net.minecraft.util.math.random.Random
 import kotlin.math.ceil
 
 object HexRandom {
-    val minecraftRandom = Random.create()
+    val minecraftRandom = Random.createThreadSafe()
 
     fun nextBoolean(): Boolean {
         return minecraftRandom.nextBoolean()

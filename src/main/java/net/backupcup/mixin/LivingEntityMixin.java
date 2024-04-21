@@ -229,6 +229,8 @@ public abstract class LivingEntityMixin extends Entity{
             if(HexHelper.INSTANCE.stackHasEnchantment(itemStack, RegisterEnchantments.INSTANCE.getAVERTING_HEX())) avertingArmor += 1;
         }
 
+        if (avertingArmor == 0) return amount;
+
         if(this.avertingTicks == 0 && avertingArmor * (Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAvertingHex().getDamageReduction() : 0.125) > HexRandom.INSTANCE.nextFloat()) {
             amount = 0f;
             this.avertingTicks = Hexed.INSTANCE.getConfig() != null ? Hexed.INSTANCE.getConfig().getAvertingHex().getAvertingCooldown() : 50;
