@@ -100,6 +100,8 @@
   "enchantment.hexed.aggravate.desc": "Holding down the bow after charging it will add more arrows to the shot.",
   "enchantment.hexed.phased": "Phased",
   "enchantment.hexed.phased.desc": "Charge a piercing projectile with increased damage. Deals more damage every time it passes through an enemy. Locks all bows into cooldown once shot.",
+  "enchantment.hexed.resentful": "Resentful",
+  "enchantment.hexed.resentful.desc": "Makes the damage of projectiles vary based on how far the hit target is from you. The farther, the more damage, and vice versa.",
 
   "enchantment.hexed.celebration": "Celebration",
   "enchantment.hexed.celebration.desc": "Converts your arrows into random fireworks and makes the crossbow have the ability to shoot automatically. Some fireworks may be faulty and not actually fly away.",
@@ -156,6 +158,8 @@
   "tooltip.hexed.miri_plushie": "We're gonna build so many Miri-acles.",
   "block.hexed.milkyfur_plushie": "Pixel Queen Plushie",
   "tooltip.hexed.milky_plushie": "Pouring out pixelated purrfection.",
+  "block.hexed.smilly_plushie": "Monochrome Jester Plushie",
+  "tooltip.hexed.smilly_plushie": "...and his Mind was electric.",
 
   "block.hexed.chronos_plushie": "Chronos Plushie",
   "block.hexed.maggie_plushie": "Maggie Plushie",
@@ -180,6 +184,9 @@
   "block.hexed.tenno_plushie": "Tenno Plushie",
   "block.hexed.toboe_plushie": "Toboe Plushie",
   "block.hexed.reader_plushie": "Reader Plushie",
+
+  "item.hexed.bishop_labrys": "Bishop's Labrys",
+  "tooltip.hexed.bishop_labrys": "...and his Mind was electric.",
 
   "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
   "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",
@@ -227,8 +234,11 @@
   "subtitles.hexed.aggravate_tier": "Aggravate arrow charged",
   "subtitles.hexed.phased_tier": "Phased arrow charged",
   "subtitles.hexed.phased_shot": "Phased projectile shot",
-  "subtitles.hexed.tech_laugh": "Distorted Laugh",
 
+  "subtitles.hexed.electric_charge": "Electrical Charge",
+  "subtitles.hexed.electric_discharge": "Electrical Disharge",
+
+  "subtitles.hexed.tech_laugh": "Distorted Laugh",
   "subtitles.hexed.yippee": "Yippee",
 
   "message.hexed.altar_no_candles": "Altar lacks Lit Brimstone Candles nearby to function.",

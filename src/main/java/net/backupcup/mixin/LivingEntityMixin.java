@@ -1,9 +1,13 @@
 package net.backupcup.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.entity.blazingSkull.BlazingSkullEntity;
 import net.backupcup.hexed.register.*;
+import net.backupcup.hexed.statusEffects.AbstractHexStatusEffect;
 import net.backupcup.hexed.util.HexHelper;
 import net.backupcup.hexed.util.HexRandom;
 import net.minecraft.block.Blocks;
@@ -20,6 +24,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -27,9 +32,7 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Mixin(value = LivingEntity.class, priority = 10)
 public abstract class LivingEntityMixin extends Entity{
@@ -70,6 +73,8 @@ public abstract class LivingEntityMixin extends Entity{
 
     @Shadow public abstract void readCustomDataFromNbt(NbtCompound nbt);
 
+    @Shadow @Final private Map<StatusEffect, StatusEffectInstance> activeStatusEffects;
+
     @Unique
     private void entityMultiplyingEffect(StatusEffect effect, int duration, int decayLength) {
         if (hasStatusEffect(effect)) {
@@ -90,6 +95,8 @@ public abstract class LivingEntityMixin extends Entity{
             ));
         }
     }
+
+    
 
     @Inject(method = "writeCustomDataToNbt", at = @At("HEAD"))
     private void hexed$LivingEntityWriteData(NbtCompound nbt, CallbackInfo ci) {

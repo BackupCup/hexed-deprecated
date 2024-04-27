@@ -53,6 +53,7 @@ object  HexHelper {
         if (Hexed.getConfig()?.phasedHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.PHASED_HEX) }
         if (Hexed.getConfig()?.overclockHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.OVERCLOCK_HEX) }
         if (Hexed.getConfig()?.provisionHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.PROVISION_HEX) }
+        if (Hexed.getConfig()?.resentfulHex?.shouldRegister == false) { tempList.add(RegisterEnchantments.RESENTFUL_HEX) }
 
         return tempList
     }

@@ -101,6 +101,10 @@ object RegisterEnchantments {
         GeneralBowHex(Enchantment.Rarity.VERY_RARE,
             EnchantmentTarget.BOW, arrayOf(EquipmentSlot.MAINHAND),
             HexHelper.runeTexture("phased")))
+    val RESENTFUL_HEX = register(
+        GeneralBowHex(Enchantment.Rarity.VERY_RARE,
+            EnchantmentTarget.BOW, arrayOf(EquipmentSlot.MAINHAND),
+            HexHelper.runeTexture("resentful")))
 
     //CROSSBOW
     val CELEBRATION_HEX = register(
@@ -161,7 +165,7 @@ object RegisterEnchantments {
         /*
         Hex Ideas:
         - Bow:
-          EVERYTHING: ??? - The bow now fires a slow, heat seeking Spirits. They get all the benefits of other enchantments that are present on the bow. TODO: Leave for now, may come in an update
+          : Resentful - Makes the damage of projectiles vary based on how far the hit target is from you. The farther, the more damage, and vice versa.
 
         - Crossbow:
           : Commencement - Diablo Strike TODO: Leave for now, may come in an update

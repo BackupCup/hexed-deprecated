@@ -35,10 +35,10 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
         }
 
         fun setLit(world: World, pos: BlockPos, state: BlockState, litValue: Boolean) {
+
             world.setBlockState(pos, state.with(LIT, litValue), NOTIFY_ALL)
 
-            if(state.get(TOP)) world.setBlockState(pos.down(1), state.with(LIT, litValue).with(
-                TOP, false))
+            if(state.get(TOP)) world.setBlockState(pos.down(1), state.with(LIT, litValue).with(TOP, false))
             else world.setBlockState(pos.up(1), state.with(LIT, litValue).with(TOP, true))
         }
     }
@@ -98,6 +98,8 @@ abstract class AbstractTallCandle(settings: Settings?) : Block(settings) {
         hand: Hand,
         hit: BlockHitResult
     ): ActionResult {
+        if (player.getStackInHand(hand).isOf(Items.DEBUG_STICK)) return ActionResult.CONSUME
+
         if(player.abilities?.allowModifyWorld == true) {
             val handItem = player.getStackInHand(hand)
             if(handItem.isEmpty && state.get(LIT)) {

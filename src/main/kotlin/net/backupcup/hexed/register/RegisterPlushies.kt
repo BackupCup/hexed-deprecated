@@ -63,17 +63,19 @@ object RegisterPlushies {
     val BON_PLUSHIE: Block = createPlushie("tooltip.hexed.bonfire_plushie", SoundEvents.BLOCK_CAMPFIRE_CRACKLE, MapColor.ORANGE)
     val MIRI_PLUSHIE: Block = createPlushie("tooltip.hexed.miri_plushie", RegisterSounds.TECH_LAUGH, MapColor.GOLD)
     val MILKY_PLUSHIE: Block = createPlushie("tooltip.hexed.milky_plushie", RegisterSounds.YIPPEE, MapColor.PINK)
+    val SMILLY_PLUSHIE: Block = createPlushie("tooltip.hexed.smilly_plushie", null, MapColor.BLACK)
 
     fun registerPlushies() {
         val chestChance = 0.3125f
 
-        val specialPlushieList: List<Block> = listOf(CALAMAIDAS_PLUSHIE, MILKY_PLUSHIE, MIRI_PLUSHIE, BON_PLUSHIE)
+        val specialPlushieList: List<Block> = listOf(CALAMAIDAS_PLUSHIE, MILKY_PLUSHIE, MIRI_PLUSHIE, BON_PLUSHIE, SMILLY_PLUSHIE)
 
         registerPlushie(CALAMAIDAS_PLUSHIE, "calamaidas_plushie", Rarity.EPIC)
 
         registerPlushie(BON_PLUSHIE, "bonfire_plushie", Rarity.EPIC)
         registerPlushie(MIRI_PLUSHIE, "yirmiri_plushie", Rarity.EPIC)
         registerPlushie(MILKY_PLUSHIE, "milkyfur_plushie", Rarity.EPIC)
+        registerPlushie(SMILLY_PLUSHIE, "smilly_plushie", Rarity.EPIC)
 
         registerPlushie(createSimplePlushie(MapColor.GREEN), "chronos_plushie", Rarity.UNCOMMON)
         registerPlushie(createSimplePlushie(MapColor.BRIGHT_RED), "maggie_plushie", Rarity.UNCOMMON)

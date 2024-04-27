@@ -42,9 +42,7 @@ public abstract class BowItemMixin {
 
             float pullStrength = ((PredicateInterface) user).getPredicate();
 
-            //System.out.println(pullStrength); //TODO: REMOVE, THIS IS DEBUGGINGe
-
-            if (pullStrength >= 1 || HexHelper.INSTANCE.hasFullRobes(user)) {
+            if (pullStrength == 1f || HexHelper.INSTANCE.hasFullRobes(user)) {
                 ((VolatilityInterface) projectile).setVolatility(true);
             } else if (projectile.getOwner() != null) {
                 projectile.getEntityWorld().createExplosion(
@@ -191,6 +189,15 @@ public abstract class BowItemMixin {
 
                 ServerPlayNetworking.send((ServerPlayerEntity) user, HexNetworkingConstants.INSTANCE.getPHASED_UPDATE_PACKET(), buf);
             }
+        }
+    }
+
+    @Inject(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V", shift = At.Shift.BEFORE))
+    private void hexed$ResentfulShoot(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci, @Local PersistentProjectileEntity projectile) {
+        if (HexHelper.INSTANCE.stackHasEnchantment(stack, RegisterEnchantments.INSTANCE.getRESENTFUL_HEX())) {
+            if (!(user instanceof ServerPlayerEntity)) return;
+
+            ((ResentfulInterface) projectile).setOwner(user);
         }
     }
 }

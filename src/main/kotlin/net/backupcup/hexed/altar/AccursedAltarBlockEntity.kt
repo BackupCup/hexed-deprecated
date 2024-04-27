@@ -100,7 +100,7 @@ class AccursedAltarBlockEntity(
                     }
                 }
                 if (world.time % 20L == 0L) {
-                    world.addParticle(
+                    world.addImportantParticle(
                         ParticleTypes.ANGRY_VILLAGER,
                         pos.x + 0.5,
                         pos.y + 1.0,
@@ -108,7 +108,7 @@ class AccursedAltarBlockEntity(
                         HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025), HexRandom.nextDouble(-.025, .025)
                     )}
             } else {
-                world.addParticle(
+                world.addImportantParticle(
                     DustParticleEffect.DEFAULT,
                     pos.x + 0.5,
                     pos.y + 1.0,

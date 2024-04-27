@@ -602,4 +602,19 @@ class Config {
                 "shouldRegister - whether the hex should be obtainable\n" +
                 "overheatLasting - how much ticks will the game wait before removing overheat stacks\n"
     ) var overclockHex: OverclockHexParams = OverclockHexParams()
+
+    //RESENTFUL
+    class ResentfulHexParams {
+        var shouldRegister: Boolean = true
+
+        var increasePoint: Double = 16.0
+        var maxIncreaseRange: Double = 80.0
+    }
+
+    @Comment(
+        "Resentful Hex settings" + skip +
+                "shouldRegister - whether the hex should be obtainable\n" +
+                "increasePoint - At which distance the damage starts to increase\n" +
+                "maxIncreaseRange - At which distance the damage stops increasing\n"
+    ) var resentfulHex: ResentfulHexParams = ResentfulHexParams()
 }
