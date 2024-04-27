@@ -11,17 +11,21 @@ object RegisterSounds {
     val ACCURSED_ALTAR_TAINT: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "accursed_altar_taint"))
     val ACCURSED_ALTAR_ACTIVATE: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "accursed_altar_activate"))
 
+    val BEEP_ALT: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "beep_alt"))
+
     val PROVISION_FAIL: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "provision_fail"))
     val PROVISION_CHARGE: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "provision_charge"))
-
     val PROVISION_IN_RANGE: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "provision_in_range"))
+
     val OVERCLOCK_TIER: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "overclock_tier"))
     val AGGRAVATE_TIER: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "aggravate_tier"))
 
     val PHASED_SHOT: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "phased_shot"))
     val PHASED_TIER: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "phased_tier"))
 
-    val BEEP_ALT: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "beep_alt"))
+    val ELECTRIC_CHARGE: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "electric_charge"))
+    val ELECTRIC_DISCHARGE: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "electric_discharge"))
+
     val TECH_LAUGH: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "tech_laugh"))
 
     val YIPPEE: SoundEvent = SoundEvent.of(Identifier(Hexed.MOD_ID, "yippee"))
@@ -31,6 +35,7 @@ object RegisterSounds {
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "accursed_altar_taint"), ACCURSED_ALTAR_TAINT)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "accursed_altar_activate"), ACCURSED_ALTAR_ACTIVATE)
 
+        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "beep_alt"), BEEP_ALT)
 
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "provision_fail"), PROVISION_FAIL)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "provision_charge"), PROVISION_CHARGE)
@@ -42,9 +47,10 @@ object RegisterSounds {
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "phased_shot"), PHASED_SHOT)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "phased_tier"), PHASED_TIER)
 
-        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "beep_alt"), BEEP_ALT)
-        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "tech_laugh"), TECH_LAUGH)
+        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "electric_charge"), ELECTRIC_CHARGE)
+        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "electric_discharge"), ELECTRIC_DISCHARGE)
 
+        Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "tech_laugh"), TECH_LAUGH)
         Registry.register(Registries.SOUND_EVENT, Identifier(Hexed.MOD_ID, "yippee"), YIPPEE)
     }
 }

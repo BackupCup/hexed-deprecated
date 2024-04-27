@@ -20,6 +20,9 @@
   "client": [
     "client.InGameHUDMixin",
     "client.LivingEntityMixin",
-    "client.MinecraftClientMixin"
+    "client.MinecraftClientMixin",
+    "client.model.ItemRendererAccessor",
+    "client.model.ItemRendererMixin",
+    "client.model.ModelLoaderMixin"
   ]
 }

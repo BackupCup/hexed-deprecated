@@ -38,5 +38,6 @@ object RegisterItems {
         Registry.register(Registries.ITEM, Identifier(Hexed.MOD_ID, "brimstone_crystal"), BRIMSTONE_CRYSTAL)
 
         RegisterRunes.registerRunes()
+        RegisterTaintItems.registerTaintItems()
     }
 }

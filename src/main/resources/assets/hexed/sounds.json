@@ -76,5 +76,17 @@
     "sounds": [
       "hexed:tech_laugh"
     ]
+  },
+  "electric_charge": {
+    "subtitle": "subtitles.hexed.electric_charge",
+    "sounds": [
+      "hexed:electric_charge"
+    ]
+  },
+  "electric_discharge": {
+    "subtitle": "subtitles.hexed.electric_discharge",
+    "sounds": [
+      "hexed:electric_discharge"
+    ]
   }
 }

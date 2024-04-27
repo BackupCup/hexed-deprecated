@@ -2,6 +2,7 @@ package net.backupcup.hexed.register
 
 import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.block.PlushieBlock
+import net.backupcup.hexed.util.TaintedItem
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
@@ -28,6 +29,8 @@ object RegisterItemGroupMain {
 
                 entries.add(ItemStack(RegisterBlocks.BRIMSTONE_CANDLE))
                 entries.add(ItemStack(RegisterBlocks.LICHLORE_CANDLE))
+
+                Registries.ITEM.forEach { item -> if (item is TaintedItem<*>) entries.add(ItemStack(item)) }
             }.build()
         )
     }

@@ -4,6 +4,7 @@ import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.enchantments.AbstractHex;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.util.HexHelper;
+import net.backupcup.hexed.util.TaintedItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -60,7 +61,7 @@ public abstract class InGameHUDMixin {
 
     @ModifyVariable(method = "renderHeldItemTooltip", at = @At("STORE"), ordinal = 0)
     private MutableText hexed$ModifyHeldItemTooltip(MutableText text) {
-        if (!HexHelper.INSTANCE.getEnchantments(currentStack).stream().filter(it -> it instanceof AbstractHex).toList().isEmpty()) {
+        if (!HexHelper.INSTANCE.getEnchantments(currentStack).stream().filter(it -> it instanceof AbstractHex).toList().isEmpty() || currentStack.getItem() instanceof TaintedItem<?>) {
             text = text.formatted(Formatting.BOLD, Formatting.DARK_RED);
         }
         return text;

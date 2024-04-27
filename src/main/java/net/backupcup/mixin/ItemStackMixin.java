@@ -12,6 +12,7 @@ import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.util.AttributeProviding;
 import net.backupcup.hexed.util.HexHelper;
 import net.backupcup.hexed.util.HexRandom;
+import net.backupcup.hexed.util.TaintedItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -90,6 +91,15 @@ public abstract class ItemStackMixin {
         }
     }
 
+    @ModifyVariable(method = "getTooltip", at = @At("STORE"), ordinal = 0)
+    private MutableText hexed$modifyTooltipFormat(MutableText text) {
+        ItemStack itemStack = (ItemStack) (Object) this;
+        if (!HexHelper.INSTANCE.getEnchantments(itemStack).stream().filter(it -> it instanceof AbstractHex).toList().isEmpty() || itemStack.getItem() instanceof TaintedItem<?>) {
+            text = text.formatted(Formatting.BOLD, Formatting.DARK_RED);
+        }
+        return text;
+    }
+
     @ModifyReturnValue(method = "hasEnchantments", at = @At("RETURN"))
     private boolean hexed$EnchantableHexes(boolean original) {
         if (nbt != null && nbt.contains(ENCHANTMENTS_KEY, NbtElement.LIST_TYPE)) {
@@ -116,15 +126,6 @@ public abstract class ItemStackMixin {
         }
 
         return modified ? newMap : original;
-    }
-
-    @ModifyVariable(method = "getTooltip", at = @At("STORE"), ordinal = 0)
-    private MutableText hexed$modifyTooltipFormat(MutableText text) {
-        ItemStack itemStack = (ItemStack) (Object) this;
-        if (!HexHelper.INSTANCE.getEnchantments(itemStack).stream().filter(it -> it instanceof AbstractHex).toList().isEmpty()) {
-            text = text.formatted(Formatting.BOLD, Formatting.DARK_RED);
-        }
-        return text;
     }
 
     @Inject(method = "postMine", at = @At("HEAD"))

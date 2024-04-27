@@ -5,6 +5,7 @@ import net.backupcup.hexed.enchantments.bow.AggravateHexUI
 import net.backupcup.hexed.enchantments.bow.PhasedHexUI
 import net.backupcup.hexed.enchantments.crossbow.OverclockHexUI
 import net.backupcup.hexed.enchantments.crossbow.ProvisionHexUI
+import net.backupcup.hexed.item.labrys.BishopLabrysUI
 import net.backupcup.hexed.register.*
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
@@ -29,6 +30,8 @@ object HexedClient: ClientModInitializer {
         OverclockHexUI.registerClient()
         AggravateHexUI.registerClient()
         PhasedHexUI.registerClient()
+
+        BishopLabrysUI.registerClient()
 
         BlockEntityRendererRegistry.register(RegisterBlockEntities.ACCURSED_ALTAR_BLOCK_ENTITY
         ) { AccursedAltarRunesRenderer() }
