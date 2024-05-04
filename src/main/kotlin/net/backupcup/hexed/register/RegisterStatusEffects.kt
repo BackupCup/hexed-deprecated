@@ -40,6 +40,10 @@ object RegisterStatusEffects {
     //Overburden Hex
     val OVERBURDEN: StatusEffect = OverburdenStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe83b3b, -0.00390625)
         .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "91ebbc45-4c4c-4772-9b21-9a6bbbef6870", 0.0, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+
+    //HARVEST OF THE BLIGHTED DEBUFF
+    val BLIGHTED: StatusEffect = BlightedStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe6904e)
+
     fun registerStatusEffects() {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ablaze"), ABLAZE)
@@ -51,5 +55,6 @@ object RegisterStatusEffects {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ironclad"), IRONCLAD)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "frantic"), FRANTIC)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "overburden"), OVERBURDEN)
+        Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "blighted"), BLIGHTED)
     }
 }

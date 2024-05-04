@@ -1,0 +1,35 @@
+{
+    "display": {
+        "title": {
+            "text": "Ancient Fashion"
+        },
+        "description": {
+            "text": "Find Calamitous Fabric in the Bastion"
+        },
+        "icon": {
+            "item": "hexed:calamitous_fabric"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "get_fabric": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "hexed:calamitous_fabric"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "get_fabric"
+        ]
+    ],
+    "parent": "hexed:root"
+}

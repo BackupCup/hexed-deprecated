@@ -128,16 +128,29 @@
   "enchantment.hexed.ruinous": "Ruinous",
   "enchantment.hexed.ruinous.desc": "Mining blocks causes them to explode, destroying nearby blocks.",
 
+
   "effect.hexed.aflame": "Aflame",
+  "effect.hexed.aflame.description": "Constantly puts the affected creature on fire.",
   "effect.hexed.ablaze": "Ablaze",
+  "effect.hexed.ablaze.description": "Slowly damages the affected creature, ignores armor.",
   "effect.hexed.ethereal": "Ethereal",
+  "effect.hexed.ethereal.description": "Reduces the armor of the affected creature.",
   "effect.hexed.exhaustion": "Exhaustion",
+  "effect.hexed.exhaustion.description": "Reduces the damage done by the affected creature.",
   "effect.hexed.vindictive": "Vindictive",
+  "effect.hexed.vindictive.description": "Deals damage to the affected creature. Damage dealt is proportionate to the amplifier of the effect when the effect runs out.",
   "effect.hexed.smouldering": "Smouldering",
+  "effect.hexed.smouldering.description": "The affected creature loses any type of regeneration.",
   "effect.hexed.traitorous": "Traitorous",
+  "effect.hexed.traitorous.description": "The affected creature loses any type of regeneration.",
   "effect.hexed.ironclad": "Ironclad",
+  "effect.hexed.ironclad.description": "Decreases Max Health of the affected creature.",
   "effect.hexed.frantic": "Frantic",
+  "effect.hexed.frantic.description": "Increases movement speed, and damage received of the affected creature.",
   "effect.hexed.overburden": "Overburden",
+  "effect.hexed.overburden.description": "Increases mining speed, but decreases the movement speed of the affected creature.",
+  "effect.hexed.blighted": "Blighted",
+  "effect.hexed.blighted.description": "The affected creature loses any type of regeneration.",
 
   "entity.hexed.blazing_skull": "Blazing Skull",
 
@@ -187,6 +200,12 @@
 
   "item.hexed.bishop_labrys": "Bishop's Labrys",
   "tooltip.hexed.bishop_labrys": "...and his Mind was electric.",
+  "item.hexed.blighted_harvest": "Harvest of the Blighted",
+  "tooltip.hexed.blighted_harvest": "...The Blood of who came before Me",
+  "item.hexed.blazing_basher": "Blazing Basher",
+  "tooltip.hexed.blazing_basher": "A horrible tool, a fire incarnate. Scourge from another world...",
+  "item.hexed.baleful_carnage": "Baleful Carnage",
+  "tooltip.hexed.baleful_carnage": "You've harnessed great power, but you wield it for no one but yourself...",
 
   "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
   "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",

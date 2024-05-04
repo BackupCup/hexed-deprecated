@@ -37,6 +37,7 @@ public abstract class InGameHUDMixin {
     @Unique
     private static final Map<StatusEffect, Identifier> TEXTURES_MAP = Map.ofEntries(
             entry(RegisterStatusEffects.INSTANCE.getSMOULDERING(), new Identifier(Hexed.MOD_ID, "textures/gui/icons_smouldering.png")),
+            entry(RegisterStatusEffects.INSTANCE.getBLIGHTED(), new Identifier(Hexed.MOD_ID, "textures/gui/icons_smouldering.png")), // Assuming smouldering and blighted share the same texture
             entry(RegisterStatusEffects.INSTANCE.getAFLAME(), new Identifier(Hexed.MOD_ID, "textures/gui/icons_aflame.png")),
             entry(RegisterStatusEffects.INSTANCE.getABLAZE(), new Identifier(Hexed.MOD_ID, "textures/gui/icons_aflame.png")), // Assuming aflame and ablaze share the same texture
             entry(RegisterStatusEffects.INSTANCE.getTRAITOROUS(), new Identifier(Hexed.MOD_ID, "textures/gui/icons_traitorous.png"))

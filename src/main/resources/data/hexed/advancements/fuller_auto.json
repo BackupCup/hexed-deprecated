@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:nether/find_bastion",
+  "parent": "hexed:get_altar",
   "display": {
     "title": {
       "text": "Fuller Auto",

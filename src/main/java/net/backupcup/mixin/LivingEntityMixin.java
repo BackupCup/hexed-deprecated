@@ -1,13 +1,11 @@
 package net.backupcup.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.entity.blazingSkull.BlazingSkullEntity;
+import net.backupcup.hexed.item.harvest.BlightedHarvestItem;
 import net.backupcup.hexed.register.*;
-import net.backupcup.hexed.statusEffects.AbstractHexStatusEffect;
 import net.backupcup.hexed.util.HexHelper;
 import net.backupcup.hexed.util.HexRandom;
 import net.minecraft.block.Blocks;
@@ -96,7 +94,7 @@ public abstract class LivingEntityMixin extends Entity{
         }
     }
 
-    
+
 
     @Inject(method = "writeCustomDataToNbt", at = @At("HEAD"))
     private void hexed$LivingEntityWriteData(NbtCompound nbt, CallbackInfo ci) {
@@ -112,11 +110,17 @@ public abstract class LivingEntityMixin extends Entity{
         this.avertingTicks = nbt.getInt("avertingTicks");
     }
 
+    @ModifyReturnValue(method = "disablesShield", at = @At("RETURN"))
+    private boolean hexed$harvestDisablesShield(boolean original) {
+        return original || ((LivingEntity)(Object)this).getMainHandStack().getItem() instanceof BlightedHarvestItem;
+    }
+
     @Inject(method = "heal", at = @At("HEAD"), cancellable = true)
     private void hexed$cancelHeal(float amount, CallbackInfo callbackInfo) {
         if(this.hasStatusEffect(RegisterStatusEffects.INSTANCE.getSMOULDERING()) ||
-                this.hasStatusEffect(RegisterStatusEffects.INSTANCE.getTRAITOROUS()) ||
-                HexHelper.INSTANCE.stackHasEnchantment(getEquippedStack(EquipmentSlot.CHEST), RegisterEnchantments.INSTANCE.getBLOODTHIRSTY_HEX())) {
+           this.hasStatusEffect(RegisterStatusEffects.INSTANCE.getTRAITOROUS()) ||
+           this.hasStatusEffect(RegisterStatusEffects.INSTANCE.getBLIGHTED()) ||
+           HexHelper.INSTANCE.stackHasEnchantment(getEquippedStack(EquipmentSlot.CHEST), RegisterEnchantments.INSTANCE.getBLOODTHIRSTY_HEX())) {
 
             if(HexHelper.INSTANCE.stackHasEnchantment(getEquippedStack(EquipmentSlot.CHEST), RegisterEnchantments.INSTANCE.getBLOODTHIRSTY_HEX())
                     && HexHelper.INSTANCE.hasFullRobes(getArmorItems()) && getMaxHealth()/getHealth() > 1.3) return;

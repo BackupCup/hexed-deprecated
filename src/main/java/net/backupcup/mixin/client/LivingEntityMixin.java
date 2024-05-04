@@ -25,7 +25,6 @@ import java.util.List;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-
     @Unique
     private boolean holdingCharged = false;
 

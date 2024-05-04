@@ -24,6 +24,7 @@ object RegisterRunes {
     val PERSECUTED: Item = Item(FabricItemSettings())
     val TRAITOROUS: Item = Item(FabricItemSettings())
     val VINDICTIVE: Item = Item(FabricItemSettings())
+    val BLIGHTED: Item = Item(FabricItemSettings())
 
     val RUNE_LIST: List<Pair<Item, String>> = listOf(
         AFLAME          to           "aflame",
@@ -41,7 +42,8 @@ object RegisterRunes {
         METAMORPHOSIS   to    "metamorphosis",
         PERSECUTED      to       "persecuted",
         TRAITOROUS      to       "traitorous",
-        VINDICTIVE      to       "vindictive"
+        VINDICTIVE      to       "vindictive",
+        BLIGHTED        to         "blighted"
     )
 
     fun registerRunes() {

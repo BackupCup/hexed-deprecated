@@ -2,6 +2,7 @@ package net.backupcup.mixin;
 
 
 import net.backupcup.hexed.Hexed;
+import net.backupcup.hexed.item.harvest.BlightedHarvestItem;
 import net.backupcup.hexed.register.RegisterEnchantments;
 import net.backupcup.hexed.register.RegisterStatusEffects;
 import net.backupcup.hexed.util.HexHelper;
@@ -9,6 +10,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -37,8 +39,21 @@ public abstract class PlayerEntityMixin extends Entity {
     @Shadow public abstract Iterable<ItemStack> getArmorItems();
 
 
+
+    @Inject(method = "takeShieldHit", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;disableShield(Z)V", shift = At.Shift.AFTER))
+    private void hexed$harvestApplyBlight(LivingEntity attacker, CallbackInfo ci) {
+        if (attacker.getMainHandStack().getItem() instanceof BlightedHarvestItem) {
+            int attackCooldown = (int) Math.ceil((4.0 - ((BlightedHarvestItem) attacker.getMainHandStack().getItem()).getAttackSpeed()) * 20);
+
+            attacker.addStatusEffect(new StatusEffectInstance(
+                RegisterStatusEffects.INSTANCE.getBLIGHTED(),
+                    attackCooldown, 0, false, true, true
+            ));
+        }
+    }
+
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
-    private void hexed$TraitorousCancelAttack(Entity target, CallbackInfo ci) {
+    private void hexed$cancelCooldownAttack(Entity target, CallbackInfo ci) {
         for (ItemStack itemStack: getHandItems()) {
             if (itemCooldownManager.isCoolingDown(itemStack.getItem())) {
                 ci.cancel();
@@ -48,7 +63,7 @@ public abstract class PlayerEntityMixin extends Entity {
     }
 
     @Inject(method = "canFoodHeal", at = @At("HEAD"), cancellable = true)
-    private void hexed$MetamorphosisNaturalRegen(CallbackInfoReturnable<Boolean> cir) {
+    private void hexed$naturalRegen(CallbackInfoReturnable<Boolean> cir) {
         if (HexHelper.INSTANCE.stackHasEnchantment(getEquippedStack(EquipmentSlot.HEAD), RegisterEnchantments.INSTANCE.getMETAMORPHOSIS_HEX()) &&
                 !HexHelper.INSTANCE.hasFullRobes(getArmorItems())) {
             cir.setReturnValue(false);

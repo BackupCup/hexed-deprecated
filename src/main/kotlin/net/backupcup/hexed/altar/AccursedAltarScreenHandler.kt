@@ -8,6 +8,7 @@ import net.backupcup.hexed.register.RegisterScreenHandlers
 import net.backupcup.hexed.register.RegisterSounds
 import net.backupcup.hexed.register.RegisterStats
 import net.backupcup.hexed.util.HexHelper
+import net.backupcup.hexed.util.TaintedItem
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.enchantment.Enchantment
@@ -76,7 +77,9 @@ class AccursedAltarScreenHandler(
 
         this.addSlot(object: Slot(inventory, 1, 18, 82) {
             override fun canInsert(stack: ItemStack): Boolean {
-                return HexHelper.getAvailableHexList(stack).isNotEmpty() && Hexed.getConfig()?.isListed(stack.item) == false
+                return HexHelper.getAvailableHexList(stack).isNotEmpty() &&
+                       Hexed.getConfig()?.isListed(stack.item) == false &&
+                       stack.item !is TaintedItem<*>
             }
         })
 

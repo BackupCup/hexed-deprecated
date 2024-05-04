@@ -12,5 +12,7 @@ object HexNetworkingConstants {
     val AGGRAVATE_UPDATE_PACKET: Identifier = Identifier(Hexed.MOD_ID, "aggravate_update_packet")
     val PHASED_UPDATE_PACKET: Identifier = Identifier(Hexed.MOD_ID, "phased_update_packet")
 
+    val BLIGHTED_RENDERER_PACKET: Identifier = Identifier(Hexed.MOD_ID, "blighted_renderer_packet")
+
     val PREDICATE_GETTER_PACKET: Identifier = Identifier(Hexed.MOD_ID, "predicate_get_packet")
 }

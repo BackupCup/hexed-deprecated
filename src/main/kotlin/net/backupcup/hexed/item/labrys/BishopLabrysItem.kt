@@ -1,24 +1,20 @@
 package net.backupcup.hexed.item.labrys
 
-import io.netty.buffer.Unpooled
 import net.backupcup.hexed.Hexed
-import net.backupcup.hexed.packets.HexNetworkingConstants
 import net.backupcup.hexed.register.RegisterDamageTypes
 import net.backupcup.hexed.register.RegisterSounds
 import net.backupcup.hexed.util.CustomHandTexture
 import net.backupcup.hexed.util.TaintedItem
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.enchantment.EnchantmentHelper
-import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityGroup
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageTypes
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.AxeItem
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ToolMaterial
-import net.minecraft.network.PacketByteBuf
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.server.world.ServerWorld
@@ -50,7 +46,7 @@ class BishopLabrysItem(
         tooltip: MutableList<Text>?,
         context: TooltipContext?
     ) {
-        tooltip?.add(Text.translatable("tooltip.hexed.bishop_labrys").formatted(Formatting.GRAY))
+        tooltip?.add(Text.translatable("tooltip.hexed.${itemId}").formatted(Formatting.GRAY))
         super.appendTooltip(stack, world, tooltip, context)
     }
 
@@ -131,7 +127,7 @@ class BishopLabrysItem(
 
         chainedList.forEach { livingEntity ->
             damage *= 0.8f
-            livingEntity.damage(RegisterDamageTypes.of(world, RegisterDamageTypes.ABYSSAL_CRUSH), damage)
+            livingEntity.damage(RegisterDamageTypes.of(world, DamageTypes.LIGHTNING_BOLT), damage)
 
             particleBeam(
                 livingEntity.entityWorld as ServerWorld,

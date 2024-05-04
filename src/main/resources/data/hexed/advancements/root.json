@@ -1,0 +1,35 @@
+{
+    "display": {
+        "title": {
+            "text": "Hexed"
+        },
+        "description": {
+            "text": "You've harnessed great power, but you wield it for no one but yourself."
+        },
+        "icon": {
+            "item": "hexed:aflame"
+        },
+        "frame": "task",
+        "show_toast": false,
+        "announce_to_chat": false,
+        "hidden": false,
+        "background": "hexed:textures/block/lavendin_cinder_top_1.png"
+    },
+    "criteria": {
+        "get_crystal": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "hexed:brimstone_crystal"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "get_crystal"
+        ]
+    ]
+}

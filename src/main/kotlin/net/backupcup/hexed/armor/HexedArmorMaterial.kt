@@ -20,7 +20,7 @@ enum class HexedArmorMaterial(
     private val repairIngredient: Supplier<Ingredient>
 ) : ArmorMaterial {
     calamitous(
-        "calamitous", 5, intArrayOf(1, 3, 2, 1), 25,
+        "calamitous", 15, intArrayOf(1, 4, 5, 2), 25,
         SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 0f, 0.0f, Supplier {
             Ingredient.ofItems(RegisterItems.CALAMITOUS_FABRIC)
         }

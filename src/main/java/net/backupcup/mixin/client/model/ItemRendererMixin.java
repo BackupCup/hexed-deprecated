@@ -22,7 +22,7 @@ public abstract class ItemRendererMixin {
             MatrixStack matrices,
             VertexConsumerProvider vertexConsumers,
             int light, int overlay) {
-        if (stack.getItem() instanceof CustomHandTexture && renderMode != ModelTransformationMode.GUI) {
+        if (stack.getItem() instanceof CustomHandTexture && (renderMode != ModelTransformationMode.GUI)) {
             return ((ItemRendererAccessor) this).hexed$getModels().getModelManager().getModel(((CustomHandTexture) stack.getItem()).getHandTexture());
         }
         return value;

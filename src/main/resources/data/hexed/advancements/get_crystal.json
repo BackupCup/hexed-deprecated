@@ -1,0 +1,35 @@
+{
+    "display": {
+        "title": {
+            "text": "Start of the Journey"
+        },
+        "description": {
+            "text": "Find a Brimstone Crystal in the Bastion Treasure"
+        },
+        "icon": {
+            "item": "hexed:brimstone_crystal"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "get_crystal": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "hexed:brimstone_crystal"
+                    }
+                ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "get_crystal"
+        ]
+    ],
+    "parent": "hexed:root"
+}
