@@ -16,6 +16,8 @@ import net.minecraft.server.MinecraftServer
 import net.minecraft.server.network.ServerPlayNetworkHandler
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.math.Vec3d
+import kotlin.math.cos
+import kotlin.math.sin
 
 object RegisterPackets {
 
@@ -38,6 +40,11 @@ object RegisterPackets {
         ClientPlayNetworking.registerGlobalReceiver(
             HexNetworkingConstants.LINGER_PARTICLE_PACKET,
             RegisterPackets::createLingerParticles
+        )
+
+        ClientPlayNetworking.registerGlobalReceiver(
+            HexNetworkingConstants.BASHER_PARTICLE_PACKET,
+            RegisterPackets::createBasherParticles
         )
     }
 
@@ -86,6 +93,34 @@ object RegisterPackets {
         }
     }
 
+
+    private fun createBasherParticles(client: MinecraftClient, handler: ClientPlayNetworkHandler, buf: PacketByteBuf, responseSender: PacketSender) {
+        val radius = buf.readDouble()
+        val centerPoint = Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble())
+        val entityCount = buf.readInt()
+
+        for (i in 0 until entityCount) {
+            val entityPos = Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble())
+            for (j in 2..10) {
+                client.particleManager.addParticle(
+                    DustParticleEffect(Vec3d.unpackRgb(10027008).toVector3f(), 1.5f),
+                    entityPos.x + randVec(), entityPos.y + 0.5 + randVec(), entityPos.z + randVec(),
+                    randVec(), 0.5,
+                    randVec()
+                )
+            }
+        }
+
+        generateCirclePoints(centerPoint, radius).forEach { pos ->
+            client.particleManager.addParticle(
+                DustParticleEffect(Vec3d.unpackRgb(10027008).toVector3f(), 1.5f),
+                pos.x + randVec(), pos.y + 0.5 + randVec(), pos.z + randVec(),
+                randVec(), 0.5,
+                randVec()
+            )
+        }
+    }
+
     private fun randVec(): Double {
         return HexRandom.nextDouble(-0.5, 0.5) * if (HexRandom.nextBoolean()) -1 else 1
     }
@@ -97,5 +132,23 @@ object RegisterPackets {
             DustParticleEffect.DEFAULT,
             pos.x, pos.y, pos.z, 0.0, 0.5, 0.0
         )
+    }
+
+    private fun generateCirclePoints(center: Vec3d, radius: Double): List<Vec3d> {
+        val points: MutableList<Vec3d> = ArrayList()
+
+        val circumference = 2 * Math.PI * radius
+        val numPoints = (circumference * 2).toInt()
+
+        val angleIncrement = 2 * Math.PI / numPoints
+
+        for (i in 0 until numPoints) {
+            val angle = i * angleIncrement
+            val x = center.x + radius * cos(angle)
+            val z = center.z + radius * sin(angle)
+            points.add(Vec3d(x, center.y, z))
+        }
+
+        return points
     }
 }

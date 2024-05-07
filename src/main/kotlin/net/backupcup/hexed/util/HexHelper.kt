@@ -159,4 +159,28 @@ object  HexHelper {
             )
         }
     }
+
+    fun entityMultiplyingEffect(user: LivingEntity, effect: StatusEffect, duration: Int, decayLength: Int, ambient: Boolean, showParticles: Boolean, showIcon: Boolean) {
+        if (user.hasStatusEffect(effect)) {
+            val effectAmplifier = user.getStatusEffect(effect)?.amplifier?.plus(1)
+
+            for (i in 0..effectAmplifier!!) {
+                user.addStatusEffect(
+                    StatusEffectInstance(
+                        effect,
+                        duration + (effectAmplifier - i) * decayLength, i,
+                        ambient, showParticles, showIcon
+                    )
+                )
+            }
+        } else {
+            user.addStatusEffect(
+                StatusEffectInstance(
+                    effect,
+                    duration, 0,
+                    ambient, showParticles, showIcon
+                )
+            )
+        }
+    }
 }

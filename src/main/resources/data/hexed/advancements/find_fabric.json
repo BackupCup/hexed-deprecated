@@ -20,7 +20,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "hexed:calamitous_fabric"
+                        "items": ["hexed:calamitous_fabric"]
                     }
                 ]
             }

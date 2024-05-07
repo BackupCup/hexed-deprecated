@@ -15,30 +15,52 @@
         "hidden": false
     },
     "criteria": {
-        "get_armor": {
+        "get_hood": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "hexed:calamitous_hood"
-                    },
+                        "items": ["hexed:calamitous_hood"]
+                    }
+                ]
+            }
+        },
+        "get_robes": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
                     {
-                        "item": "hexed:calamitous_robes"
-                    },
+                        "items": ["hexed:calamitous_robes"]
+                    }
+                ]
+            }
+        },
+        "get_cassock": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
                     {
-                        "item": "hexed:calamitous_cassock"
-                    },
+                        "items": ["hexed:calamitous_cassock"]
+                    }
+                ]
+            }
+        },
+        "get_boots": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
                     {
-                        "item": "hexed:calamitous_boots"
+                        "items": ["hexed:calamitous_boots"]
                     }
                 ]
             }
         }
     },
     "requirements": [
-        [
-            "get_armor"
-        ]
+        ["get_hood"],
+        ["get_robes"],
+        ["get_cassock"],
+        ["get_boots"]
     ],
     "parent": "hexed:find_fabric"
 }

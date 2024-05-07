@@ -3,12 +3,6 @@
     "": [
       {
         "model": "hexed:block/brimstone_bricks"
-      },
-      {
-        "model": "hexed:block/brimstone_bricks_1"
-      },
-      {
-        "model": "hexed:block/brimstone_bricks_2"
       }
     ]
   }

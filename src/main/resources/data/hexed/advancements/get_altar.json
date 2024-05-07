@@ -20,7 +20,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "hexed:accursed_altar"
+                        "items": ["hexed:accursed_altar"]
                     }
                 ]
             }

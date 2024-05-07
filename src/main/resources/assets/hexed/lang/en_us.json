@@ -162,6 +162,8 @@
   "death.attack.frantic.player": "%1$s's pain receptors got overloaded whilst fighting %2$s",
   "death.attack.abyssal_crush": "%1$s got crushed by the inner abyss",
   "death.attack.abyssal_crush.player": "%1$s got crushed by the inner abyss whilst fighting %2$s",
+  "death.attack.blazing_wave": "%1$s got swooped by the fiery aura",
+  "death.attack.blazing_wave.player": "%1$s got swooped by the fiery aura whilst fighting %2$s",
 
   "block.hexed.calamaidas_plushie": "Supreme Maid Plushie",
   "tooltip.hexed.calamaidas_plushie": "Things are about to get calamitous!",
@@ -169,8 +171,6 @@
   "tooltip.hexed.bonfire_plushie": "Hey, who set 8 on fire?",
   "block.hexed.yirmiri_plushie": "Architect's Patron Plushie",
   "tooltip.hexed.miri_plushie": "We're gonna build so many Miri-acles.",
-  "block.hexed.milkyfur_plushie": "Pixel Queen Plushie",
-  "tooltip.hexed.milky_plushie": "Pouring out pixelated purrfection.",
   "block.hexed.smilly_plushie": "Monochrome Jester Plushie",
   "tooltip.hexed.smilly_plushie": "...and his Mind was electric.",
 
@@ -205,7 +205,7 @@
   "item.hexed.blazing_basher": "Blazing Basher",
   "tooltip.hexed.blazing_basher": "A horrible tool, a fire incarnate. Scourge from another world...",
   "item.hexed.baleful_carnage": "Baleful Carnage",
-  "tooltip.hexed.baleful_carnage": "You've harnessed great power, but you wield it for no one but yourself...",
+  "tooltip.hexed.baleful_carnage": "In Blood and Flames, may Death cry your name...",
 
   "tooltip.hexed.brimstone_candle.line_1": "Calamitous powers resonate from",
   "tooltip.hexed.brimstone_candle.line_2": "the fires of this candle.",

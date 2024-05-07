@@ -20,7 +20,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "hexed:brimstone_crystal"
+                        "items": ["hexed:brimstone_crystal"]
                     }
                 ]
             }

@@ -74,6 +74,7 @@ object Hexed : ModInitializer {
 		RegisterStats.registerStats()
 		RegisterEntities.registerEntities()
 
+		RegisterTimedEvents.registerServerTick()
 		RegisterPackets.registerServerPackets()
 		ServerListener.registerServerListeners()
 

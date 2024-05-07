@@ -44,6 +44,9 @@ object RegisterStatusEffects {
     //HARVEST OF THE BLIGHTED DEBUFF
     val BLIGHTED: StatusEffect = BlightedStatusEffect(StatusEffectCategory.BENEFICIAL, 0xe6904e)
 
+    //BALEFUL CARNAGE DEBUFF
+    val DEATH_MARK: StatusEffect = DeathMarkStatusEffect(StatusEffectCategory.BENEFICIAL, 0x7a3045)
+
     fun registerStatusEffects() {
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "aflame"), AFLAME)
         Registry.register(Registries.STATUS_EFFECT, Identifier(Hexed.MOD_ID, "ablaze"), ABLAZE)

@@ -3,8 +3,10 @@ package net.backupcup.hexed.item.labrys
 import net.backupcup.hexed.Hexed
 import net.backupcup.hexed.register.RegisterDamageTypes
 import net.backupcup.hexed.register.RegisterSounds
+import net.backupcup.hexed.register.RegisterTimedEvents
 import net.backupcup.hexed.util.CustomHandTexture
 import net.backupcup.hexed.util.TaintedItem
+import net.backupcup.hexed.util.TimedEvent
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.client.util.ModelIdentifier
 import net.minecraft.enchantment.EnchantmentHelper
@@ -122,18 +124,24 @@ class BishopLabrysItem(
     }
 
     private fun iterateOverEntities(chainedList: List<LivingEntity>, world: World, stack: ItemStack, target: LivingEntity) {
-        var damage = EnchantmentHelper.getAttackDamage(stack, EntityGroup.DEFAULT)
-        var previousEntity: LivingEntity = target
+        val damage = EnchantmentHelper.getAttackDamage(stack, EntityGroup.DEFAULT)
+        createRecursiveSpark(damage, world, chainedList, target)
+    }
 
-        chainedList.forEach { livingEntity ->
-            damage *= 0.8f
-            livingEntity.damage(RegisterDamageTypes.of(world, DamageTypes.LIGHTNING_BOLT), damage)
+    private fun createRecursiveSpark(damage: Float, world: World, chainedList: List<LivingEntity>, previousEntity: LivingEntity) {
+        if (chainedList.isEmpty()) return
+
+        RegisterTimedEvents.createTimedEvent(false, 4) {
+            val currentEntity = chainedList[0]
+
+            previousEntity.damage(RegisterDamageTypes.of(world, DamageTypes.LIGHTNING_BOLT), damage)
 
             particleBeam(
-                livingEntity.entityWorld as ServerWorld,
+                currentEntity.entityWorld as ServerWorld,
                 previousEntity.pos.add(0.0, previousEntity.height/2.0, 0.0),
-                livingEntity.pos.add(0.0, livingEntity.height/2.0, 0.0))
-            previousEntity = livingEntity
+                currentEntity.pos.add(0.0, currentEntity.height/2.0, 0.0))
+
+            createRecursiveSpark(damage * 0.8f, world, chainedList.drop(1), currentEntity)
         }
     }
 

@@ -4,10 +4,12 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.backupcup.hexed.Hexed;
 import net.backupcup.hexed.entity.blazingSkull.BlazingSkullEntity;
+import net.backupcup.hexed.item.basher.BlazingWaveHelper;
 import net.backupcup.hexed.item.harvest.BlightedHarvestItem;
 import net.backupcup.hexed.register.*;
 import net.backupcup.hexed.util.HexHelper;
 import net.backupcup.hexed.util.HexRandom;
+import net.backupcup.hexed.util.TimedEventAction;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.*;
@@ -332,5 +334,14 @@ public abstract class LivingEntityMixin extends Entity{
             );
         }
         if(!isUsingRiptide() && this.hasSpawnedSkulls) this.hasSpawnedSkulls = false;
+    }
+
+    @Inject(method = "onDeath", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;onKilledBy(Lnet/minecraft/entity/LivingEntity;)V", shift = At.Shift.AFTER))
+    private void hexed$BlazingBasherEffect(DamageSource source, CallbackInfo ci) {
+        if (source.isOf(RegisterDamageTypes.INSTANCE.getBLAZING_WAVE())) {
+            final LivingEntity target = (LivingEntity)(Object)this;
+
+            RegisterTimedEvents.INSTANCE.createTimedEvent(false, 20, () -> BlazingWaveHelper.INSTANCE.createExplosion(target, 5.0));
+        }
     }
 }

@@ -27,13 +27,13 @@ object RegisterTaintItems {
         BishopLabrysItem(ToolMaterials.NETHERITE, 5f, -3.2f, "bishop_labrys", FabricItemSettings()
             .rarity(Rarity.EPIC)))
 
-    val BLIGHTED_HARVEST: Item = register( //MILKY
+    val BLIGHTED_HARVEST: Item = register(
         BlightedHarvestItem(ToolMaterials.NETHERITE, 1, -2f, "blighted_harvest", FabricItemSettings()
             .rarity(Rarity.EPIC)))
 
-//    val BLAZING_BASHER: Item = register( //MIRI
-//        BlazingBasherItem(ToolMaterials.NETHERITE, 2, -2.4f, "blazing_basher", FabricItemSettings()
-//            .rarity(Rarity.EPIC)))
+    val BLAZING_BASHER: Item = register( //MIRI
+        BlazingBasherItem(ToolMaterials.NETHERITE, 2, -2.4f, "blazing_basher", FabricItemSettings()
+            .rarity(Rarity.EPIC)))
 
     //TIMEFALL
     val BALEFUL_CARNAGE: Item = register( //PHOENIX

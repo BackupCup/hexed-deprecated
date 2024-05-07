@@ -17,6 +17,9 @@ object RegisterDamageTypes {
     //THIS DAMAGE TYPE BYPASSES I-FRAMES
     val ABYSSAL_CRUSH = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier(Hexed.MOD_ID, "abyssal_crush"))
 
+    //BASHER EXPLOSION DAMAGE TYPE
+    val BLAZING_WAVE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Identifier(Hexed.MOD_ID, "blazing_wave"))
+
     fun of(world: World, key: RegistryKey<DamageType>?): DamageSource {
         return DamageSource(world.registryManager.get(RegistryKeys.DAMAGE_TYPE).entryOf(key))
     }
