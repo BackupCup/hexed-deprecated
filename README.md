@@ -2,9 +2,9 @@
 [<img src="https://i.imgur.com/Ol1Tcf8.png" alt="Button mentioning the requirement of and linking to the Fabric API" height="56"/>](https://modrinth.com/mod/fabric-api)
 [<img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg">](https://modrinth.com/mod/hexed)
 
-# ![Hexed Banner stating the name of the mod as Hexed](https://www.bisecthosting.com/images/CF/Hexed/BH_HEX_header.webp)
+# ![Hexed Banner stating the name of the mod as Hexed](https://raw.githubusercontent.com/BackupCup/hexed/master/banner.webp)
 
-[![Banner indicating sponsorship by Bisect Hosting](https://www.bisecthosting.com/images/CF/Hexed/BH_HEX_promo.webp)](https://bisecthosting.com/backupcup)
+[![Banner indicating sponsorship by Bisect Hosting](https://raw.githubusercontent.com/BackupCup/hexed/master/BH_sponsor.webp)](https://bisecthosting.com/backupcup)
 
 ## ![Banner in a style of ink writing indicating the start of the Introduction section](https://www.bisecthosting.com/images/CF/Hexed/BH_HEX_intro.webp)
 
