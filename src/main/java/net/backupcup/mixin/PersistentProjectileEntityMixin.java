@@ -41,7 +41,9 @@ public abstract class PersistentProjectileEntityMixin extends Entity implements 
     @Inject(method = "writeCustomDataToNbt", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;writeCustomDataToNbt(Lnet/minecraft/nbt/NbtCompound;)V"))
     private void hexed$writeCustomData(NbtCompound nbt, CallbackInfo ci) {
         nbt.putBoolean("isVolatile", this.isVolatile);
-        nbt.putUuid("resentfulOwner", this.ownerEntity.getUuid());
+        if (this.ownerEntity != null) {
+            nbt.putUuid("resentfulOwner", this.ownerEntity.getUuid());
+        }
     }
 
     @Inject(method = "readCustomDataFromNbt", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;readCustomDataFromNbt(Lnet/minecraft/nbt/NbtCompound;)V"))
